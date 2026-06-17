@@ -24,6 +24,7 @@ input,textarea,button{
     width:100%;
     padding:12px;
     margin:10px 0;
+    box-sizing:border-box;
 }
 
 button{
@@ -34,14 +35,6 @@ button{
     cursor:pointer;
 }
 
-.delete-btn{
-    background:#b3261e;
-}
-
-.edit-btn{
-    background:#d4a017;
-}
-
 .product{
     border:1px solid #ddd;
     padding:15px;
@@ -50,10 +43,14 @@ button{
 }
 
 .product img{
-    width:160px;
-    height:100px;
+    width:180px;
+    height:120px;
     object-fit:cover;
     border-radius:8px;
+}
+
+.delete-btn{
+    background:#b3261e;
 }
 </style>
 </head>
@@ -61,29 +58,28 @@ button{
 <body>
 
 <div class="box" id="loginBox">
-<h2>Admin Login</h2>
-<input type="password" id="password" placeholder="Enter password">
-<button onclick="login()">Login</button>
+    <h2>Admin Login</h2>
+    <input type="password" id="password" placeholder="Enter password">
+    <button onclick="login()">Login</button>
 </div>
 
 <div class="box" id="adminBox" style="display:none;">
 
-<h2>Morgan Product Admin</h2>
+    <h2>Add Product</h2>
 
-<input type="hidden" id="productId">
+    <input id="name" placeholder="Product name">
+    <input id="price" placeholder="Price">
+    <textarea id="description" placeholder="Description"></textarea>
+    <input id="image_url" placeholder="Image URL">
 
-<input id="name" placeholder="Product name">
-<input id="price" placeholder="Price">
-<textarea id="description" placeholder="Description"></textarea>
-<input id="image_url" placeholder="Image URL">
+    <button onclick="addProduct()">Save Product</button>
 
-<button onclick="saveProduct()">Save Product</button>
-<p id="message"></p>
+    <p id="message"></p>
 
-<hr>
+    <hr>
 
-<h2>Product List</h2>
-<div id="productList">Loading...</div>
+    <h2>Product List</h2>
+    <div id="productList">Loading...</div>
 
 </div>
 
@@ -105,17 +101,7 @@ function login(){
     }
 }
 
-function clearForm(){
-    document.getElementById("productId").value = "";
-    document.getElementById("name").value = "";
-    document.getElementById("price").value = "";
-    document.getElementById("description").value = "";
-    document.getElementById("image_url").value = "";
-}
-
-async function saveProduct(){
-    const id = document.getElementById("productId").value;
-
+async function addProduct(){
     const product = {
         name: document.getElementById("name").value,
         price: Number(document.getElementById("price").value),
@@ -123,35 +109,33 @@ async function saveProduct(){
         image_url: document.getElementById("image_url").value
     };
 
-    let url = `${SUPABASE_URL}/rest/v1/products`;
-    let method = "POST";
-
-    if(id){
-        url = `${SUPABASE_URL}/rest/v1/products?id=eq.${id}`;
-        method = "PATCH";
-    }
-
-    const response = await fetch(url,{
-        method: method,
-        headers:{
-            apikey: SUPABASE_KEY,
-            Authorization:`Bearer ${SUPABASE_KEY}`,
-            "Content-Type":"application/json",
-            "Prefer":"return=representation"
-        },
-        body: JSON.stringify(product)
-    });
+    const response = await fetch(
+        `${SUPABASE_URL}/rest/v1/products`,
+        {
+            method:"POST",
+            headers:{
+                apikey: SUPABASE_KEY,
+                Authorization:`Bearer ${SUPABASE_KEY}`,
+                "Content-Type":"application/json",
+                "Prefer":"return=representation"
+            },
+            body: JSON.stringify(product)
+        }
+    );
 
     if(response.ok){
-        document.getElementById("message").innerText = id ? 
-        "Product updated successfully!" :
+        document.getElementById("message").innerText =
         "Product saved successfully!";
 
-        clearForm();
+        document.getElementById("name").value = "";
+        document.getElementById("price").value = "";
+        document.getElementById("description").value = "";
+        document.getElementById("image_url").value = "";
+
         loadProducts();
     }else{
         document.getElementById("message").innerText =
-        "Failed. You may need INSERT/UPDATE policy.";
+        "Failed to save product.";
     }
 }
 
@@ -167,52 +151,35 @@ async function loadProducts(){
     );
 
     const products = await response.json();
-    const list = document.getElementById("productList");
+    const productList = document.getElementById("productList");
 
-    list.innerHTML = "";
+    productList.innerHTML = "";
 
-    products.forEach(product=>{
-        list.innerHTML += `
-        <div class="product">
-            <img src="${product.image_url}">
-            <h3>${product.name}</h3>
-            <p>${product.description}</p>
-            <p><strong>$${product.price}</strong></p>
+    if(products.length === 0){
+        productList.innerHTML = "<p>No products yet.</p>";
+        return;
+    }
 
-            <button class="edit-btn" onclick="editProduct(
-                ${product.id},
-                '${escapeText(product.name)}',
-                ${product.price},
-                '${escapeText(product.description)}',
-                '${escapeText(product.image_url)}'
-            )">Edit</button>
+    products.forEach(product => {
+        productList.innerHTML += `
+            <div class="product">
+                <img src="${product.image_url}">
+                <h3>${product.name}</h3>
+                <p>${product.description}</p>
+                <p><strong>$${product.price}</strong></p>
 
-            <button class="delete-btn" onclick="deleteProduct(${product.id})">
-                Delete
-            </button>
-        </div>
+                <button class="delete-btn" onclick="deleteProduct(${product.id})">
+                    Delete
+                </button>
+            </div>
         `;
     });
 }
 
-function escapeText(text){
-    if(!text) return "";
-    return text.replace(/'/g,"\\'");
-}
-
-function editProduct(id,name,price,description,image_url){
-    document.getElementById("productId").value = id;
-    document.getElementById("name").value = name;
-    document.getElementById("price").value = price;
-    document.getElementById("description").value = description;
-    document.getElementById("image_url").value = image_url;
-
-    document.getElementById("message").innerText =
-    "Editing product ID: " + id;
-}
-
 async function deleteProduct(id){
-    if(!confirm("Delete this product?")) return;
+    if(!confirm("Delete this product?")){
+        return;
+    }
 
     const response = await fetch(
         `${SUPABASE_URL}/rest/v1/products?id=eq.${id}`,
@@ -231,7 +198,7 @@ async function deleteProduct(id){
         loadProducts();
     }else{
         document.getElementById("message").innerText =
-        "Failed to delete. You may need DELETE policy.";
+        "Failed to delete product.";
     }
 }
 </script>
