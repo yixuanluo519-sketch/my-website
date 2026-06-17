@@ -1,229 +1,163 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Morgan | Food Machinery & Kitchen Equipment</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Morgan Food Machinery</title>
 
 <style>
+
 body{
-    margin:0;
-    font-family:Arial, sans-serif;
-    background:#f8f1e7;
-    color:#2b1a12;
+margin:0;
+font-family:Arial;
+background:#f8f5ef;
 }
 
 header{
-    background:#7b1e1e;
-    color:white;
-    padding:20px 60px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-}
-
-.logo{
-    font-size:32px;
-    font-weight:bold;
-}
-
-nav a{
-    color:white;
-    text-decoration:none;
-    margin-left:25px;
-    font-weight:bold;
+background:#8b0000;
+color:white;
+padding:25px;
+text-align:center;
 }
 
 .hero{
-    background:linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),
-    url("https://images.unsplash.com/photo-1556911220-bff31c812dba?w=1400");
-    background-size:cover;
-    background-position:center;
-    color:white;
-    text-align:center;
-    padding:140px 20px;
+padding:80px 20px;
+text-align:center;
+background:#d9b36c;
+color:white;
 }
 
 .hero h1{
-    font-size:65px;
-    margin:0;
-}
-
-.hero p{
-    font-size:24px;
-    margin:20px 0 35px;
-}
-
-.btn{
-    background:#d4a017;
-    color:white;
-    padding:14px 32px;
-    border-radius:30px;
-    text-decoration:none;
-    font-weight:bold;
-    display:inline-block;
-}
-
-.section{
-    padding:65px 80px;
-    text-align:center;
-}
-
-.section h2{
-    font-size:36px;
-    color:#7b1e1e;
-}
-
-.about{
-    background:white;
-    line-height:1.8;
+font-size:50px;
 }
 
 .products{
-    display:flex;
-    justify-content:center;
-    gap:25px;
-    flex-wrap:wrap;
+padding:40px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+gap:30px;
 }
 
 .card{
-    background:white;
-    width:280px;
-    padding:20px;
-    border-radius:16px;
-    box-shadow:0 5px 18px #c9b8a2;
+background:white;
+border-radius:12px;
+overflow:hidden;
+box-shadow:0 4px 12px rgba(0,0,0,.1);
 }
 
 .card img{
-    width:100%;
-    height:180px;
-    object-fit:cover;
-    border-radius:12px;
+width:100%;
+height:250px;
+object-fit:cover;
 }
 
-.card h3{
-    color:#7b1e1e;
+.card-body{
+padding:20px;
 }
 
-.contact{
-    background:#fff7ea;
-}
-
-.info-box{
-    background:white;
-    max-width:700px;
-    margin:auto;
-    padding:30px;
-    border-radius:16px;
-    box-shadow:0 5px 18px #c9b8a2;
-    line-height:1.8;
+.price{
+font-size:24px;
+color:#8b0000;
+font-weight:bold;
 }
 
 footer{
-    background:#7b1e1e;
-    color:white;
-    text-align:center;
-    padding:25px;
+background:#222;
+color:white;
+padding:30px;
+text-align:center;
+margin-top:50px;
 }
+
 </style>
 </head>
 
 <body>
 
 <header>
-    <div class="logo">Morgan</div>
-
-    <nav>
-        <a href="#home">Home</a>
-        <a href="#about">About</a>
-        <a href="#products">Products</a>
-        <a href="#contact">Contact</a>
-    </nav>
+<h1>Morgan Food Machinery</h1>
+<p>Commercial Kitchen Equipment Supplier</p>
 </header>
 
-<section class="hero" id="home">
-    <h1>Morgan</h1>
-    <p>Professional Food Machinery & Kitchen Equipment</p>
-    <a class="btn" href="#products">View Products</a>
+<section class="hero">
+<h1>Morgan</h1>
+<p>Professional Food Machinery & Kitchen Equipment</p>
 </section>
 
-<section class="section about" id="about">
-    <h2>About Morgan</h2>
-
-    <p>
-        Morgan specializes in professional food processing machinery
-        and commercial kitchen equipment.
-    </p>
-
-    <p>
-        Our products include sausage stuffers, meat grinders,
-        food preparation tools, restaurant equipment,
-        and practical kitchen supplies.
-    </p>
-
-    <p>
-        We are committed to providing durable, efficient,
-        and reliable equipment for restaurants, food businesses,
-        distributors, and home users.
-    </p>
-</section>
-
-<section class="section" id="products">
-    <h2>Our Products</h2>
-
-    <div class="products">
-
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=500">
-            <h3>Sausage Stuffer</h3>
-            <p>
-                Food-grade sausage filling machine for home kitchens,
-                restaurants, and small food businesses.
-            </p>
-        </div>
-
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1586201375761-83865001e31c?w=500">
-            <h3>Meat Processing Tools</h3>
-            <p>
-                Reliable tools for meat preparation,
-                food processing, and kitchen production.
-            </p>
-        </div>
-
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=500">
-            <h3>Kitchen Equipment</h3>
-            <p>
-                Practical kitchen supplies designed for daily use,
-                commercial kitchens, and food service.
-            </p>
-        </div>
-
-    </div>
-</section>
-
-<section class="section contact" id="contact">
-    <h2>Contact Us</h2>
-
-    <div class="info-box">
-        <p><strong>Email:</strong> sales@morgangastros.com</p>
-        <p><strong>Phone:</strong> 313-899-9696</p>
-        <p>
-            <strong>Address:</strong><br>
-            3231 S Gulley Rd. STE B<br>
-            Dearborn, MI 48124<br>
-            USA
-        </p>
-
-        <a class="btn" href="mailto:sales@morgangastros.com">
-            Contact Sales
-        </a>
-    </div>
-</section>
+<section class="products" id="products"></section>
 
 <footer>
-    <p>© 2026 Morgan. All Rights Reserved.</p>
+
+<h3>Contact Us</h3>
+
+<p>sales@morgangastros.com</p>
+
+<p>313-899-9696</p>
+
+<p>
+3231 S Gulley Rd. STE B<br>
+Dearborn, MI 48124 USA
+</p>
+
 </footer>
+
+<script>
+
+const SUPABASE_URL =
+'https://omcytrhftuivfzbwcalp.supabase.co';
+
+const SUPABASE_KEY =
+'sb_publishable_XpUZl3GZyhSQ9-NR4xFzbw_Kf5pU_cQ';
+
+async function loadProducts(){
+
+const res = await fetch(
+`${SUPABASE_URL}/rest/v1/products?select=*`,
+{
+headers:{
+apikey:SUPABASE_KEY,
+Authorization:`Bearer ${SUPABASE_KEY}`
+}
+}
+);
+
+const products = await res.json();
+
+const container =
+document.getElementById('products');
+
+container.innerHTML='';
+
+products.forEach(product=>{
+
+container.innerHTML += `
+<div class="card">
+
+<img src="${product.image_url}">
+
+<div class="card-body">
+
+<h2>${product.name}</h2>
+
+<p>${product.description}</p>
+
+<div class="price">
+$${product.price}
+</div>
+
+</div>
+
+</div>
+`;
+
+});
+
+}
+
+loadProducts();
+
+</script>
 
 </body>
 </html>
