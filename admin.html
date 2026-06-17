@@ -137,26 +137,36 @@ async function uploadImageIfNeeded(){
         return document.getElementById("image_url").value;
     }
 
-    const fileName = Date.now() + "-" + file.name;
+    const fileExt = file.name.split(".").pop();
+    const safeFileName =
+        Date.now() + "_" + Math.floor(Math.random() * 100000) + "." + fileExt;
 
     const uploadResponse = await fetch(
-        `${SUPABASE_URL}/storage/v1/object/${BUCKET_NAME}/${fileName}`,
+        `${SUPABASE_URL}/storage/v1/object/${BUCKET_NAME}/${safeFileName}`,
         {
             method: "POST",
             headers:{
                 apikey: SUPABASE_KEY,
                 Authorization: `Bearer ${SUPABASE_KEY}`,
-                "Content-Type": file.type
+                "Content-Type": file.type,
+                "x-upsert": "true"
             },
             body: file
         }
     );
 
     if(!uploadResponse.ok){
-        throw new Error("Image upload failed");
+        const errorText = await uploadResponse.text();
+        console.log("Upload failed:", errorText);
+        throw new Error(errorText);
     }
 
-    return `${SUPABASE_URL}/storage/v1/object/public/${BUCKET_NAME}/${fileName}`;
+    const publicUrl =
+        `${SUPABASE_URL}/storage/v1/object/public/${BUCKET_NAME}/${safeFileName}`;
+
+    document.getElementById("image_url").value = publicUrl;
+
+    return publicUrl;
 }
 
 async function saveProduct(){
@@ -206,13 +216,17 @@ async function saveProduct(){
             clearForm();
             loadProducts();
         }else{
+            const errorText = await response.text();
+            console.log("Save failed:", errorText);
+
             document.getElementById("message").innerText =
             "Failed to save product.";
         }
 
     }catch(error){
+        console.log(error);
         document.getElementById("message").innerText =
-        "Image upload failed. You may need Storage INSERT policy.";
+        "Image upload failed. Check Storage INSERT policy.";
     }
 }
 
