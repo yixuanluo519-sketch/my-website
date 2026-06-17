@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Morgan Admin</title>
+
+<style>
+body{
+    font-family:Arial;
+    background:#f8f1e7;
+    padding:40px;
+}
+
+.box{
+    max-width:500px;
+    margin:auto;
+    background:white;
+    padding:30px;
+    border-radius:15px;
+    box-shadow:0 5px 18px #c9b8a2;
+}
+
+input,textarea,button{
+    width:100%;
+    padding:12px;
+    margin:10px 0;
+}
+
+button{
+    background:#7b1e1e;
+    color:white;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div class="box" id="loginBox">
+<h2>Admin Login</h2>
+<input type="password" id="password" placeholder="Enter password">
+<button onclick="login()">Login</button>
+</div>
+
+<div class="box" id="adminBox" style="display:none;">
+<h2>Add Product</h2>
+
+<input id="name" placeholder="Product name">
+<input id="price" placeholder="Price">
+<textarea id="description" placeholder="Description"></textarea>
+<input id="image_url" placeholder="Image URL">
+
+<button onclick="addProduct()">Save Product</button>
+<p id="message"></p>
+</div>
+
+<script>
+const ADMIN_PASSWORD = "morgan123";
+
+const SUPABASE_URL = "https://omcytrhftuivfzbwcalp.supabase.co";
+const SUPABASE_KEY = "sb_publishable_XpUZl3GZyhSQ9-NR4xFzbw_Kf5pU_cQ";
+
+function login(){
+    const password = document.getElementById("password").value;
+
+    if(password === ADMIN_PASSWORD){
+        document.getElementById("loginBox").style.display = "none";
+        document.getElementById("adminBox").style.display = "block";
+    }else{
+        alert("Wrong password");
+    }
+}
+
+async function addProduct(){
+    const product = {
+        name: document.getElementById("name").value,
+        price: Number(document.getElementById("price").value),
+        description: document.getElementById("description").value,
+        image_url: document.getElementById("image_url").value
+    };
+
+    const response = await fetch(
+        `${SUPABASE_URL}/rest/v1/products`,
+        {
+            method:"POST",
+            headers:{
+                apikey: SUPABASE_KEY,
+                Authorization:`Bearer ${SUPABASE_KEY}`,
+                "Content-Type":"application/json",
+                "Prefer":"return=representation"
+            },
+            body: JSON.stringify(product)
+        }
+    );
+
+    if(response.ok){
+        document.getElementById("message").innerText =
+        "Product saved successfully!";
+    }else{
+        document.getElementById("message").innerText =
+        "Failed to save product. You may need an INSERT policy.";
+    }
+}
+</script>
+
+</body>
+</html>
