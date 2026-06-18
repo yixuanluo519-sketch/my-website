@@ -1,14 +1,96 @@
 <!DOCTYPE html>
+
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Morgan Admin</title>
+
+<style>
+body{
+    font-family:Arial,sans-serif;
+    background:#f8f1e7;
+    padding:40px;
+}
+
+.box{
+    max-width:900px;
+    margin:auto;
+    background:white;
+    padding:30px;
+    border-radius:15px;
+    box-shadow:0 5px 18px #c9b8a2;
+}
+
+input,textarea,button{
+    width:100%;
+    padding:12px;
+    margin:10px 0;
+    box-sizing:border-box;
+}
+
+button{
+    background:#7b1e1e;
+    color:white;
+    border:none;
+    border-radius:8px;
+}
+
+.product{
+    border:1px solid #ddd;
+    padding:15px;
+    margin-top:15px;
+    border-radius:10px;
+}
+</style>
+
 </head>
+
 <body>
 
-<h1>Morgan Admin</h1>
+<div class="box">
 
-<p>测试成功</p>
+<h1>Morgan Product Admin</h1>
+
+<input type="hidden" id="productId">
+
+<input id="name" placeholder="Product Name">
+
+<input id="price" placeholder="Price">
+
+<textarea
+id="description"
+placeholder="Description">
+</textarea>
+
+<input
+id="image_url"
+placeholder="Image URL">
+
+<button onclick="saveProduct()">
+Save Product
+</button>
+
+<p id="message"></p>
+
+<hr>
+
+<h2>Products</h2>
+
+<div id="productList">
+Loading...
+</div>
+
+</div>
+
+<script>
+
+const SUPABASE_URL =
+"https://omcytrhftuivfzbwcalp.supabase.co";
+
+const SUPABASE_KEY =
+"把你的publishable key放这里";
+
+</script>
 
 </body>
 </html>
