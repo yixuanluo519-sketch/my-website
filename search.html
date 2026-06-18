@@ -1,1 +1,231 @@
-<h1>Search Page</h1>
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Search Products | Morgan Food Machinery</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#0b0b0b;
+    color:white;
+}
+
+header{
+    background:#050505;
+    border-bottom:1px solid #d4af37;
+    padding:20px 50px;
+}
+
+.logo{
+    color:#d4af37;
+    font-size:28px;
+    font-weight:bold;
+    text-decoration:none;
+}
+
+.container{
+    max-width:1400px;
+    margin:auto;
+    padding:50px 20px;
+}
+
+h1{
+    text-align:center;
+    color:#d4af37;
+    margin-bottom:30px;
+}
+
+.search-box{
+    width:100%;
+    padding:18px;
+    border-radius:12px;
+    border:2px solid #d4af37;
+    background:#111;
+    color:white;
+    font-size:18px;
+    outline:none;
+}
+
+.products{
+    margin-top:40px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:25px;
+}
+
+.card{
+    background:#161616;
+    border:1px solid #333;
+    border-radius:15px;
+    overflow:hidden;
+    transition:.2s;
+}
+
+.card:hover{
+    border-color:#d4af37;
+    transform:translateY(-5px);
+}
+
+.card img{
+    width:100%;
+    height:220px;
+    object-fit:cover;
+}
+
+.card-body{
+    padding:20px;
+}
+
+.card-body h3{
+    color:white;
+}
+
+.price{
+    color:#d4af37;
+    font-size:22px;
+    font-weight:bold;
+}
+
+.btn{
+    display:inline-block;
+    margin-top:12px;
+    padding:10px 18px;
+    background:#d4af37;
+    color:black;
+    text-decoration:none;
+    border-radius:25px;
+    font-weight:bold;
+}
+</style>
+
+</head>
+
+<body>
+
+<header>
+<a class="logo" href="index.html">
+Morgan Food Machinery
+</a>
+</header>
+
+<div class="container">
+
+<h1>Search Products</h1>
+
+<input
+type="text"
+id="searchInput"
+class="search-box"
+placeholder="Search products, machines, parts..."
+
+>
+
+<div id="results" class="products"></div>
+
+</div>
+
+<script>
+
+const SUPABASE_URL =
+"https://omcytrhftuivfzbwcalp.supabase.co";
+
+const SUPABASE_KEY =
+"YOUR_SUPABASE_KEY";
+
+let allProducts = [];
+
+async function loadProducts(){
+
+const response = await fetch(
+`${SUPABASE_URL}/rest/v1/products?select=*`,
+{
+headers:{
+apikey:SUPABASE_KEY,
+Authorization:`Bearer ${SUPABASE_KEY}`
+}
+}
+);
+
+allProducts = await response.json();
+
+renderProducts(allProducts);
+
+}
+
+function renderProducts(products){
+
+const box =
+document.getElementById("results");
+
+if(products.length===0){
+box.innerHTML =
+"<p>No products found.</p>";
+return;
+}
+
+box.innerHTML =
+products.map(product=>`
+
+<div class="card">
+
+<img src="${product.image_url}" alt="${product.name}">
+
+<div class="card-body">
+
+<h3>${product.name}</h3>
+
+<p>${product.description || ""}</p>
+
+<p class="price">$${product.price}</p>
+
+<a class="btn"
+href="product.html?id=${product.id}">
+View Details
+</a>
+
+</div>
+
+</div>
+
+`).join("");
+
+}
+
+document.addEventListener("input",(e)=>{
+
+if(e.target.id!=="searchInput") return;
+
+const term =
+e.target.value.toLowerCase();
+
+const filtered =
+allProducts.filter(product=>
+
+(product.name || "")
+.toLowerCase()
+.includes(term)
+
+||
+
+(product.description || "")
+.toLowerCase()
+.includes(term)
+
+);
+
+renderProducts(filtered);
+
+});
+
+loadProducts();
+
+</script>
+
+</body>
+</html>
+
