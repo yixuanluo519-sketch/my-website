@@ -119,6 +119,8 @@ h1{
     border-radius:30px;
     font-weight:bold;
     margin-top:22px;
+    border:none;
+    cursor:pointer;
 }
 
 .btn:hover{
@@ -148,6 +150,50 @@ h1{
     padding-left:20px;
     line-height:1.8;
     color:#ddd;
+}
+
+.quote-section{
+    margin-top:55px;
+    background:#151515;
+    border:1px solid #333;
+    border-radius:18px;
+    padding:35px;
+}
+
+.quote-section h2{
+    color:#d4af37;
+    margin-top:0;
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+
+input, textarea{
+    width:100%;
+    padding:14px;
+    margin-top:12px;
+    border-radius:8px;
+    border:1px solid #333;
+    background:#0f0f0f;
+    color:white;
+    font-size:16px;
+}
+
+textarea{
+    height:130px;
+    resize:vertical;
+}
+
+.full{
+    grid-column:1 / -1;
+}
+
+#quoteResult{
+    margin-top:18px;
+    font-weight:bold;
 }
 
 .related-section{
@@ -211,6 +257,10 @@ footer{
         grid-template-columns:1fr;
     }
 
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
     h1{
         font-size:30px;
     }
@@ -265,16 +315,65 @@ Loading...
 </div>
 
 <div class="info-box">
-<h2>Request a Quote</h2>
+<h2>Need Help?</h2>
 <p class="description">
-Need pricing, shipping information, or product recommendations?
-Contact our sales team for details.
+Not sure which model fits your business? Send us a request and our team will help you choose the right equipment.
 </p>
-<a id="quoteButton" class="btn" href="mailto:sales@morgangastros.com">
-Get Quote
+<a class="btn" href="#quote">
+Request A Quote
 </a>
 </div>
 
+</div>
+
+<div class="quote-section" id="quote">
+<h2>Request A Quote</h2>
+
+<form id="quoteForm">
+
+<div class="form-grid">
+
+<input
+type="text"
+id="name"
+placeholder="Your Name"
+required
+>
+
+<input
+type="email"
+id="email"
+placeholder="Email"
+required
+>
+
+<input
+type="text"
+id="phone"
+placeholder="Phone Number"
+>
+
+<input
+type="text"
+id="company"
+placeholder="Company Name"
+>
+
+<textarea
+class="full"
+id="message"
+placeholder="Tell us what you need..."
+></textarea>
+
+</div>
+
+<button type="submit" class="btn">
+Submit Quote Request
+</button>
+
+</form>
+
+<div id="quoteResult"></div>
 </div>
 
 <div class="related-section">
@@ -361,8 +460,7 @@ $${product.price}
 ${product.description || "No description available."}
 </div>
 
-<a class="btn"
-href="mailto:sales@morgangastros.com?subject=Quote Request: ${encodeURIComponent(product.name)}">
+<a class="btn" href="#quote">
 Request Quote
 </a>
 
@@ -383,9 +481,6 @@ document.getElementById("specList").innerHTML = `
 <li>Availability: Contact sales for details</li>
 <li>Support: Morgan Food Machinery</li>
 `;
-
-document.getElementById("quoteButton").href =
-`mailto:sales@morgangastros.com?subject=Quote Request: ${encodeURIComponent(product.name)}`;
 
 loadRelatedProducts(product.category, product.id);
 
@@ -448,6 +543,54 @@ View Details
 `).join("");
 
 }
+
+document.addEventListener("submit", async function(e){
+
+if(e.target.id !== "quoteForm") return;
+
+e.preventDefault();
+
+if(!currentProduct){
+document.getElementById("quoteResult").innerHTML =
+"<p style='color:red;'>Product information is still loading.</p>";
+return;
+}
+
+const response = await fetch(
+`${SUPABASE_URL}/rest/v1/quotes`,
+{
+method:"POST",
+headers:{
+apikey:SUPABASE_KEY,
+Authorization:`Bearer ${SUPABASE_KEY}`,
+"Content-Type":"application/json"
+},
+body:JSON.stringify({
+name:document.getElementById("name").value,
+email:document.getElementById("email").value,
+phone:document.getElementById("phone").value,
+company:document.getElementById("company").value,
+product_name:currentProduct.name,
+message:document.getElementById("message").value
+})
+}
+);
+
+if(response.ok){
+
+document.getElementById("quoteResult").innerHTML =
+"<p style='color:#d4af37;'>Thank you! We received your inquiry.</p>";
+
+document.getElementById("quoteForm").reset();
+
+}else{
+
+document.getElementById("quoteResult").innerHTML =
+"<p style='color:red;'>Submission failed. Please try again.</p>";
+
+}
+
+});
 
 loadProduct();
 </script>
