@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html>
 <head>
 <meta charset="UTF-8">
@@ -28,21 +27,40 @@ input,textarea,button{
     box-sizing:border-box;
 }
 
+textarea{
+    height:100px;
+}
+
 button{
     background:#7b1e1e;
     color:white;
     border:none;
     border-radius:8px;
+    cursor:pointer;
 }
 
 .product{
     border:1px solid #ddd;
     padding:15px;
-    margin-top:15px;
+    margin:15px 0;
     border-radius:10px;
 }
-</style>
 
+.product img{
+    width:200px;
+    height:130px;
+    object-fit:cover;
+    border-radius:8px;
+}
+
+.edit-btn{
+    background:#d4a017;
+}
+
+.delete-btn{
+    background:#b3261e;
+}
+</style>
 </head>
 
 <body>
@@ -57,18 +75,13 @@ button{
 
 <input id="price" placeholder="Price">
 
-<textarea
-id="description"
-placeholder="Description">
-</textarea>
+<textarea id="description" placeholder="Description"></textarea>
 
-<input
-id="image_url"
-placeholder="Image URL">
+<input id="image_url" placeholder="Image URL">
 
-<button onclick="saveProduct()">
-Save Product
-</button>
+<button onclick="saveProduct()">Save Product</button>
+
+<button onclick="clearForm()">Clear</button>
 
 <p id="message"></p>
 
@@ -76,26 +89,28 @@ Save Product
 
 <h2>Products</h2>
 
-<div id="productList">
-Loading...
-</div>
+<div id="productList">Loading...</div>
 
 </div>
 
 <script>
-
-<script>
-
 const SUPABASE_URL =
 "https://omcytrhftuivfzbwcalp.supabase.co";
 
 const SUPABASE_KEY =
 "你的 sb_publishable 开头那串";
 
-async function loadProducts(){
+function clearForm(){
+    document.getElementById("productId").value = "";
+    document.getElementById("name").value = "";
+    document.getElementById("price").value = "";
+    document.getElementById("description").value = "";
+    document.getElementById("image_url").value = "";
+}
 
+async function loadProducts(){
     const response = await fetch(
-        `${SUPABASE_URL}/rest/v1/products?select=*`,
+        `${SUPABASE_URL}/rest/v1/products?select=*&order=id.asc`,
         {
             headers:{
                 apikey:SUPABASE_KEY,
@@ -105,46 +120,115 @@ async function loadProducts(){
     );
 
     const products = await response.json();
-
-    const productList =
-    document.getElementById("productList");
-
+    const productList = document.getElementById("productList");
     productList.innerHTML = "";
 
     products.forEach(product=>{
-
         productList.innerHTML += `
+            <div class="product">
+                <img src="${product.image_url}">
+                <h3>${product.name}</h3>
+                <p>${product.description}</p>
+                <p><strong>$${product.price}</strong></p>
 
-        <div class="product">
+                <button class="edit-btn" onclick="editProduct(${product.id})">
+                    Edit
+                </button>
 
-            <h3>${product.name}</h3>
-
-            <p>
-            ${product.description}
-            </p>
-
-            <p>
-            <strong>
-            $${product.price}
-            </strong>
-            </p>
-
-            <img
-            src="${product.image_url}"
-            width="200">
-
-        </div>
-
+                <button class="delete-btn" onclick="deleteProduct(${product.id})">
+                    Delete
+                </button>
+            </div>
         `;
+    });
+}
 
+async function saveProduct(){
+    const id = document.getElementById("productId").value;
+
+    const product = {
+        name: document.getElementById("name").value,
+        price: Number(document.getElementById("price").value),
+        description: document.getElementById("description").value,
+        image_url: document.getElementById("image_url").value
+    };
+
+    let url = `${SUPABASE_URL}/rest/v1/products`;
+    let method = "POST";
+
+    if(id){
+        url = `${SUPABASE_URL}/rest/v1/products?id=eq.${id}`;
+        method = "PATCH";
+    }
+
+    const response = await fetch(url,{
+        method:method,
+        headers:{
+            apikey:SUPABASE_KEY,
+            Authorization:`Bearer ${SUPABASE_KEY}`,
+            "Content-Type":"application/json",
+            "Prefer":"return=representation"
+        },
+        body:JSON.stringify(product)
     });
 
+    if(response.ok){
+        document.getElementById("message").innerText =
+        id ? "Product updated successfully!" : "Product saved successfully!";
+
+        clearForm();
+        loadProducts();
+    }else{
+        document.getElementById("message").innerText =
+        "Save failed. Check Supabase policy.";
+    }
+}
+
+async function editProduct(id){
+    const response = await fetch(
+        `${SUPABASE_URL}/rest/v1/products?id=eq.${id}&select=*`,
+        {
+            headers:{
+                apikey:SUPABASE_KEY,
+                Authorization:`Bearer ${SUPABASE_KEY}`
+            }
+        }
+    );
+
+    const data = await response.json();
+    const product = data[0];
+
+    document.getElementById("productId").value = product.id;
+    document.getElementById("name").value = product.name;
+    document.getElementById("price").value = product.price;
+    document.getElementById("description").value = product.description;
+    document.getElementById("image_url").value = product.image_url;
+
+    window.scrollTo(0,0);
+}
+
+async function deleteProduct(id){
+    if(!confirm("Delete this product?")) return;
+
+    const response = await fetch(
+        `${SUPABASE_URL}/rest/v1/products?id=eq.${id}`,
+        {
+            method:"DELETE",
+            headers:{
+                apikey:SUPABASE_KEY,
+                Authorization:`Bearer ${SUPABASE_KEY}`
+            }
+        }
+    );
+
+    if(response.ok){
+        loadProducts();
+    }else{
+        alert("Delete failed. Check DELETE policy.");
+    }
 }
 
 loadProducts();
-
-</script>
-
 </script>
 
 </body>
