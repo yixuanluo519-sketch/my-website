@@ -1,106 +1,235 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Product Details</title>
+<title>Product Details | Morgan Food Machinery</title>
 
 <style>
+*{
+    box-sizing:border-box;
+}
 
 body{
-margin:0;
-font-family:Arial,sans-serif;
-background:#0b0b0b;
-color:white;
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#0b0b0b;
+    color:white;
 }
 
 header{
-background:#050505;
-border-bottom:1px solid #d4af37;
-padding:20px 50px;
+    background:#050505;
+    border-bottom:1px solid #d4af37;
+    padding:20px 50px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
 }
 
 .logo{
-font-size:28px;
-font-weight:bold;
-color:#d4af37;
+    font-size:28px;
+    font-weight:bold;
+    color:#d4af37;
+    text-decoration:none;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    margin-left:22px;
+    font-weight:bold;
+}
+
+nav a:hover{
+    color:#d4af37;
 }
 
 .container{
-max-width:1200px;
-margin:auto;
-padding:60px 30px;
-}
-
-.product{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:50px;
-align-items:start;
-}
-
-.product img{
-width:100%;
-border-radius:15px;
-background:#111;
-}
-
-h1{
-color:#d4af37;
-margin-top:0;
-}
-
-.price{
-font-size:32px;
-font-weight:bold;
-color:#d4af37;
-margin:20px 0;
-}
-
-.description{
-line-height:1.8;
-font-size:18px;
-color:#ddd;
-}
-
-.btn{
-display:inline-block;
-padding:14px 28px;
-background:#d4af37;
-color:black;
-text-decoration:none;
-border-radius:30px;
-font-weight:bold;
-margin-top:20px;
+    max-width:1250px;
+    margin:auto;
+    padding:55px 30px;
 }
 
 .back{
-display:inline-block;
-margin-bottom:30px;
-color:#d4af37;
-text-decoration:none;
+    display:inline-block;
+    margin-bottom:30px;
+    color:#d4af37;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+.product{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:50px;
+    align-items:start;
+}
+
+.product-image{
+    background:#111;
+    border:1px solid #333;
+    border-radius:18px;
+    padding:15px;
+}
+
+.product-image img{
+    width:100%;
+    border-radius:12px;
+    display:block;
+}
+
+.product-info{
+    background:#151515;
+    border:1px solid #333;
+    border-radius:18px;
+    padding:35px;
+}
+
+h1{
+    color:#d4af37;
+    margin-top:0;
+    font-size:38px;
+}
+
+.category{
+    color:#aaa;
+    margin-bottom:15px;
+}
+
+.price{
+    font-size:34px;
+    font-weight:bold;
+    color:#d4af37;
+    margin:20px 0;
+}
+
+.description{
+    line-height:1.8;
+    font-size:18px;
+    color:#ddd;
+}
+
+.btn{
+    display:inline-block;
+    padding:14px 28px;
+    background:#d4af37;
+    color:black;
+    text-decoration:none;
+    border-radius:30px;
+    font-weight:bold;
+    margin-top:22px;
+}
+
+.btn:hover{
+    background:#b9962f;
+}
+
+.info-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:25px;
+    margin-top:50px;
+}
+
+.info-box{
+    background:#151515;
+    border:1px solid #333;
+    border-radius:18px;
+    padding:28px;
+}
+
+.info-box h2{
+    color:#d4af37;
+    margin-top:0;
+}
+
+.info-box ul{
+    padding-left:20px;
+    line-height:1.8;
+    color:#ddd;
+}
+
+.related-section{
+    margin-top:60px;
+}
+
+.related-section h2{
+    color:#d4af37;
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.related-products{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:25px;
+}
+
+.card{
+    background:#151515;
+    border:1px solid #333;
+    border-radius:15px;
+    overflow:hidden;
+}
+
+.card img{
+    width:100%;
+    height:190px;
+    object-fit:cover;
+}
+
+.card-body{
+    padding:18px;
+}
+
+.card h3{
+    color:white;
+    font-size:18px;
+}
+
+.card .price{
+    font-size:22px;
+}
+
+footer{
+    background:#050505;
+    border-top:1px solid #d4af37;
+    color:#aaa;
+    text-align:center;
+    padding:30px;
+    margin-top:50px;
 }
 
 @media(max-width:900px){
+    header{
+        flex-direction:column;
+        gap:15px;
+    }
 
-.product{
-grid-template-columns:1fr;
+    .product{
+        grid-template-columns:1fr;
+    }
+
+    h1{
+        font-size:30px;
+    }
 }
-
-}
-
 </style>
-
 </head>
 
 <body>
 
 <header>
-<div class="logo">
+<a class="logo" href="index.html">
 Morgan Food Machinery
-</div>
+</a>
+
+<nav>
+<a href="index.html">Home</a>
+<a href="search.html">Search</a>
+<a href="index.html#contact">Contact</a>
+</nav>
 </header>
 
 <div class="container">
@@ -110,15 +239,58 @@ Morgan Food Machinery
 </a>
 
 <div id="productContainer">
-
 Loading...
+</div>
 
+<div class="info-grid">
+
+<div class="info-box">
+<h2>Product Features</h2>
+<ul>
+<li>Commercial-grade construction for professional use</li>
+<li>Designed for restaurants, food shops, and production environments</li>
+<li>Reliable performance for daily operation</li>
+<li>Easy to clean and maintain</li>
+</ul>
+</div>
+
+<div class="info-box">
+<h2>Specifications</h2>
+<ul id="specList">
+<li>Category: Loading...</li>
+<li>Price: Loading...</li>
+<li>Availability: Contact sales for details</li>
+<li>Support: Morgan Food Machinery</li>
+</ul>
+</div>
+
+<div class="info-box">
+<h2>Request a Quote</h2>
+<p class="description">
+Need pricing, shipping information, or product recommendations?
+Contact our sales team for details.
+</p>
+<a id="quoteButton" class="btn" href="mailto:sales@morgangastros.com">
+Get Quote
+</a>
 </div>
 
 </div>
+
+<div class="related-section">
+<h2>Related Products</h2>
+<div class="related-products" id="relatedProducts">
+Loading related products...
+</div>
+</div>
+
+</div>
+
+<footer>
+<p>© 2026 Morgan Food Machinery. All Rights Reserved.</p>
+</footer>
 
 <script>
-
 const SUPABASE_URL =
 "https://omcytrhftuivfzbwcalp.supabase.co";
 
@@ -130,6 +302,8 @@ new URLSearchParams(window.location.search);
 
 const id =
 params.get("id");
+
+let currentProduct = null;
 
 async function loadProduct(){
 
@@ -149,6 +323,8 @@ await response.json();
 const product =
 data[0];
 
+currentProduct = product;
+
 const box =
 document.getElementById("productContainer");
 
@@ -159,20 +335,21 @@ return;
 }
 
 document.title =
-product.name;
+product.name + " | Morgan Food Machinery";
 
 box.innerHTML = `
 
 <div class="product">
 
-<div>
-
-<img src="${product.image_url}"
-alt="${product.name}">
-
+<div class="product-image">
+<img src="${product.image_url}" alt="${product.name}">
 </div>
 
-<div>
+<div class="product-info">
+
+<div class="category">
+${product.category || "Commercial Equipment"}
+</div>
 
 <h1>${product.name}</h1>
 
@@ -186,9 +363,12 @@ ${product.description || "No description available."}
 
 <a class="btn"
 href="mailto:sales@morgangastros.com?subject=Quote Request: ${encodeURIComponent(product.name)}">
+Request Quote
+</a>
 
-Get Quote
-
+<a class="btn"
+href="category.html?category=${encodeURIComponent(product.category || "")}">
+View Category
 </a>
 
 </div>
@@ -197,10 +377,79 @@ Get Quote
 
 `;
 
+document.getElementById("specList").innerHTML = `
+<li>Category: ${product.category || "Commercial Equipment"}</li>
+<li>Price: $${product.price}</li>
+<li>Availability: Contact sales for details</li>
+<li>Support: Morgan Food Machinery</li>
+`;
+
+document.getElementById("quoteButton").href =
+`mailto:sales@morgangastros.com?subject=Quote Request: ${encodeURIComponent(product.name)}`;
+
+loadRelatedProducts(product.category, product.id);
+
+}
+
+async function loadRelatedProducts(category, productId){
+
+if(!category){
+document.getElementById("relatedProducts").innerHTML =
+"<p>No related products available.</p>";
+return;
+}
+
+const response = await fetch(
+`${SUPABASE_URL}/rest/v1/products?category=eq.${encodeURIComponent(category)}&id=neq.${productId}&select=*&limit=4`,
+{
+headers:{
+apikey:SUPABASE_KEY,
+Authorization:`Bearer ${SUPABASE_KEY}`
+}
+}
+);
+
+const products =
+await response.json();
+
+const box =
+document.getElementById("relatedProducts");
+
+if(!products || products.length===0){
+box.innerHTML =
+"<p>No related products available.</p>";
+return;
+}
+
+box.innerHTML =
+products.map(product=>`
+
+<div class="card">
+
+<img src="${product.image_url}" alt="${product.name}">
+
+<div class="card-body">
+
+<h3>${product.name}</h3>
+
+<div class="price">
+$${product.price}
+</div>
+
+<a class="btn"
+href="product.html?id=${product.id}">
+View Details
+</a>
+
+</div>
+
+</div>
+
+`).join("");
+
 }
 
 loadProduct();
-
 </script>
 
 </body>
