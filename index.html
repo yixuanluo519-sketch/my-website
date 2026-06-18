@@ -88,6 +88,11 @@ border-radius:30px;
 font-weight:bold;
 }
 
+.btn:hover{
+background:white;
+color:black;
+}
+
 .section{
 padding:80px 60px;
 text-align:center;
@@ -120,6 +125,13 @@ border-radius:18px;
 overflow:hidden;
 position:relative;
 text-decoration:none;
+border:1px solid #333;
+transition:.3s;
+}
+
+.category-card:hover{
+transform:translateY(-6px);
+border-color:#d4af37;
 }
 
 .category-card img{
@@ -132,7 +144,7 @@ object-fit:cover;
 content:"";
 position:absolute;
 inset:0;
-background:rgba(0,0,0,.5);
+background:rgba(0,0,0,.55);
 }
 
 .category-card h3{
@@ -143,6 +155,8 @@ transform:translate(-50%,-50%);
 z-index:2;
 font-size:30px;
 color:#d4af37;
+text-align:center;
+width:90%;
 }
 
 .products{
@@ -157,16 +171,33 @@ background:#161616;
 border:1px solid #333;
 border-radius:15px;
 overflow:hidden;
+transition:.3s;
+}
+
+.product-card:hover{
+transform:translateY(-5px);
+border-color:#d4af37;
 }
 
 .product-card img{
 width:100%;
 height:220px;
 object-fit:cover;
+background:#111;
 }
 
 .product-body{
 padding:20px;
+}
+
+.product-body h3{
+color:white;
+margin-bottom:10px;
+}
+
+.product-body p{
+color:#ccc;
+line-height:1.5;
 }
 
 .price{
@@ -182,6 +213,37 @@ border-top:1px solid #d4af37;
 padding:40px;
 text-align:center;
 color:#aaa;
+}
+
+@media(max-width:800px){
+
+header{
+flex-direction:column;
+padding:20px;
+}
+
+nav{
+margin-top:15px;
+text-align:center;
+}
+
+nav a{
+display:inline-block;
+margin:8px;
+}
+
+.hero h1{
+font-size:42px;
+}
+
+hero p{
+font-size:18px;
+}
+
+.section{
+padding:50px 20px;
+}
+
 }
 
 </style>
@@ -200,6 +262,7 @@ Morgan Food Machinery
 <a href="#about">About</a>
 <a href="#categories">Categories</a>
 <a href="#bestsellers">Best Sellers</a>
+<a href="search.html">Search</a>
 <a href="#contact">Contact</a>
 </nav>
 
@@ -227,14 +290,9 @@ Explore Products
 <h2>About Morgan</h2>
 
 <p class="about-text">
-
-Morgan Food Machinery supplies professional food
-processing equipment for restaurants,
-food manufacturers,
-butchers,
-supermarkets,
+Morgan Food Machinery supplies professional food processing equipment
+for restaurants, food manufacturers, butchers, supermarkets,
 and distributors throughout North America.
-
 </p>
 
 </section>
@@ -248,7 +306,7 @@ and distributors throughout North America.
 <a class="category-card"
 href="category.html?category=Meat Processing">
 
-<img src="https://images.unsplash.com/photo-1607623814075-e51df1bdc82f">
+<img src="https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?w=900">
 
 <h3>Meat Processing</h3>
 
@@ -257,7 +315,7 @@ href="category.html?category=Meat Processing">
 <a class="category-card"
 href="category.html?category=Sausage Equipment">
 
-<img src="https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba">
+<img src="https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?w=900">
 
 <h3>Sausage Equipment</h3>
 
@@ -266,15 +324,43 @@ href="category.html?category=Sausage Equipment">
 <a class="category-card"
 href="category.html?category=Vegetable Processing">
 
-<img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd">
+<img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=900">
 
 <h3>Vegetable Processing</h3>
+
+</a>
+
+<a class="category-card"
+href="category.html?category=Smokers & Warmers">
+
+<img src="https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?w=900">
+
+<h3>Smokers & Warmers</h3>
+
+</a>
+
+<a class="category-card"
+href="category.html?category=Kitchen Equipment">
+
+<img src="https://images.unsplash.com/photo-1556911220-bff31c812dba?w=900">
+
+<h3>Kitchen Equipment</h3>
+
+</a>
+
+<a class="category-card"
+href="category.html?category=Parts & Accessories">
+
+<img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=900">
+
+<h3>Parts & Accessories</h3>
 
 </a>
 
 </div>
 
 </section>
+
 <section class="section" id="bestsellers">
 
 <h2>Best Sellers</h2>
@@ -310,7 +396,7 @@ const SUPABASE_KEY = "sb_publishable_XpUZl3GZyhSQ9-NR4xFzbw_Kf5pU_cQ";
 function productCard(product){
     return `
     <div class="product-card">
-        <img src="${product.image_url}">
+        <img src="${product.image_url}" alt="${product.name}">
         <div class="product-body">
             <h3>${product.name}</h3>
             <p>${product.description || ""}</p>
