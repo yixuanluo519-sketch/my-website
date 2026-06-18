@@ -1,1 +1,207 @@
-<h1>Product Page</h1>
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Product Details</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:#0b0b0b;
+color:white;
+}
+
+header{
+background:#050505;
+border-bottom:1px solid #d4af37;
+padding:20px 50px;
+}
+
+.logo{
+font-size:28px;
+font-weight:bold;
+color:#d4af37;
+}
+
+.container{
+max-width:1200px;
+margin:auto;
+padding:60px 30px;
+}
+
+.product{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:50px;
+align-items:start;
+}
+
+.product img{
+width:100%;
+border-radius:15px;
+background:#111;
+}
+
+h1{
+color:#d4af37;
+margin-top:0;
+}
+
+.price{
+font-size:32px;
+font-weight:bold;
+color:#d4af37;
+margin:20px 0;
+}
+
+.description{
+line-height:1.8;
+font-size:18px;
+color:#ddd;
+}
+
+.btn{
+display:inline-block;
+padding:14px 28px;
+background:#d4af37;
+color:black;
+text-decoration:none;
+border-radius:30px;
+font-weight:bold;
+margin-top:20px;
+}
+
+.back{
+display:inline-block;
+margin-bottom:30px;
+color:#d4af37;
+text-decoration:none;
+}
+
+@media(max-width:900px){
+
+.product{
+grid-template-columns:1fr;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+<div class="logo">
+Morgan Food Machinery
+</div>
+</header>
+
+<div class="container">
+
+<a class="back" href="javascript:history.back()">
+← Back
+</a>
+
+<div id="productContainer">
+
+Loading...
+
+</div>
+
+</div>
+
+<script>
+
+const SUPABASE_URL =
+"https://omcytrhftuivfzbwcalp.supabase.co";
+
+const SUPABASE_KEY =
+"sb_publishable_XpUZl3GZyhSQ9-NR4xFzbw_Kf5pU_cQ";
+
+const params =
+new URLSearchParams(window.location.search);
+
+const id =
+params.get("id");
+
+async function loadProduct(){
+
+const response = await fetch(
+`${SUPABASE_URL}/rest/v1/products?id=eq.${id}&select=*`,
+{
+headers:{
+apikey:SUPABASE_KEY,
+Authorization:`Bearer ${SUPABASE_KEY}`
+}
+}
+);
+
+const data =
+await response.json();
+
+const product =
+data[0];
+
+const box =
+document.getElementById("productContainer");
+
+if(!product){
+box.innerHTML =
+"<h2>Product not found</h2>";
+return;
+}
+
+document.title =
+product.name;
+
+box.innerHTML = `
+
+<div class="product">
+
+<div>
+
+<img src="${product.image_url}"
+alt="${product.name}">
+
+</div>
+
+<div>
+
+<h1>${product.name}</h1>
+
+<div class="price">
+$${product.price}
+</div>
+
+<div class="description">
+${product.description || "No description available."}
+</div>
+
+<a class="btn"
+href="mailto:sales@morgangastros.com?subject=Quote Request: ${encodeURIComponent(product.name)}">
+
+Get Quote
+
+</a>
+
+</div>
+
+</div>
+
+`;
+
+}
+
+loadProduct();
+
+</script>
+
+</body>
+</html>
