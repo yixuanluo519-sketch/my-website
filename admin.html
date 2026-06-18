@@ -84,11 +84,66 @@ Loading...
 
 <script>
 
+<script>
+
 const SUPABASE_URL =
 "https://omcytrhftuivfzbwcalp.supabase.co";
 
 const SUPABASE_KEY =
-"sb_publishable_开头那串";
+"你的 sb_publishable 开头那串";
+
+async function loadProducts(){
+
+    const response = await fetch(
+        `${SUPABASE_URL}/rest/v1/products?select=*`,
+        {
+            headers:{
+                apikey:SUPABASE_KEY,
+                Authorization:`Bearer ${SUPABASE_KEY}`
+            }
+        }
+    );
+
+    const products = await response.json();
+
+    const productList =
+    document.getElementById("productList");
+
+    productList.innerHTML = "";
+
+    products.forEach(product=>{
+
+        productList.innerHTML += `
+
+        <div class="product">
+
+            <h3>${product.name}</h3>
+
+            <p>
+            ${product.description}
+            </p>
+
+            <p>
+            <strong>
+            $${product.price}
+            </strong>
+            </p>
+
+            <img
+            src="${product.image_url}"
+            width="200">
+
+        </div>
+
+        `;
+
+    });
+
+}
+
+loadProducts();
+
+</script>
 
 </script>
 
