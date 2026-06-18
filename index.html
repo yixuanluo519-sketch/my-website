@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -8,244 +7,304 @@
 <title>Morgan Food Machinery</title>
 
 <style>
-
 *{
-margin:0;
-padding:0;
-box-sizing:border-box;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
 }
 
 body{
-font-family:Arial,sans-serif;
-background:#0b0b0b;
-color:white;
+    font-family:Arial,sans-serif;
+    background:#0b0b0b;
+    color:white;
 }
 
 header{
-background:#050505;
-border-bottom:1px solid #d4af37;
-padding:20px 60px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-position:sticky;
-top:0;
-z-index:999;
+    background:#050505;
+    border-bottom:1px solid #d4af37;
+    padding:20px 60px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    position:sticky;
+    top:0;
+    z-index:999;
 }
 
 .logo{
-font-size:30px;
-font-weight:bold;
-color:#d4af37;
+    font-size:30px;
+    font-weight:bold;
+    color:#d4af37;
 }
 
 nav a{
-color:white;
-text-decoration:none;
-margin-left:25px;
-font-weight:bold;
+    color:white;
+    text-decoration:none;
+    margin-left:25px;
+    font-weight:bold;
 }
 
 nav a:hover{
-color:#d4af37;
+    color:#d4af37;
 }
 
 .hero{
-height:85vh;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-text-align:center;
-padding:20px;
-background:
-linear-gradient(rgba(0,0,0,.65),rgba(0,0,0,.75)),
-url("https://images.unsplash.com/photo-1556911220-bff31c812dba?w=1600");
-background-size:cover;
-background-position:center;
+    min-height:85vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:40px 20px;
+    background:
+    linear-gradient(rgba(0,0,0,.70),rgba(0,0,0,.82)),
+    url("https://images.unsplash.com/photo-1556911220-bff31c812dba?w=1600");
+    background-size:cover;
+    background-position:center;
 }
 
 .hero h1{
-font-size:70px;
-color:#d4af37;
+    font-size:70px;
+    color:#d4af37;
 }
 
 .hero p{
-font-size:24px;
-max-width:900px;
-margin-top:20px;
-line-height:1.6;
+    font-size:24px;
+    max-width:900px;
+    margin-top:20px;
+    line-height:1.6;
+}
+
+.search-area{
+    margin-top:35px;
+    width:100%;
+    max-width:760px;
+}
+
+.search-box{
+    width:100%;
+    padding:18px 22px;
+    font-size:18px;
+    border-radius:40px;
+    border:2px solid #d4af37;
+    background:#111;
+    color:white;
+    outline:none;
+}
+
+.search-box::placeholder{
+    color:#aaa;
+}
+
+.search-results{
+    width:100%;
+    max-width:760px;
+    background:#111;
+    border:1px solid #d4af37;
+    border-radius:18px;
+    margin-top:12px;
+    overflow:hidden;
+    display:none;
+    text-align:left;
+}
+
+.search-item{
+    display:flex;
+    gap:15px;
+    padding:14px;
+    border-bottom:1px solid #333;
+    color:white;
+    text-decoration:none;
+}
+
+.search-item:hover{
+    background:#1d1d1d;
+}
+
+.search-item img{
+    width:80px;
+    height:65px;
+    object-fit:cover;
+    border-radius:8px;
+}
+
+.search-item h4{
+    color:#d4af37;
+    margin-bottom:5px;
+}
+
+.search-item p{
+    font-size:14px;
+    margin:0;
+    color:#ccc;
 }
 
 .btn{
-display:inline-block;
-margin-top:30px;
-padding:15px 30px;
-background:#d4af37;
-color:black;
-text-decoration:none;
-border-radius:30px;
-font-weight:bold;
+    display:inline-block;
+    margin-top:30px;
+    padding:15px 30px;
+    background:#d4af37;
+    color:black;
+    text-decoration:none;
+    border-radius:30px;
+    font-weight:bold;
 }
 
 .btn:hover{
-background:white;
-color:black;
+    background:#b9962f;
 }
 
 .section{
-padding:80px 60px;
-text-align:center;
+    padding:80px 60px;
+    text-align:center;
 }
 
 .section h2{
-font-size:42px;
-color:#d4af37;
-margin-bottom:20px;
+    font-size:42px;
+    color:#d4af37;
+    margin-bottom:20px;
 }
 
 .about-text{
-max-width:900px;
-margin:auto;
-font-size:20px;
-line-height:1.8;
-color:#ddd;
+    max-width:900px;
+    margin:auto;
+    font-size:20px;
+    line-height:1.8;
+    color:#ddd;
 }
 
 .categories{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-gap:30px;
-margin-top:50px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:30px;
+    margin-top:50px;
 }
 
 .category-card{
-height:260px;
-border-radius:18px;
-overflow:hidden;
-position:relative;
-text-decoration:none;
-border:1px solid #333;
-transition:.3s;
-}
-
-.category-card:hover{
-transform:translateY(-6px);
-border-color:#d4af37;
+    height:260px;
+    border-radius:18px;
+    overflow:hidden;
+    position:relative;
+    text-decoration:none;
+    border:1px solid #333;
 }
 
 .category-card img{
-width:100%;
-height:100%;
-object-fit:cover;
+    width:100%;
+    height:100%;
+    object-fit:cover;
 }
 
 .category-card::before{
-content:"";
-position:absolute;
-inset:0;
-background:rgba(0,0,0,.55);
+    content:"";
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,.55);
 }
 
 .category-card h3{
-position:absolute;
-left:50%;
-top:50%;
-transform:translate(-50%,-50%);
-z-index:2;
-font-size:30px;
-color:#d4af37;
-text-align:center;
-width:90%;
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    z-index:2;
+    font-size:30px;
+    color:#d4af37;
+}
+
+.category-card:hover{
+    border:1px solid #d4af37;
 }
 
 .products{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-gap:25px;
-margin-top:40px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:25px;
+    margin-top:40px;
 }
 
 .product-card{
-background:#161616;
-border:1px solid #333;
-border-radius:15px;
-overflow:hidden;
-transition:.3s;
+    background:#161616;
+    border:1px solid #333;
+    border-radius:15px;
+    overflow:hidden;
+    transition:.2s;
 }
 
 .product-card:hover{
-transform:translateY(-5px);
-border-color:#d4af37;
+    transform:translateY(-5px);
+    border-color:#d4af37;
 }
 
 .product-card img{
-width:100%;
-height:220px;
-object-fit:cover;
-background:#111;
+    width:100%;
+    height:220px;
+    object-fit:cover;
 }
 
 .product-body{
-padding:20px;
+    padding:20px;
 }
 
 .product-body h3{
-color:white;
-margin-bottom:10px;
+    color:white;
+    min-height:50px;
 }
 
 .product-body p{
-color:#ccc;
-line-height:1.5;
+    color:#ccc;
 }
 
 .price{
-color:#d4af37;
-font-size:24px;
-font-weight:bold;
-margin-top:10px;
+    color:#d4af37;
+    font-size:24px;
+    font-weight:bold;
+    margin-top:10px;
+}
+
+.contact{
+    background:#111;
 }
 
 footer{
-background:#050505;
-border-top:1px solid #d4af37;
-padding:40px;
-text-align:center;
-color:#aaa;
+    background:#050505;
+    border-top:1px solid #d4af37;
+    padding:40px;
+    text-align:center;
+    color:#aaa;
 }
 
 @media(max-width:800px){
+    header{
+        flex-direction:column;
+        padding:20px;
+    }
 
-header{
-flex-direction:column;
-padding:20px;
+    nav{
+        margin-top:15px;
+    }
+
+    nav a{
+        display:inline-block;
+        margin:8px;
+    }
+
+    .hero h1{
+        font-size:42px;
+    }
+
+    .hero p{
+        font-size:18px;
+    }
+
+    .section{
+        padding:50px 20px;
+    }
 }
-
-nav{
-margin-top:15px;
-text-align:center;
-}
-
-nav a{
-display:inline-block;
-margin:8px;
-}
-
-.hero h1{
-font-size:42px;
-}
-
-hero p{
-font-size:18px;
-}
-
-.section{
-padding:50px 20px;
-}
-
-}
-
 </style>
 
 </head>
@@ -262,7 +321,6 @@ Morgan Food Machinery
 <a href="#about">About</a>
 <a href="#categories">Categories</a>
 <a href="#bestsellers">Best Sellers</a>
-<a href="search.html">Search</a>
 <a href="#contact">Contact</a>
 </nav>
 
@@ -279,6 +337,17 @@ Meat Processing Systems,
 Smokers & Warmers.
 </p>
 
+<div class="search-area">
+<input
+type="text"
+id="searchInput"
+class="search-box"
+placeholder="Search products, machines, parts..."
+>
+
+<div id="searchResults" class="search-results"></div>
+</div>
+
 <a class="btn" href="#categories">
 Explore Products
 </a>
@@ -290,8 +359,11 @@ Explore Products
 <h2>About Morgan</h2>
 
 <p class="about-text">
-Morgan Food Machinery supplies professional food processing equipment
-for restaurants, food manufacturers, butchers, supermarkets,
+Morgan Food Machinery supplies professional food
+processing equipment for restaurants,
+food manufacturers,
+butchers,
+supermarkets,
 and distributors throughout North America.
 </p>
 
@@ -303,58 +375,34 @@ and distributors throughout North America.
 
 <div class="categories">
 
-<a class="category-card"
-href="category.html?category=Meat Processing">
-
-<img src="https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?w=900">
-
+<a class="category-card" href="category.html?category=Meat Processing">
+<img src="https://images.unsplash.com/photo-1607623814075-e51df1bdc82f">
 <h3>Meat Processing</h3>
-
 </a>
 
-<a class="category-card"
-href="category.html?category=Sausage Equipment">
-
-<img src="https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?w=900">
-
+<a class="category-card" href="category.html?category=Sausage Equipment">
+<img src="https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba">
 <h3>Sausage Equipment</h3>
-
 </a>
 
-<a class="category-card"
-href="category.html?category=Vegetable Processing">
-
-<img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=900">
-
+<a class="category-card" href="category.html?category=Vegetable Processing">
+<img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd">
 <h3>Vegetable Processing</h3>
-
 </a>
 
-<a class="category-card"
-href="category.html?category=Smokers & Warmers">
-
-<img src="https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?w=900">
-
+<a class="category-card" href="category.html?category=Smokers & Warmers">
+<img src="https://images.unsplash.com/photo-1529193591184-b1d58069ecdd">
 <h3>Smokers & Warmers</h3>
-
 </a>
 
-<a class="category-card"
-href="category.html?category=Kitchen Equipment">
-
-<img src="https://images.unsplash.com/photo-1556911220-bff31c812dba?w=900">
-
+<a class="category-card" href="category.html?category=Kitchen Equipment">
+<img src="https://images.unsplash.com/photo-1556911220-bff31c812dba">
 <h3>Kitchen Equipment</h3>
-
 </a>
 
-<a class="category-card"
-href="category.html?category=Parts & Accessories">
-
-<img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=900">
-
+<a class="category-card" href="category.html?category=Parts & Accessories">
+<img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758">
 <h3>Parts & Accessories</h3>
-
 </a>
 
 </div>
@@ -371,7 +419,7 @@ Loading...
 
 </section>
 
-<section class="section" id="contact">
+<section class="section contact" id="contact">
 
 <h2>Contact Us</h2>
 
@@ -393,10 +441,12 @@ Contact Sales
 const SUPABASE_URL = "https://omcytrhftuivfzbwcalp.supabase.co";
 const SUPABASE_KEY = "sb_publishable_XpUZl3GZyhSQ9-NR4xFzbw_Kf5pU_cQ";
 
+let allProducts = [];
+
 function productCard(product){
     return `
     <div class="product-card">
-        <img src="${product.image_url}" alt="${product.name}">
+        <img src="${product.image_url}">
         <div class="product-body">
             <h3>${product.name}</h3>
             <p>${product.description || ""}</p>
@@ -409,9 +459,9 @@ function productCard(product){
     `;
 }
 
-async function loadBestSellers(){
+async function loadProducts(){
     const response = await fetch(
-        `${SUPABASE_URL}/rest/v1/products?select=*&featured=eq.true&limit=6`,
+        `${SUPABASE_URL}/rest/v1/products?select=*&order=id.asc`,
         {
             headers:{
                 apikey: SUPABASE_KEY,
@@ -420,18 +470,69 @@ async function loadBestSellers(){
         }
     );
 
-    const products = await response.json();
+    allProducts = await response.json();
+
+    const bestSellers =
+    allProducts.filter(product => product.featured === true).slice(0,6);
+
     const box = document.getElementById("bestSellerList");
 
-    if(!products || products.length === 0){
+    if(!bestSellers || bestSellers.length === 0){
         box.innerHTML = "<p>No best sellers yet.</p>";
-        return;
+    }else{
+        box.innerHTML = bestSellers.map(productCard).join("");
     }
-
-    box.innerHTML = products.map(productCard).join("");
 }
 
-loadBestSellers();
+function setupSearch(){
+    const input = document.getElementById("searchInput");
+    const results = document.getElementById("searchResults");
+
+    input.addEventListener("input", function(){
+
+        const term = input.value.toLowerCase().trim();
+
+        if(term.length < 2){
+            results.style.display = "none";
+            results.innerHTML = "";
+            return;
+        }
+
+        const filtered = allProducts
+        .filter(product =>
+            product.name &&
+            product.name.toLowerCase().includes(term)
+        )
+        .slice(0,8);
+
+        if(filtered.length === 0){
+            results.style.display = "block";
+            results.innerHTML = `
+            <div class="search-item">
+                <div>
+                    <h4>No products found</h4>
+                    <p>Try another keyword.</p>
+                </div>
+            </div>
+            `;
+            return;
+        }
+
+        results.style.display = "block";
+
+        results.innerHTML = filtered.map(product => `
+            <a class="search-item" href="product.html?id=${product.id}">
+                <img src="${product.image_url}">
+                <div>
+                    <h4>${product.name}</h4>
+                    <p>$${product.price}</p>
+                </div>
+            </a>
+        `).join("");
+    });
+}
+
+loadProducts().then(setupSearch);
 </script>
 
 </body>
