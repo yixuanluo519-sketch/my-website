@@ -7,6 +7,10 @@
 <title>Morgan Food Machinery</title>
 
 <style>
+*{
+    box-sizing:border-box;
+}
+
 html{
     scroll-behavior:smooth;
 }
@@ -14,64 +18,97 @@ html{
 body{
     margin:0;
     font-family:Arial, sans-serif;
-    background:#f8f1e7;
-    color:#2b1a12;
+    background:#0f0f0f;
+    color:#f5f5f5;
 }
 
 header{
-    background:#7b1e1e;
+    background:#050505;
+    border-bottom:1px solid #d4af37;
     color:white;
-    padding:22px 60px;
+    padding:20px 60px;
     display:flex;
     justify-content:space-between;
     align-items:center;
     position:sticky;
     top:0;
-    z-index:10;
+    z-index:100;
 }
 
 .logo{
     font-size:28px;
     font-weight:bold;
+    color:#d4af37;
+    letter-spacing:1px;
 }
 
 nav a{
-    color:white;
+    color:#f5f5f5;
     text-decoration:none;
     margin-left:22px;
     font-weight:bold;
 }
 
+nav a:hover{
+    color:#d4af37;
+}
+
 .hero{
-    background:linear-gradient(135deg,#7b1e1e,#d4a017);
-    color:white;
+    background:
+    linear-gradient(rgba(0,0,0,0.65),rgba(0,0,0,0.85)),
+    url("https://images.unsplash.com/photo-1556911220-bff31c812dba?w=1600");
+    background-size:cover;
+    background-position:center;
     text-align:center;
-    padding:90px 20px;
+    padding:130px 20px;
 }
 
 .hero h1{
-    font-size:56px;
+    font-size:64px;
     margin:0;
+    color:#d4af37;
 }
 
 .hero p{
-    font-size:22px;
+    font-size:24px;
+    max-width:800px;
+    margin:25px auto;
+    line-height:1.5;
+}
+
+.btn{
+    background:#d4af37;
+    color:#0f0f0f;
+    padding:13px 28px;
+    border-radius:30px;
+    text-decoration:none;
+    display:inline-block;
+    margin-top:10px;
+    font-weight:bold;
+    border:2px solid #d4af37;
+}
+
+.btn:hover{
+    background:transparent;
+    color:#d4af37;
 }
 
 .section{
-    padding:55px 70px;
+    padding:60px 70px;
     text-align:center;
 }
 
 .section h2{
-    color:#7b1e1e;
-    font-size:34px;
+    color:#d4af37;
+    font-size:38px;
+    margin-bottom:25px;
 }
 
 .section-intro{
-    max-width:800px;
+    max-width:850px;
     margin:auto;
     font-size:18px;
+    color:#ddd;
     line-height:1.7;
 }
 
@@ -79,21 +116,30 @@ nav a{
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
     gap:25px;
+    margin-top:30px;
 }
 
 .card{
-    background:white;
-    border-radius:16px;
-    box-shadow:0 5px 18px #c9b8a2;
+    background:#1a1a1a;
+    border:1px solid #333;
+    border-radius:18px;
     overflow:hidden;
     text-decoration:none;
-    color:#2b1a12;
+    color:#f5f5f5;
+    box-shadow:0 8px 25px rgba(0,0,0,0.5);
+    transition:0.25s;
+}
+
+.card:hover{
+    transform:translateY(-6px);
+    border-color:#d4af37;
 }
 
 .card img{
     width:100%;
     height:210px;
     object-fit:cover;
+    background:#111;
 }
 
 .card-body{
@@ -101,56 +147,59 @@ nav a{
 }
 
 .card h3{
+    color:#fff;
     min-height:48px;
 }
 
 .price{
-    color:#7b1e1e;
+    color:#d4af37;
     font-size:24px;
     font-weight:bold;
-}
-
-.btn{
-    background:#7b1e1e;
-    color:white;
-    padding:12px 25px;
-    border-radius:25px;
-    text-decoration:none;
-    display:inline-block;
-    margin-top:10px;
 }
 
 .category-card{
-    min-height:150px;
+    min-height:180px;
     display:flex;
     align-items:center;
     justify-content:center;
-    font-size:24px;
-    font-weight:bold;
-    transition:0.2s;
+    position:relative;
+    background-size:cover;
+    background-position:center;
 }
 
-.category-card:hover{
-    transform:translateY(-5px);
+.category-card::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,0.55);
+}
+
+.category-card h3{
+    position:relative;
+    z-index:2;
+    font-size:26px;
+    color:#d4af37;
 }
 
 .contact{
-    background:white;
+    background:#151515;
+    border-top:1px solid #333;
 }
 
 footer{
-    background:#7b1e1e;
-    color:white;
+    background:#050505;
+    border-top:1px solid #d4af37;
+    color:#aaa;
     text-align:center;
     padding:25px;
 }
 
 .empty{
-    color:#777;
+    color:#999;
     font-style:italic;
 }
 
-@media(max-width:700px){
+@media(max-width:760px){
     header{
         flex-direction:column;
         padding:20px;
@@ -166,11 +215,15 @@ footer{
     }
 
     .hero h1{
-        font-size:38px;
+        font-size:40px;
+    }
+
+    .hero p{
+        font-size:18px;
     }
 
     .section{
-        padding:40px 20px;
+        padding:45px 20px;
     }
 }
 </style>
@@ -181,64 +234,63 @@ footer{
 <header>
     <div class="logo">Morgan Food Machinery</div>
     <nav>
-        <a href="#about">About</a>
-        <a href="#best-sellers">Best Sellers</a>
         <a href="#categories">Categories</a>
+        <a href="#best-sellers">Best Sellers</a>
         <a href="#contact">Contact</a>
     </nav>
 </header>
 
 <section class="hero">
     <h1>Morgan Food Machinery</h1>
-    <p>Professional Food Processing Machinery & Commercial Kitchen Equipment</p>
-    <a class="btn" href="#categories">Browse Products</a>
+    <p>
+        Premium commercial food processing machinery, kitchen equipment,
+        smokers, warmers, and replacement parts for restaurants and food businesses.
+    </p>
+    <a class="btn" href="#categories">Shop By Category</a>
 </section>
 
-<section class="section" id="about">
-    <h2>About Us</h2>
-    <p class="section-intro">
-        Morgan Food Machinery provides reliable food processing machines,
-        sausage stuffers, meat processing tools, smokers, warmers, commercial kitchen
-        equipment, and replacement parts for restaurants, food businesses, and distributors.
-    </p>
+<section class="section" id="categories">
+    <h2>Shop By Category</h2>
+
+    <div class="products">
+
+        <a class="card category-card" href="#meat-processing"
+        style="background-image:url('https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?w=900');">
+            <h3>🥩 Meat Processing</h3>
+        </a>
+
+        <a class="card category-card" href="#sausage-equipment"
+        style="background-image:url('https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?w=900');">
+            <h3>🌭 Sausage Equipment</h3>
+        </a>
+
+        <a class="card category-card" href="#vegetable-processing"
+        style="background-image:url('https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=900');">
+            <h3>🥔 Vegetable Processing</h3>
+        </a>
+
+        <a class="card category-card" href="#smokers-warmers"
+        style="background-image:url('https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?w=900');">
+            <h3>🔥 Smokers & Warmers</h3>
+        </a>
+
+        <a class="card category-card" href="#kitchen-equipment"
+        style="background-image:url('https://images.unsplash.com/photo-1556911220-bff31c812dba?w=900');">
+            <h3>🍳 Kitchen Equipment</h3>
+        </a>
+
+        <a class="card category-card" href="#parts-accessories"
+        style="background-image:url('https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=900');">
+            <h3>⚙️ Parts & Accessories</h3>
+        </a>
+
+    </div>
 </section>
 
 <section class="section" id="best-sellers">
     <h2>🔥 Best Sellers</h2>
     <div class="products" id="bestSellerList">
-        <p>Loading best sellers...</p>
-    </div>
-</section>
-
-<section class="section" id="categories">
-    <h2>Shop by Category</h2>
-
-    <div class="products">
-
-        <a class="card category-card" href="#meat-processing">
-            🥩 Meat Processing
-        </a>
-
-        <a class="card category-card" href="#sausage-equipment">
-            🌭 Sausage Equipment
-        </a>
-
-        <a class="card category-card" href="#vegetable-processing">
-            🥔 Vegetable Processing
-        </a>
-
-        <a class="card category-card" href="#smokers-warmers">
-            🔥 Smokers & Warmers
-        </a>
-
-        <a class="card category-card" href="#kitchen-equipment">
-            🍕 Kitchen Equipment
-        </a>
-
-        <a class="card category-card" href="#parts-accessories">
-            ⚙️ Parts & Accessories
-        </a>
-
+        <p>Loading...</p>
     </div>
 </section>
 
@@ -263,7 +315,7 @@ footer{
 </section>
 
 <section class="section" id="kitchen-equipment">
-    <h2>🍕 Kitchen Equipment</h2>
+    <h2>🍳 Kitchen Equipment</h2>
     <div class="products" id="kitchenList"></div>
 </section>
 
@@ -332,22 +384,40 @@ async function loadProducts(){
 
     const products = await response.json();
 
-    const bestSellers = products.filter(p => p.featured === true);
+    renderProducts(
+        "bestSellerList",
+        products.filter(p => p.featured === true).slice(0,8)
+    );
 
-    const meat = products.filter(p => p.category === "Meat Processing");
-    const sausage = products.filter(p => p.category === "Sausage Equipment");
-    const vegetable = products.filter(p => p.category === "Vegetable Processing");
-    const smokers = products.filter(p => p.category === "Smokers & Warmers");
-    const kitchen = products.filter(p => p.category === "Kitchen Equipment");
-    const parts = products.filter(p => p.category === "Parts & Accessories");
+    renderProducts(
+        "meatList",
+        products.filter(p => p.category === "Meat Processing")
+    );
 
-    renderProducts("bestSellerList", bestSellers);
-    renderProducts("meatList", meat);
-    renderProducts("sausageList", sausage);
-    renderProducts("vegetableList", vegetable);
-    renderProducts("smokerList", smokers);
-    renderProducts("kitchenList", kitchen);
-    renderProducts("partsList", parts);
+    renderProducts(
+        "sausageList",
+        products.filter(p => p.category === "Sausage Equipment")
+    );
+
+    renderProducts(
+        "vegetableList",
+        products.filter(p => p.category === "Vegetable Processing")
+    );
+
+    renderProducts(
+        "smokerList",
+        products.filter(p => p.category === "Smokers & Warmers")
+    );
+
+    renderProducts(
+        "kitchenList",
+        products.filter(p => p.category === "Kitchen Equipment")
+    );
+
+    renderProducts(
+        "partsList",
+        products.filter(p => p.category === "Parts & Accessories")
+    );
 }
 
 loadProducts();
