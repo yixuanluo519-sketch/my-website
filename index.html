@@ -7,6 +7,10 @@
 <title>Morgan Food Machinery</title>
 
 <style>
+html{
+    scroll-behavior:smooth;
+}
+
 body{
     margin:0;
     font-family:Arial, sans-serif;
@@ -21,22 +25,25 @@ header{
     display:flex;
     justify-content:space-between;
     align-items:center;
+    position:sticky;
+    top:0;
+    z-index:10;
 }
 
 .logo{
-    font-size:30px;
+    font-size:28px;
     font-weight:bold;
 }
 
 nav a{
     color:white;
     text-decoration:none;
-    margin-left:25px;
+    margin-left:22px;
     font-weight:bold;
 }
 
 .hero{
-    background:#d4a017;
+    background:linear-gradient(135deg,#7b1e1e,#d4a017);
     color:white;
     text-align:center;
     padding:90px 20px;
@@ -52,7 +59,7 @@ nav a{
 }
 
 .section{
-    padding:60px 80px;
+    padding:55px 70px;
     text-align:center;
 }
 
@@ -61,9 +68,16 @@ nav a{
     font-size:34px;
 }
 
+.section-intro{
+    max-width:800px;
+    margin:auto;
+    font-size:18px;
+    line-height:1.7;
+}
+
 .products{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
     gap:25px;
 }
 
@@ -72,16 +86,22 @@ nav a{
     border-radius:16px;
     box-shadow:0 5px 18px #c9b8a2;
     overflow:hidden;
+    text-decoration:none;
+    color:#2b1a12;
 }
 
 .card img{
     width:100%;
-    height:220px;
+    height:210px;
     object-fit:cover;
 }
 
 .card-body{
     padding:22px;
+}
+
+.card h3{
+    min-height:48px;
 }
 
 .price{
@@ -100,6 +120,20 @@ nav a{
     margin-top:10px;
 }
 
+.category-card{
+    min-height:150px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:24px;
+    font-weight:bold;
+    transition:0.2s;
+}
+
+.category-card:hover{
+    transform:translateY(-5px);
+}
+
 .contact{
     background:white;
 }
@@ -110,6 +144,35 @@ footer{
     text-align:center;
     padding:25px;
 }
+
+.empty{
+    color:#777;
+    font-style:italic;
+}
+
+@media(max-width:700px){
+    header{
+        flex-direction:column;
+        padding:20px;
+    }
+
+    nav{
+        margin-top:15px;
+    }
+
+    nav a{
+        display:inline-block;
+        margin:8px;
+    }
+
+    .hero h1{
+        font-size:38px;
+    }
+
+    .section{
+        padding:40px 20px;
+    }
+}
 </style>
 </head>
 
@@ -119,7 +182,8 @@ footer{
     <div class="logo">Morgan Food Machinery</div>
     <nav>
         <a href="#about">About</a>
-        <a href="#products">Products</a>
+        <a href="#best-sellers">Best Sellers</a>
+        <a href="#categories">Categories</a>
         <a href="#contact">Contact</a>
     </nav>
 </header>
@@ -127,22 +191,85 @@ footer{
 <section class="hero">
     <h1>Morgan Food Machinery</h1>
     <p>Professional Food Processing Machinery & Commercial Kitchen Equipment</p>
+    <a class="btn" href="#categories">Browse Products</a>
 </section>
 
 <section class="section" id="about">
     <h2>About Us</h2>
-    <p>
+    <p class="section-intro">
         Morgan Food Machinery provides reliable food processing machines,
-        sausage stuffers, meat processing tools, and commercial kitchen equipment
-        for restaurants, food businesses, and distributors.
+        sausage stuffers, meat processing tools, smokers, warmers, commercial kitchen
+        equipment, and replacement parts for restaurants, food businesses, and distributors.
     </p>
 </section>
 
-<section class="section" id="products">
-    <h2>Our Products</h2>
-    <div class="products" id="productList">
-        <p>Loading products...</p>
+<section class="section" id="best-sellers">
+    <h2>🔥 Best Sellers</h2>
+    <div class="products" id="bestSellerList">
+        <p>Loading best sellers...</p>
     </div>
+</section>
+
+<section class="section" id="categories">
+    <h2>Shop by Category</h2>
+
+    <div class="products">
+
+        <a class="card category-card" href="#meat-processing">
+            🥩 Meat Processing
+        </a>
+
+        <a class="card category-card" href="#sausage-equipment">
+            🌭 Sausage Equipment
+        </a>
+
+        <a class="card category-card" href="#vegetable-processing">
+            🥔 Vegetable Processing
+        </a>
+
+        <a class="card category-card" href="#smokers-warmers">
+            🔥 Smokers & Warmers
+        </a>
+
+        <a class="card category-card" href="#kitchen-equipment">
+            🍕 Kitchen Equipment
+        </a>
+
+        <a class="card category-card" href="#parts-accessories">
+            ⚙️ Parts & Accessories
+        </a>
+
+    </div>
+</section>
+
+<section class="section" id="meat-processing">
+    <h2>🥩 Meat Processing</h2>
+    <div class="products" id="meatList"></div>
+</section>
+
+<section class="section" id="sausage-equipment">
+    <h2>🌭 Sausage Equipment</h2>
+    <div class="products" id="sausageList"></div>
+</section>
+
+<section class="section" id="vegetable-processing">
+    <h2>🥔 Vegetable Processing</h2>
+    <div class="products" id="vegetableList"></div>
+</section>
+
+<section class="section" id="smokers-warmers">
+    <h2>🔥 Smokers & Warmers</h2>
+    <div class="products" id="smokerList"></div>
+</section>
+
+<section class="section" id="kitchen-equipment">
+    <h2>🍕 Kitchen Equipment</h2>
+    <div class="products" id="kitchenList"></div>
+</section>
+
+<section class="section" id="parts-accessories">
+    <h2>⚙️ Parts & Accessories</h2>
+    <div class="products" id="partsList"></div>
 </section>
 
 <section class="section contact" id="contact">
@@ -165,9 +292,36 @@ footer{
 const SUPABASE_URL = "https://omcytrhftuivfzbwcalp.supabase.co";
 const SUPABASE_KEY = "sb_publishable_XpUZl3GZyhSQ9-NR4xFzbw_Kf5pU_cQ";
 
+function productCard(product){
+    return `
+        <div class="card">
+            <img src="${product.image_url}" alt="${product.name}">
+            <div class="card-body">
+                <h3>${product.name}</h3>
+                <p>${product.description || ""}</p>
+                <p class="price">$${product.price}</p>
+                <a class="btn" href="mailto:sales@morgangastros.com?subject=Quote Request: ${encodeURIComponent(product.name)}">
+                    Get Quote
+                </a>
+            </div>
+        </div>
+    `;
+}
+
+function renderProducts(listId, products){
+    const box = document.getElementById(listId);
+
+    if(!products || products.length === 0){
+        box.innerHTML = `<p class="empty">No products in this category yet.</p>`;
+        return;
+    }
+
+    box.innerHTML = products.map(productCard).join("");
+}
+
 async function loadProducts(){
     const response = await fetch(
-        `${SUPABASE_URL}/rest/v1/products?select=*`,
+        `${SUPABASE_URL}/rest/v1/products?select=*&order=id.asc`,
         {
             headers:{
                 apikey: SUPABASE_KEY,
@@ -177,29 +331,23 @@ async function loadProducts(){
     );
 
     const products = await response.json();
-    const productList = document.getElementById("productList");
-    productList.innerHTML = "";
 
-    if(!products || products.length === 0){
-        productList.innerHTML = "<p>No products available yet.</p>";
-        return;
-    }
+    const bestSellers = products.filter(p => p.featured === true);
 
-    products.forEach(product => {
-        productList.innerHTML += `
-            <div class="card">
-                <img src="${product.image_url}" alt="${product.name}">
-                <div class="card-body">
-                    <h3>${product.name}</h3>
-                    <p>${product.description}</p>
-                    <p class="price">$${product.price}</p>
-                    <a class="btn" href="mailto:sales@morgangastros.com?subject=Quote Request: ${product.name}">
-                        Get Quote
-                    </a>
-                </div>
-            </div>
-        `;
-    });
+    const meat = products.filter(p => p.category === "Meat Processing");
+    const sausage = products.filter(p => p.category === "Sausage Equipment");
+    const vegetable = products.filter(p => p.category === "Vegetable Processing");
+    const smokers = products.filter(p => p.category === "Smokers & Warmers");
+    const kitchen = products.filter(p => p.category === "Kitchen Equipment");
+    const parts = products.filter(p => p.category === "Parts & Accessories");
+
+    renderProducts("bestSellerList", bestSellers);
+    renderProducts("meatList", meat);
+    renderProducts("sausageList", sausage);
+    renderProducts("vegetableList", vegetable);
+    renderProducts("smokerList", smokers);
+    renderProducts("kitchenList", kitchen);
+    renderProducts("partsList", parts);
 }
 
 loadProducts();
