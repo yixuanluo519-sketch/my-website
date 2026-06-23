@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html>
 <head>
 <meta charset="UTF-8">
@@ -146,6 +147,7 @@ h2{
     }
 }
 </style>
+
 </head>
 
 <body>
@@ -191,7 +193,9 @@ Morgan Admin Dashboard
 <input id="name" placeholder="Product name">
 <input id="price" placeholder="Price">
 <textarea id="description" placeholder="Description"></textarea>
-<input id="image_url" placeholder="Image URL">
+
+<input type="file" id="imageFile" accept="image/*">
+<input id="image_url" placeholder="Image URL optional">
 
 <select id="category">
 <option value="">Select Category</option>
@@ -208,8 +212,7 @@ Morgan Admin Dashboard
 <option value="true">Best Seller</option>
 </select>
 
-<button onclick="saveProduct()">Save Product</button>
-<button class="clear-btn" onclick="clearForm()">Clear Form</button>
+<button onclick="saveProduct()">Save Product</button> <button class="clear-btn" onclick="clearForm()">Clear Form</button>
 
 <p id="message"></p>
 </div>
@@ -233,6 +236,7 @@ const ADMIN_PASSWORD = "morgan123";
 
 const SUPABASE_URL = "https://omcytrhftuivfzbwcalp.supabase.co";
 const SUPABASE_KEY = "sb_publishable_XpUZl3GZyhSQ9-NR4xFzbw_Kf5pU_cQ";
+const BUCKET_NAME = "products";
 
 function login(){
     const password = document.getElementById("password").value;
@@ -252,9 +256,45 @@ function clearForm(){
     document.getElementById("price").value = "";
     document.getElementById("description").value = "";
     document.getElementById("image_url").value = "";
+    document.getElementById("imageFile").value = "";
     document.getElementById("category").value = "";
     document.getElementById("featured").value = "false";
     document.getElementById("message").innerText = "";
+}
+
+async function uploadImageIfNeeded(){
+    const fileInput = document.getElementById("imageFile");
+    const file = fileInput.files[0];
+
+    if(!file){
+        return document.getElementById("image_url").value;
+    }
+
+    const fileExt = file.name.split(".").pop();
+    const safeFileName =
+        Date.now() + "_" + Math.floor(Math.random() * 100000) + "." + fileExt;
+
+    const uploadResponse = await fetch(
+        `${SUPABASE_URL}/storage/v1/object/${BUCKET_NAME}/${safeFileName}`,
+        {
+            method:"POST",
+            headers:{
+                apikey:SUPABASE_KEY,
+                Authorization:`Bearer ${SUPABASE_KEY}`,
+                "Content-Type":file.type,
+                "x-upsert":"true"
+            },
+            body:file
+        }
+    );
+
+    if(!uploadResponse.ok){
+        const errorText = await uploadResponse.text();
+        console.log("Upload failed:", errorText);
+        throw new Error("Image upload failed");
+    }
+
+    return `${SUPABASE_URL}/storage/v1/object/public/${BUCKET_NAME}/${safeFileName}`;
 }
 
 async function loadDashboard(){
@@ -401,45 +441,66 @@ async function deleteQuote(id){
 }
 
 async function saveProduct(){
-    const id = document.getElementById("productId").value;
-
-    const product = {
-        name: document.getElementById("name").value,
-        price: Number(document.getElementById("price").value),
-        description: document.getElementById("description").value,
-        image_url: document.getElementById("image_url").value,
-        category: document.getElementById("category").value,
-        featured: document.getElementById("featured").value === "true"
-    };
-
-    let url = `${SUPABASE_URL}/rest/v1/products`;
-    let method = "POST";
-
-    if(id){
-        url = `${SUPABASE_URL}/rest/v1/products?id=eq.${id}`;
-        method = "PATCH";
-    }
-
-    const response = await fetch(url,{
-        method:method,
-        headers:{
-            apikey:SUPABASE_KEY,
-            Authorization:`Bearer ${SUPABASE_KEY}`,
-            "Content-Type":"application/json",
-            "Prefer":"return=representation"
-        },
-        body:JSON.stringify(product)
-    });
-
-    if(response.ok){
+    try{
         document.getElementById("message").innerText =
-        id ? "Product updated successfully!" : "Product saved successfully!";
+        "Uploading / Saving...";
 
-        clearForm();
-        loadProducts();
-    }else{
+        const id = document.getElementById("productId").value;
+
+        const imageUrl = await uploadImageIfNeeded();
+
+        const product = {
+            name: document.getElementById("name").value,
+            price: Number(document.getElementById("price").value),
+            description: document.getElementById("description").value,
+            image_url: imageUrl,
+            category: document.getElementById("category").value,
+            featured: document.getElementById("featured").value === "true"
+        };
+
+        if(!product.name || !product.price || !product.description || !product.image_url){
+            document.getElementById("message").innerText =
+            "Please fill in name, price, description, and image.";
+            return;
+        }
+
+        let url = `${SUPABASE_URL}/rest/v1/products`;
+        let method = "POST";
+
+        if(id){
+            url = `${SUPABASE_URL}/rest/v1/products?id=eq.${id}`;
+            method = "PATCH";
+        }
+
+        const response = await fetch(url,{
+            method:method,
+            headers:{
+                apikey:SUPABASE_KEY,
+                Authorization:`Bearer ${SUPABASE_KEY}`,
+                "Content-Type":"application/json",
+                "Prefer":"return=representation"
+            },
+            body:JSON.stringify(product)
+        });
+
+        if(response.ok){
+            document.getElementById("message").innerText =
+            id ? "Product updated successfully!" : "Product saved successfully!";
+
+            clearForm();
+            loadProducts();
+        }else{
+            const errorText = await response.text();
+            console.log("Save failed:", errorText);
+
+            document.getElementById("message").innerText =
+            "Save failed. Check policies or fields.";
+        }
+
+    }catch(error){
+        console.log(error);
         document.getElementById("message").innerText =
-        "Save failed. Check policies or fields.";
+        "Image upload failed. Check Storage INSERT policy.";
     }
 }
 
@@ -462,6 +523,7 @@ async function editProduct(id){
     document.getElementById("price").value = product.price || "";
     document.getElementById("description").value = product.description || "";
     document.getElementById("image_url").value = product.image_url || "";
+    document.getElementById("imageFile").value = "";
     document.getElementById("category").value = product.category || "";
     document.getElementById("featured").value = product.featured ? "true" : "false";
 
