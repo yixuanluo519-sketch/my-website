@@ -1,111 +1,188 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Category</title>
+<title>Category | Morgan Food Machinery</title>
 
 <style>
-
 body{
-margin:0;
-font-family:Arial,sans-serif;
-background:#0b0b0b;
-color:white;
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#0b0b0b;
+    color:white;
 }
 
 header{
-background:#050505;
-border-bottom:1px solid #d4af37;
-padding:20px 50px;
+    background:#050505;
+    border-bottom:1px solid #d4af37;
+    padding:20px 50px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
 }
 
 .logo{
-font-size:28px;
-font-weight:bold;
-color:#d4af37;
+    font-size:28px;
+    font-weight:bold;
+    color:#d4af37;
+    text-decoration:none;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    margin-left:20px;
+    font-weight:bold;
+}
+
+nav a:hover{
+    color:#d4af37;
 }
 
 .container{
-padding:50px;
+    padding:50px;
 }
 
 h1{
-color:#d4af37;
-text-align:center;
-margin-bottom:40px;
+    color:#d4af37;
+    text-align:center;
+    margin-bottom:15px;
+}
+
+.count{
+    text-align:center;
+    color:#aaa;
+    margin-bottom:35px;
 }
 
 .products{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-gap:25px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:25px;
 }
 
 .card{
-background:#161616;
-border:1px solid #333;
-border-radius:15px;
-overflow:hidden;
+    background:#161616;
+    border:1px solid #333;
+    border-radius:15px;
+    overflow:hidden;
+    transition:.2s;
+}
+
+.card:hover{
+    border-color:#d4af37;
+    transform:translateY(-5px);
 }
 
 .card img{
-width:100%;
-height:220px;
-object-fit:cover;
+    width:100%;
+    height:220px;
+    object-fit:cover;
 }
 
 .card-body{
-padding:20px;
+    padding:20px;
+}
+
+.card-body h3{
+    color:white;
+}
+
+.card-body p{
+    color:#ccc;
 }
 
 .price{
-color:#d4af37;
-font-size:22px;
-font-weight:bold;
+    color:#d4af37;
+    font-size:22px;
+    font-weight:bold;
 }
 
 .btn{
-display:inline-block;
-margin-top:15px;
-padding:12px 20px;
-background:#d4af37;
-color:black;
-text-decoration:none;
-border-radius:25px;
-font-weight:bold;
+    display:inline-block;
+    margin-top:15px;
+    padding:12px 20px;
+    background:#d4af37;
+    color:black;
+    text-decoration:none;
+    border-radius:25px;
+    font-weight:bold;
+    border:none;
+    cursor:pointer;
 }
 
-</style>
+.btn:disabled{
+    background:#555;
+    color:#aaa;
+    cursor:not-allowed;
+}
 
+.pagination{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:15px;
+    margin-top:45px;
+    flex-wrap:wrap;
+}
+
+.page-info{
+    color:#d4af37;
+    font-weight:bold;
+}
+
+.empty{
+    text-align:center;
+    color:#aaa;
+}
+
+@media(max-width:700px){
+    header{
+        flex-direction:column;
+        gap:15px;
+    }
+
+    .container{
+        padding:30px 20px;
+    }
+}
+</style>
 </head>
 
 <body>
 
 <header>
-<div class="logo">
+<a class="logo" href="index.html">
 Morgan Food Machinery
-</div>
+</a>
+
+<nav>
+<a href="index.html">Home</a>
+<a href="search.html">Search</a>
+<a href="index.html#contact">Contact</a>
+</nav>
 </header>
 
 <div class="container">
 
-<h1 id="title">
-Loading Category...
-</h1>
+<h1 id="title">Loading Category...</h1>
+<p class="count" id="countText"></p>
 
 <div class="products" id="productList">
-
 Loading...
+</div>
 
+<div class="pagination">
+<button class="btn" id="prevBtn" onclick="previousPage()">← Previous</button>
+<span class="page-info" id="pageInfo">Page 1</span>
+<button class="btn" id="nextBtn" onclick="nextPage()">Next →</button>
 </div>
 
 </div>
 
 <script>
-
 const SUPABASE_URL =
 "https://omcytrhftuivfzbwcalp.supabase.co";
 
@@ -118,67 +195,122 @@ new URLSearchParams(window.location.search);
 const category =
 params.get("category");
 
+const PRODUCTS_PER_PAGE = 12;
+
+let currentPage = 1;
+let allProducts = [];
+
 document.getElementById("title").innerText =
-category;
+category || "Products";
 
 async function loadProducts(){
+    const response = await fetch(
+        `${SUPABASE_URL}/rest/v1/products?category=eq.${encodeURIComponent(category)}&select=*&order=id.asc`,
+        {
+            headers:{
+                apikey:SUPABASE_KEY,
+                Authorization:`Bearer ${SUPABASE_KEY}`
+            }
+        }
+    );
 
-const response = await fetch(
-`${SUPABASE_URL}/rest/v1/products?category=eq.${encodeURIComponent(category)}&select=*`,
-{
-headers:{
-apikey:SUPABASE_KEY,
-Authorization:`Bearer ${SUPABASE_KEY}`
-}
-}
-);
+    allProducts = await response.json();
 
-const products =
-await response.json();
-
-const list =
-document.getElementById("productList");
-
-if(products.length===0){
-list.innerHTML =
-"<p>No products found.</p>";
-return;
+    renderPage();
 }
 
-list.innerHTML =
-products.map(product=>`
+function renderPage(){
+    const list = document.getElementById("productList");
+    const countText = document.getElementById("countText");
+    const pageInfo = document.getElementById("pageInfo");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
 
-<div class="card">
+    if(!allProducts || allProducts.length === 0){
+        list.innerHTML = "<p class='empty'>No products found.</p>";
+        countText.innerText = "0 products";
+        pageInfo.innerText = "Page 0 of 0";
+        prevBtn.disabled = true;
+        nextBtn.disabled = true;
+        return;
+    }
 
-<img src="${product.image_url}">
+    const totalPages =
+    Math.ceil(allProducts.length / PRODUCTS_PER_PAGE);
 
-<div class="card-body">
+    if(currentPage < 1) currentPage = 1;
+    if(currentPage > totalPages) currentPage = totalPages;
 
-<h3>${product.name}</h3>
+    const start =
+    (currentPage - 1) * PRODUCTS_PER_PAGE;
 
-<p>${product.description || ""}</p>
+    const end =
+    start + PRODUCTS_PER_PAGE;
 
-<p class="price">
-$${product.price}
-</p>
+    const pageProducts =
+    allProducts.slice(start,end);
 
-<a class="btn"
-href="product.html?id=${product.id}">
-View Details
-</a>
+    countText.innerText =
+    `${allProducts.length} products found`;
 
-</div>
+    pageInfo.innerText =
+    `Page ${currentPage} of ${totalPages}`;
 
-</div>
+    prevBtn.disabled =
+    currentPage === 1;
 
-`).join("");
+    nextBtn.disabled =
+    currentPage === totalPages;
 
+    list.innerHTML =
+    pageProducts.map(product=>`
+
+        <div class="card">
+
+            <img src="${product.image_url}" alt="${product.name}">
+
+            <div class="card-body">
+
+                <h3>${product.name}</h3>
+
+                <p>${product.description || ""}</p>
+
+                <p class="price">
+                $${product.price}
+                </p>
+
+                <a class="btn"
+                href="product.html?id=${product.id}">
+                View Details
+                </a>
+
+            </div>
+
+        </div>
+
+    `).join("");
+}
+
+function nextPage(){
+    currentPage++;
+    renderPage();
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+}
+
+function previousPage(){
+    currentPage--;
+    renderPage();
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
 }
 
 loadProducts();
-
 </script>
 
 </body>
 </html>
-
