@@ -4,435 +4,331 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>MorganGastro | Commercial Food Machinery</title>
 
 <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:Arial,sans-serif;background:#f5f5f5;color:#111}
 
-html{
-    scroll-behavior:smooth;
-}
-
-body{
-    font-family:Arial, sans-serif;
-    background:#0b0b0b;
+.topbar{
+    background:#111;
     color:white;
-    overflow-x:hidden;
-}
-
-header{
-    background:#050505;
-    border-bottom:1px solid #d4af37;
-    padding:8px 55px;
+    padding:8px 50px;
     display:flex;
     justify-content:space-between;
+    font-size:14px;
+}
+
+.header{
+    background:white;
+    padding:18px 50px;
+    display:flex;
     align-items:center;
+    justify-content:space-between;
+    border-bottom:1px solid #ddd;
     position:sticky;
     top:0;
     z-index:999;
 }
 
-.logo{
-    display:flex;
-    align-items:center;
-    text-decoration:none;
-}
-
 .logo img{
-    height:72px;
-    width:auto;
+    height:68px;
     display:block;
-    transition:.25s ease;
 }
 
-.logo img:hover{
-    transform:scale(1.05);
-}
-
-nav a{
-    color:white;
-    text-decoration:none;
-    margin-left:28px;
-    font-weight:bold;
-    font-size:15px;
-    transition:.25s ease;
-}
-
-nav a:hover{
-    color:#d4af37;
-}
-
-.hero{
-    min-height:88vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    padding:70px 20px;
-    background:
-    linear-gradient(rgba(0,0,0,.68),rgba(0,0,0,.88)),
-    url("https://images.unsplash.com/photo-1556911220-bff31c812dba?w=1600");
-    background-size:cover;
-    background-position:center;
-}
-
-.hero-content{
-    max-width:1050px;
-}
-
-.hero-label{
-    color:#d4af37;
-    letter-spacing:4px;
-    font-weight:bold;
-    margin-bottom:18px;
-    text-transform:uppercase;
-    font-size:15px;
-}
-
-.hero h1{
-    font-size:82px;
-    color:#d4af37;
-    margin-bottom:18px;
-}
-
-.hero p{
-    font-size:25px;
-    line-height:1.6;
-    color:#eee;
-    max-width:950px;
-    margin:auto;
-}
-
-.search-area{
-    margin:35px auto 0;
-    width:100%;
-    max-width:800px;
+.main-search{
+    flex:1;
+    max-width:650px;
+    margin:0 35px;
     position:relative;
 }
 
-.search-box{
+.main-search input{
     width:100%;
-    padding:18px 60px 18px 24px;
-    font-size:18px;
-    border-radius:40px;
+    padding:15px 55px 15px 20px;
     border:2px solid #d4af37;
-    background:#0d0d0d;
-    color:white;
-    outline:none;
-    box-shadow:0 0 25px rgba(212,175,55,.15);
-    transition:.25s ease;
-}
-
-.search-box:focus{
-    box-shadow:0 0 35px rgba(212,175,55,.35);
+    border-radius:6px;
+    font-size:16px;
 }
 
 .search-icon{
     position:absolute;
-    right:24px;
-    top:17px;
+    right:18px;
+    top:13px;
     font-size:24px;
     color:#d4af37;
 }
 
 .search-results{
-    width:100%;
-    background:#111;
-    border:1px solid #d4af37;
-    border-radius:18px;
-    margin-top:12px;
-    overflow:hidden;
-    display:none;
-    text-align:left;
     position:absolute;
-    z-index:20;
+    top:58px;
+    left:0;
+    right:0;
+    background:white;
+    border:1px solid #ddd;
+    display:none;
+    z-index:1000;
+    box-shadow:0 8px 25px rgba(0,0,0,.15);
 }
 
 .search-item{
     display:flex;
-    gap:15px;
-    padding:14px;
-    border-bottom:1px solid #333;
-    color:white;
+    gap:12px;
+    padding:12px;
+    color:#111;
     text-decoration:none;
+    border-bottom:1px solid #eee;
 }
 
-.search-item:hover{
-    background:#1d1d1d;
-}
+.search-item:hover{background:#f7f7f7}
 
 .search-item img{
-    width:82px;
-    height:66px;
+    width:70px;
+    height:58px;
     object-fit:cover;
-    border-radius:8px;
-    background:#222;
 }
 
-.search-item h4{
+.header-actions a{
+    color:#111;
+    text-decoration:none;
+    margin-left:18px;
+    font-weight:bold;
+}
+
+.nav{
+    background:#050505;
+    padding:13px 50px;
+    display:flex;
+    gap:28px;
+    align-items:center;
+}
+
+.nav a{
+    color:white;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+.nav a:hover{color:#d4af37}
+
+.hero{
+    min-height:520px;
+    background:
+    linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,.7)),
+    url("https://images.unsplash.com/photo-1556911220-bff31c812dba?w=1600");
+    background-size:cover;
+    background-position:center;
+    display:flex;
+    align-items:center;
+    padding:70px 60px;
+    color:white;
+}
+
+.hero-box{
+    max-width:720px;
+    animation:fadeUp .8s ease forwards;
+}
+
+.hero-label{
     color:#d4af37;
-    margin-bottom:5px;
+    letter-spacing:3px;
+    font-weight:bold;
+    margin-bottom:18px;
 }
 
-.search-item p{
-    font-size:14px;
-    color:#ccc;
+.hero h1{
+    font-size:58px;
+    line-height:1.1;
+    margin-bottom:20px;
+}
+
+.hero p{
+    font-size:21px;
+    line-height:1.6;
+    color:#eee;
 }
 
 .btn{
     display:inline-block;
-    margin-top:30px;
-    padding:15px 32px;
+    margin-top:25px;
     background:#d4af37;
     color:black;
-    text-decoration:none;
-    border-radius:30px;
+    padding:14px 28px;
+    border-radius:4px;
     font-weight:bold;
-    transition:.25s ease;
+    text-decoration:none;
+    transition:.25s;
 }
 
 .btn:hover{
     background:#b9962f;
     transform:translateY(-2px);
-    box-shadow:0 0 25px rgba(212,175,55,.35);
 }
 
 .section{
-    padding:85px 60px;
-    text-align:center;
+    padding:60px 50px;
 }
 
-.section h2{
-    font-size:42px;
+.section-title{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:28px;
+}
+
+.section-title h2{
+    font-size:34px;
+}
+
+.section-title a{
     color:#d4af37;
-    margin-bottom:18px;
+    text-decoration:none;
+    font-weight:bold;
 }
 
-.section-subtitle{
-    color:#ccc;
-    max-width:760px;
-    margin:0 auto 40px;
-    line-height:1.7;
-    font-size:18px;
+.trending{
+    background:white;
 }
 
-.about{
-    background:#101010;
+.trend-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
 }
 
-.about-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:25px;
-    margin-top:40px;
+.trend-row a{
+    background:#111;
+    color:white;
+    text-decoration:none;
+    padding:10px 18px;
+    border-radius:30px;
+    font-weight:bold;
 }
 
-.about-card{
-    background:#161616;
-    border:1px solid #333;
-    border-radius:16px;
-    padding:28px;
-}
-
-.about-card h3{
-    color:#d4af37;
-    margin-bottom:10px;
-}
-
-.about-card p{
-    color:#ccc;
-    line-height:1.6;
-}
+.trend-row a:hover{background:#d4af37;color:black}
 
 .categories{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-    gap:28px;
-    margin-top:45px;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:22px;
 }
 
 .category-card{
-    height:250px;
-    border-radius:18px;
+    background:white;
+    border-radius:8px;
     overflow:hidden;
-    position:relative;
     text-decoration:none;
-    border:1px solid #333;
-    background:#111;
+    color:#111;
+    box-shadow:0 4px 15px rgba(0,0,0,.08);
+    transition:.25s;
+}
+
+.category-card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 8px 25px rgba(0,0,0,.15);
 }
 
 .category-card img{
     width:100%;
-    height:100%;
+    height:180px;
     object-fit:cover;
-    transition:.3s;
-}
-
-.category-card::before{
-    content:"";
-    position:absolute;
-    inset:0;
-    background:rgba(0,0,0,.58);
-    z-index:1;
 }
 
 .category-card h3{
-    position:absolute;
-    left:50%;
-    top:50%;
-    transform:translate(-50%,-50%);
-    z-index:2;
-    font-size:27px;
+    padding:18px;
+    font-size:20px;
+}
+
+.promo-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:22px;
+}
+
+.promo{
+    background:#111;
+    color:white;
+    padding:35px;
+    min-height:180px;
+    border-radius:8px;
+    position:relative;
+    overflow:hidden;
+}
+
+.promo h3{
     color:#d4af37;
-    width:90%;
-}
-
-.category-card:hover{
-    border-color:#d4af37;
-}
-
-.category-card:hover img{
-    transform:scale(1.08);
+    font-size:26px;
+    margin-bottom:10px;
 }
 
 .products{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-    gap:25px;
-    margin-top:40px;
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:22px;
 }
 
 .product-card{
-    background:#161616;
-    border:1px solid #333;
-    border-radius:15px;
+    background:white;
+    border:1px solid #e0e0e0;
+    border-radius:8px;
     overflow:hidden;
-    transition:.25s ease;
+    transition:.25s;
 }
 
 .product-card:hover{
-    transform:translateY(-6px);
-    border-color:#d4af37;
-    box-shadow:0 0 22px rgba(212,175,55,.18);
+    transform:translateY(-5px);
+    box-shadow:0 8px 25px rgba(0,0,0,.12);
 }
 
 .product-card img{
     width:100%;
-    height:220px;
+    height:210px;
     object-fit:cover;
-    background:#222;
+    background:#eee;
 }
 
 .product-body{
-    padding:20px;
-    text-align:left;
+    padding:18px;
 }
 
 .product-body h3{
-    color:white;
-    min-height:50px;
-    font-size:18px;
+    font-size:17px;
+    min-height:58px;
 }
 
 .product-body p{
-    color:#ccc;
     margin-top:8px;
+    color:#666;
 }
 
 .price{
-    color:#d4af37 !important;
-    font-size:24px;
-    font-weight:bold;
-    margin-top:12px;
-}
-
-.brands{
-    background:#101010;
-}
-
-.brand-row{
-    display:flex;
-    justify-content:center;
-    flex-wrap:wrap;
-    gap:18px;
-    margin-top:30px;
-}
-
-.brand-pill{
-    border:1px solid #d4af37;
-    color:#d4af37;
-    border-radius:30px;
-    padding:12px 24px;
+    color:#b8860b!important;
+    font-size:22px;
     font-weight:bold;
 }
 
 .contact{
     background:#111;
+    color:white;
+    text-align:center;
 }
 
-.contact p{
-    margin:10px 0;
-    color:#ddd;
-}
+.contact h2{color:#d4af37}
+
+.contact p{margin:10px 0;color:#ddd}
 
 footer{
     background:#050505;
-    border-top:1px solid #d4af37;
-    padding:35px;
-    text-align:center;
     color:#aaa;
-}
-
-/* Animations */
-@keyframes fadeUp{
-    from{
-        opacity:0;
-        transform:translateY(35px);
-    }
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-}
-
-.hero-label,
-.hero h1,
-.hero p,
-.search-area,
-.hero .btn{
-    opacity:0;
-    animation:fadeUp .9s ease forwards;
-}
-
-.hero-label{
-    animation-delay:.1s;
-}
-
-.hero h1{
-    animation-delay:.25s;
-}
-
-.hero p{
-    animation-delay:.42s;
-}
-
-.search-area{
-    animation-delay:.62s;
-}
-
-.hero .btn{
-    animation-delay:.82s;
+    padding:30px 50px;
+    text-align:center;
 }
 
 .reveal{
     opacity:0;
     transform:translateY(35px);
-    transition:.75s ease;
+    transition:.7s ease;
 }
 
 .reveal.show{
@@ -440,217 +336,175 @@ footer{
     transform:translateY(0);
 }
 
+@keyframes fadeUp{
+    from{opacity:0;transform:translateY(35px)}
+    to{opacity:1;transform:translateY(0)}
+}
+
 @media(max-width:800px){
-    header{
-        flex-direction:column;
-        padding:14px 18px;
-    }
-
-    .logo img{
-        height:58px;
-    }
-
-    nav{
-        margin-top:12px;
-    }
-
-    nav a{
-        display:inline-block;
-        margin:8px;
-    }
-
-    .hero h1{
-        font-size:44px;
-    }
-
-    .hero p{
-        font-size:18px;
-    }
-
-    .hero-label{
-        font-size:12px;
-        letter-spacing:2px;
-    }
-
-    .section{
-        padding:55px 20px;
-    }
+    .topbar{display:none}
+    .header{flex-direction:column;padding:15px}
+    .main-search{margin:18px 0;width:100%}
+    .nav{flex-wrap:wrap;padding:14px 20px;gap:15px}
+    .hero{padding:50px 25px}
+    .hero h1{font-size:38px}
+    .section{padding:45px 20px}
 }
 </style>
 </head>
 
 <body>
 
-<header>
-<a class="logo" href="index.html">
-    <img src="logo.png" alt="MorganGastro">
-</a>
+<div class="topbar">
+    <div>Tel: 313-899-9696</div>
+    <div>Commercial Food Machinery • Restaurant Equipment • Quote Support</div>
+</div>
 
-<nav>
-<a href="#about">About</a>
-<a href="#categories">Categories</a>
-<a href="#bestsellers">Best Sellers</a>
-<a href="#contact">Contact</a>
-</nav>
+<header class="header">
+    <a class="logo" href="index.html">
+        <img src="logo.png" alt="MorganGastro">
+    </a>
+
+    <div class="main-search">
+        <input type="text" id="searchInput" placeholder="What are you looking for?">
+        <span class="search-icon">⌕</span>
+        <div id="searchResults" class="search-results"></div>
+    </div>
+
+    <div class="header-actions">
+        <a href="#contact">Contact</a>
+        <a href="#bestsellers">Products</a>
+    </div>
 </header>
 
+<nav class="nav">
+    <a href="index.html">Home</a>
+    <a href="#categories">Departments</a>
+    <a href="#bestsellers">Best Sellers</a>
+    <a href="#trending">Trending Now</a>
+    <a href="#contact">Request Quote</a>
+</nav>
+
 <section class="hero">
-<div class="hero-content">
-
-<div class="hero-label">
-Commercial Kitchen Equipment Supplier
-</div>
-
-<h1>MorganGastro</h1>
-
-<p>
-Premium commercial food machinery, restaurant equipment,
-food processing systems, warmers, refrigeration, and kitchen supplies
-for restaurants, supermarkets, food factories, and distributors.
-</p>
-
-<div class="search-area">
-<input
-type="text"
-id="searchInput"
-class="search-box"
-placeholder="Search products, machines, parts..."
->
-<span class="search-icon">⌕</span>
-<div id="searchResults" class="search-results"></div>
-</div>
-
-<a class="btn" href="#categories">
-Explore Products
-</a>
-
-</div>
+    <div class="hero-box">
+        <div class="hero-label">COMMERCIAL KITCHEN EQUIPMENT</div>
+        <h1>Professional Food Machinery for Commercial Kitchens</h1>
+        <p>
+            Browse restaurant equipment, food preparation machines, refrigeration,
+            warmers, storage supplies, and commercial kitchen accessories.
+        </p>
+        <a class="btn" href="#categories">Shop Departments</a>
+    </div>
 </section>
 
-<section class="section about" id="about">
+<section class="section trending" id="trending">
+    <div class="section-title">
+        <h2>Trending Now</h2>
+    </div>
 
-<h2 class="reveal">About MorganGastro</h2>
-
-<p class="section-subtitle reveal">
-MorganGastro supplies professional commercial food equipment for food service
-businesses across North America, including restaurants, butchers, supermarkets,
-food manufacturers, and distributors.
-</p>
-
-<div class="about-grid">
-
-<div class="about-card reveal">
-<h3>Commercial Grade</h3>
-<p>Reliable equipment designed for demanding restaurant and food processing environments.</p>
-</div>
-
-<div class="about-card reveal">
-<h3>Wide Product Range</h3>
-<p>Explore hundreds of products across cooking, refrigeration, food prep, warming, and accessories.</p>
-</div>
-
-<div class="about-card reveal">
-<h3>Fast Quote Support</h3>
-<p>Request a quote directly from any product page and our sales team will follow up.</p>
-</div>
-
-</div>
+    <div class="trend-row">
+        <a href="search.html?query=sausage">Sausage</a>
+        <a href="search.html?query=meat mixer">Meat Mixer</a>
+        <a href="search.html?query=smoker">Smoker</a>
+        <a href="search.html?query=food pans">Food Pans</a>
+        <a href="search.html?query=refrigerator">Refrigerator</a>
+        <a href="search.html?query=coffee">Coffee</a>
+    </div>
 </section>
 
 <section class="section" id="categories">
+    <div class="section-title reveal">
+        <h2>Shop Departments</h2>
+    </div>
 
-<h2 class="reveal">Shop By Category</h2>
+    <div class="categories">
 
-<p class="section-subtitle reveal">
-Browse equipment by category and find the right commercial solution for your business.
-</p>
+        <a class="category-card reveal" href="category.html?category=Food%20Prep%20%26%20Processing">
+            <img src="https://images.unsplash.com/photo-1607623814075-e51df1bdc82f">
+            <h3>Food Prep & Processing</h3>
+        </a>
 
-<div class="categories">
+        <a class="category-card reveal" href="category.html?category=Cooking%20Equipment">
+            <img src="https://images.unsplash.com/photo-1556911220-bff31c812dba">
+            <h3>Cooking Equipment</h3>
+        </a>
 
-<a class="category-card reveal" href="category.html?category=Food%20Prep%20%26%20Processing">
-<img src="https://images.unsplash.com/photo-1607623814075-e51df1bdc82f">
-<h3>Food Prep & Processing</h3>
-</a>
+        <a class="category-card reveal" href="category.html?category=Refrigeration%20%26%20Ice">
+            <img src="https://images.unsplash.com/photo-1514996937319-344454492b37">
+            <h3>Refrigeration & Ice</h3>
+        </a>
 
-<a class="category-card reveal" href="category.html?category=Cooking%20Equipment">
-<img src="https://images.unsplash.com/photo-1556911220-bff31c812dba">
-<h3>Cooking Equipment</h3>
-</a>
+        <a class="category-card reveal" href="category.html?category=Holding%20%26%20Warming">
+            <img src="https://images.unsplash.com/photo-1529193591184-b1d58069ecdd">
+            <h3>Holding & Warming</h3>
+        </a>
 
-<a class="category-card reveal" href="category.html?category=Refrigeration%20%26%20Ice">
-<img src="https://images.unsplash.com/photo-1514996937319-344454492b37">
-<h3>Refrigeration & Ice</h3>
-</a>
+        <a class="category-card reveal" href="category.html?category=Beverage%20Equipment">
+            <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085">
+            <h3>Beverage Equipment</h3>
+        </a>
 
-<a class="category-card reveal" href="category.html?category=Holding%20%26%20Warming">
-<img src="https://images.unsplash.com/photo-1529193591184-b1d58069ecdd">
-<h3>Holding & Warming</h3>
-</a>
+        <a class="category-card reveal" href="category.html?category=Storage%20%26%20Transport">
+            <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d">
+            <h3>Storage & Transport</h3>
+        </a>
 
-<a class="category-card reveal" href="category.html?category=Beverage%20Equipment">
-<img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085">
-<h3>Beverage Equipment</h3>
-</a>
+        <a class="category-card reveal" href="category.html?category=Smallwares%20%26%20Accessories">
+            <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758">
+            <h3>Smallwares & Accessories</h3>
+        </a>
 
-<a class="category-card reveal" href="category.html?category=Storage%20%26%20Transport">
-<img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d">
-<h3>Storage & Transport</h3>
-</a>
+        <a class="category-card reveal" href="category.html?category=Cleaning%20%26%20Dishwashing">
+            <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952">
+            <h3>Cleaning & Dishwashing</h3>
+        </a>
 
-<a class="category-card reveal" href="category.html?category=Smallwares%20%26%20Accessories">
-<img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758">
-<h3>Smallwares & Accessories</h3>
-</a>
+    </div>
+</section>
 
-<a class="category-card reveal" href="category.html?category=Cleaning%20%26%20Dishwashing">
-<img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952">
-<h3>Cleaning & Dishwashing</h3>
-</a>
+<section class="section">
+    <div class="promo-grid">
+        <div class="promo reveal">
+            <h3>Cooking Equipment</h3>
+            <p>Convenient commercial equipment for chefs and food service teams.</p>
+            <a class="btn" href="category.html?category=Cooking%20Equipment">Shop Now</a>
+        </div>
 
-</div>
+        <div class="promo reveal">
+            <h3>Food Preparation</h3>
+            <p>Meat processing, mixers, cutters, slicers, and prep machines.</p>
+            <a class="btn" href="category.html?category=Food%20Prep%20%26%20Processing">Shop Now</a>
+        </div>
+
+        <div class="promo reveal">
+            <h3>Refrigeration</h3>
+            <p>Commercial refrigeration and cold storage solutions.</p>
+            <a class="btn" href="category.html?category=Refrigeration%20%26%20Ice">Shop Now</a>
+        </div>
+    </div>
 </section>
 
 <section class="section" id="bestsellers">
+    <div class="section-title reveal">
+        <h2>Best Sellers</h2>
+        <a href="search.html">View All</a>
+    </div>
 
-<h2 class="reveal">Best Sellers</h2>
-
-<p class="section-subtitle reveal">
-Popular equipment selected from our commercial product catalog.
-</p>
-
-<div class="products" id="bestSellerList">
-Loading products...
-</div>
-</section>
-
-<section class="section brands">
-
-<h2 class="reveal">Featured Brands</h2>
-
-<div class="brand-row">
-<span class="brand-pill reveal">Hakka</span>
-<span class="brand-pill reveal">EasyRose</span>
-<span class="brand-pill reveal">Morgangastro</span>
-<span class="brand-pill reveal">Caterway</span>
-<span class="brand-pill reveal">Planetary</span>
-</div>
+    <div class="products" id="bestSellerList">
+        Loading products...
+    </div>
 </section>
 
 <section class="section contact" id="contact">
-
-<h2 class="reveal">Contact Us</h2>
-
-<p class="reveal"><strong>Email:</strong> sales@morgangastros.com</p>
-<p class="reveal"><strong>Phone:</strong> 313-899-9696</p>
-<p class="reveal"><strong>Address:</strong> 3231 S Gulley Rd. STE B, Dearborn, MI 48124 USA</p>
-
-<a class="btn reveal" href="mailto:sales@morgangastros.com">
-Contact Sales
-</a>
+    <h2>Request a Quote</h2>
+    <p><strong>Email:</strong> sales@morgangastros.com</p>
+    <p><strong>Phone:</strong> 313-899-9696</p>
+    <p><strong>Address:</strong> 3231 S Gulley Rd. STE B, Dearborn, MI 48124 USA</p>
+    <a class="btn" href="mailto:sales@morgangastros.com">Contact Sales</a>
 </section>
 
 <footer>
-<p>© 2026 MorganGastro. Commercial Food Machinery & Restaurant Equipment.</p>
+    <p>© 2026 MorganGastro. Commercial Food Machinery & Restaurant Equipment.</p>
 </footer>
 
 <script>
@@ -685,36 +539,33 @@ async function loadProducts(){
         `${SUPABASE_URL}/rest/v1/products?select=*&order=id.asc`,
         {
             headers:{
-                apikey: SUPABASE_KEY,
-                Authorization: `Bearer ${SUPABASE_KEY}`
+                apikey:SUPABASE_KEY,
+                Authorization:`Bearer ${SUPABASE_KEY}`
             }
         }
     );
 
     allProducts = await response.json();
 
-    let bestSellers =
-    allProducts.filter(product => product.featured === true).slice(0,8);
+    let bestSellers = allProducts
+        .filter(product => product.featured === true)
+        .slice(0,8);
 
     if(bestSellers.length === 0){
         bestSellers = allProducts.slice(0,8);
     }
 
     const box = document.getElementById("bestSellerList");
+    box.innerHTML = bestSellers.map(productCard).join("");
 
-    if(!bestSellers || bestSellers.length === 0){
-        box.innerHTML = "<p>No products available yet.</p>";
-    }else{
-        box.innerHTML = bestSellers.map(productCard).join("");
-        observeRevealElements();
-    }
+    observeRevealElements();
 }
 
 function setupSearch(){
     const input = document.getElementById("searchInput");
     const results = document.getElementById("searchResults");
 
-    input.addEventListener("input", function(){
+    input.addEventListener("input",()=>{
         const term = input.value.toLowerCase().trim();
 
         if(term.length < 2){
@@ -723,36 +574,30 @@ function setupSearch(){
             return;
         }
 
-        const filtered = allProducts
-        .filter(product =>
+        const filtered = allProducts.filter(product =>
             (product.name || "").toLowerCase().includes(term) ||
-            (product.description || "").toLowerCase().includes(term) ||
             (product.category || "").toLowerCase().includes(term) ||
             (product.brand || "").toLowerCase().includes(term)
-        )
-        .slice(0,8);
+        ).slice(0,8);
+
+        results.style.display = "block";
 
         if(filtered.length === 0){
-            results.style.display = "block";
             results.innerHTML = `
             <div class="search-item">
                 <div>
                     <h4>No products found</h4>
                     <p>Try another keyword.</p>
                 </div>
-            </div>
-            `;
+            </div>`;
             return;
         }
-
-        results.style.display = "block";
 
         results.innerHTML = filtered.map(product => `
             <a class="search-item" href="product.html?id=${product.id}">
                 <img src="${safeImage(product.image_url)}" alt="${product.name}">
                 <div>
                     <h4>${product.name}</h4>
-                    <p>${product.category || ""}</p>
                     <p>$${product.price}</p>
                 </div>
             </a>
@@ -766,9 +611,7 @@ const observer = new IntersectionObserver((entries)=>{
             entry.target.classList.add("show");
         }
     });
-},{
-    threshold:0.12
-});
+},{threshold:.12});
 
 function observeRevealElements(){
     document.querySelectorAll(".reveal").forEach(el=>{
@@ -776,9 +619,7 @@ function observeRevealElements(){
     });
 }
 
-document.addEventListener("DOMContentLoaded",()=>{
-    observeRevealElements();
-});
+document.addEventListener("DOMContentLoaded",observeRevealElements);
 
 loadProducts().then(setupSearch);
 </script>
@@ -786,3 +627,5 @@ loadProducts().then(setupSearch);
 </body>
 </html>
 ```
+
+保存后记得 **Commit changes**，然后等 1–2 分钟再 `Ctrl + F5`。
