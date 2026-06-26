@@ -1,46 +1,41 @@
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Morgan Admin Dashboard</title>
+<title>MorganGastro Admin V2</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
+*{box-sizing:border-box;margin:0;padding:0}
+
 body{
-    margin:0;
     font-family:Arial,sans-serif;
     background:#0b0b0b;
     color:white;
 }
 
-header{
-    background:#050505;
-    border-bottom:1px solid #d4af37;
-    padding:20px 40px;
-    color:#d4af37;
-    font-size:26px;
-    font-weight:bold;
+.login{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
 }
 
-.container{
-    max-width:1200px;
-    margin:auto;
-    padding:35px 20px;
-}
-
-.box{
+.login-box{
+    width:360px;
     background:#151515;
-    border:1px solid #333;
+    border:1px solid #d4af37;
     border-radius:16px;
-    padding:25px;
-    margin-bottom:25px;
+    padding:30px;
 }
+
+h1,h2,h3{color:#d4af37}
 
 input,textarea,select,button{
     width:100%;
     padding:12px;
     margin:8px 0;
-    box-sizing:border-box;
     border-radius:8px;
     border:1px solid #333;
 }
@@ -58,64 +53,105 @@ button{
     cursor:pointer;
 }
 
-.delete-btn{
-    background:#b3261e;
+button:hover{background:#b9962f}
+
+.app{
+    display:none;
+    min-height:100vh;
+}
+
+.sidebar{
+    width:240px;
+    background:#050505;
+    border-right:1px solid #d4af37;
+    position:fixed;
+    top:0;
+    bottom:0;
+    padding:25px 18px;
+}
+
+.sidebar img{
+    width:150px;
+    margin-bottom:30px;
+}
+
+.sidebar button{
+    margin:8px 0;
+    text-align:left;
+    background:#151515;
     color:white;
 }
 
-.edit-btn{
+.sidebar button.active{
     background:#d4af37;
     color:black;
 }
 
-.clear-btn{
-    background:#666;
-    color:white;
+.main{
+    margin-left:240px;
+    padding:30px;
 }
 
-.dashboard{
+.stats{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
     gap:20px;
+    margin:25px 0;
 }
 
 .stat{
-    background:#111;
-    border:1px solid #d4af37;
-    border-radius:14px;
+    background:#151515;
+    border:1px solid #333;
+    border-radius:16px;
     padding:25px;
-    text-align:center;
 }
 
 .stat h2{
-    color:#d4af37;
-    font-size:36px;
+    font-size:42px;
+}
+
+.section{
+    display:none;
+}
+
+.section.active{
+    display:block;
+}
+
+.box{
+    background:#151515;
+    border:1px solid #333;
+    border-radius:16px;
+    padding:22px;
+    margin:20px 0;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:12px;
+}
+
+.product,.quote{
+    background:#111;
+    border:1px solid #333;
+    border-radius:14px;
+    padding:15px;
+    margin:15px 0;
 }
 
 .product{
     display:grid;
     grid-template-columns:130px 1fr;
     gap:18px;
-    border:1px solid #333;
-    border-radius:12px;
-    padding:15px;
-    margin:15px 0;
-    background:#111;
 }
 
 .product img{
     width:130px;
-    height:100px;
+    height:110px;
     object-fit:cover;
-    border-radius:8px;
-}
-
-.quote{
-    border:1px solid #333;
-    border-radius:12px;
-    padding:15px;
-    margin:12px 0;
-    background:#111;
+    border-radius:10px;
+    background:#222;
 }
 
 .badge{
@@ -124,23 +160,43 @@ button{
     color:black;
     padding:4px 10px;
     border-radius:20px;
-    font-size:13px;
+    font-size:12px;
+    font-weight:bold;
+    margin:4px 4px 4px 0;
+}
+
+.delete{
+    background:#b3261e;
+    color:white;
+}
+
+.clear{
+    background:#666;
+    color:white;
+}
+
+.small-btn{
+    width:auto;
+    padding:9px 14px;
+    margin-right:8px;
+}
+
+.message{
+    color:#d4af37;
     font-weight:bold;
 }
 
-.hidden{
-    display:none;
-}
-
-h2{
-    color:#d4af37;
-}
-
-@media(max-width:700px){
+@media(max-width:800px){
+    .sidebar{
+        position:static;
+        width:100%;
+    }
+    .main{
+        margin-left:0;
+    }
     .product{
         grid-template-columns:1fr;
     }
-
     .product img{
         width:100%;
         height:180px;
@@ -152,83 +208,146 @@ h2{
 
 <body>
 
-<header>
-Morgan Admin Dashboard
-</header>
-
-<div class="container">
-
-<div class="box" id="loginBox">
-<h2>Admin Login</h2>
-<input type="password" id="password" placeholder="Enter password">
-<button onclick="login()">Login</button>
+<div class="login" id="loginPage">
+    <div class="login-box">
+        <h2>MorganGastro Admin</h2>
+        <input type="password" id="password" placeholder="Admin Password">
+        <button onclick="login()">Login</button>
+    </div>
 </div>
 
-<div id="adminBox" class="hidden">
+<div class="app" id="app">
 
-<div class="dashboard">
+<aside class="sidebar">
+    <img src="logo.png" alt="MorganGastro">
+    <button class="active" onclick="showSection('dashboard',this)">📊 Dashboard</button>
+    <button onclick="showSection('products',this)">📦 Products</button>
+    <button onclick="showSection('quotes',this)">📨 Quotes</button>
+    <button onclick="showSection('settings',this)">⚙ Settings</button>
+</aside>
 
-<div class="stat">
-<h2 id="productCount">0</h2>
-<p>Total Products</p>
-</div>
+<main class="main">
 
-<div class="stat">
-<h2 id="quoteCount">0</h2>
-<p>Total Quotes</p>
-</div>
+<section id="dashboard" class="section active">
+    <h1>Dashboard</h1>
 
-<div class="stat">
-<h2 id="featuredCount">0</h2>
-<p>Best Sellers</p>
-</div>
-
-</div>
-
-<div class="box">
-<h2>Add / Edit Product</h2>
-
-<input type="hidden" id="productId">
-
-<input id="name" placeholder="Product name">
-<input id="price" placeholder="Price">
-<textarea id="description" placeholder="Description"></textarea>
-
-<input type="file" id="imageFile" accept="image/*">
-<input id="image_url" placeholder="Image URL optional">
-
-<select id="category">
-<option value="">Select Category</option>
-<option value="Meat Processing">Meat Processing</option>
-<option value="Sausage Equipment">Sausage Equipment</option>
-<option value="Vegetable Processing">Vegetable Processing</option>
-<option value="Smokers & Warmers">Smokers & Warmers</option>
-<option value="Kitchen Equipment">Kitchen Equipment</option>
-<option value="Parts & Accessories">Parts & Accessories</option>
-</select>
-
-<select id="featured">
-<option value="false">Not Best Seller</option>
-<option value="true">Best Seller</option>
-</select>
-
-<button onclick="saveProduct()">Save Product</button> <button class="clear-btn" onclick="clearForm()">Clear Form</button>
-
-<p id="message"></p>
+```
+<div class="stats">
+    <div class="stat"><p>Total Products</p><h2 id="productCount">0</h2></div>
+    <div class="stat"><p>Total Quotes</p><h2 id="quoteCount">0</h2></div>
+    <div class="stat"><p>New Quotes</p><h2 id="newQuoteCount">0</h2></div>
+    <div class="stat"><p>Featured</p><h2 id="featuredCount">0</h2></div>
 </div>
 
 <div class="box">
-<h2>Recent Quote Requests</h2>
-<div id="quoteList">Loading...</div>
+    <h2>Recent Quotes</h2>
+    <div id="recentQuotes">Loading...</div>
+</div>
+```
+
+</section>
+
+<section id="products" class="section">
+    <h1>Product Manager</h1>
+
+```
+<div class="box">
+    <h2>Add / Edit Product</h2>
+
+    <input type="hidden" id="productId">
+
+    <div class="grid">
+        <input id="name" placeholder="Product Name">
+        <input id="price" placeholder="Price">
+        <input id="brand" placeholder="Brand">
+        <input id="model" placeholder="Model">
+        <input id="voltage" placeholder="Voltage">
+        <input id="power" placeholder="Power">
+        <input id="material" placeholder="Material">
+
+        <select id="category">
+            <option value="">Select Category</option>
+            <option value="Food Prep & Processing">Food Prep & Processing</option>
+            <option value="Cooking Equipment">Cooking Equipment</option>
+            <option value="Refrigeration & Ice">Refrigeration & Ice</option>
+            <option value="Holding & Warming">Holding & Warming</option>
+            <option value="Beverage Equipment">Beverage Equipment</option>
+            <option value="Storage & Transport">Storage & Transport</option>
+            <option value="Smallwares & Accessories">Smallwares & Accessories</option>
+            <option value="Cleaning & Dishwashing">Cleaning & Dishwashing</option>
+        </select>
+
+        <select id="featured">
+            <option value="false">Not Featured</option>
+            <option value="true">Featured Product</option>
+        </select>
+    </div>
+
+    <textarea id="description" placeholder="Description"></textarea>
+
+    <input type="file" id="imageFile" accept="image/*">
+    <input id="image_url" placeholder="Image URL optional">
+
+    <button onclick="saveProduct()">Save Product</button>
+    <button class="clear" onclick="clearForm()">Clear Form</button>
+
+    <p class="message" id="message"></p>
 </div>
 
 <div class="box">
-<h2>Product List</h2>
-<div id="productList">Loading...</div>
-</div>
+    <h2>Products</h2>
 
-</div>
+    <div class="grid">
+        <input id="productSearch" placeholder="Search products..." oninput="renderProducts()">
 
+        <select id="categoryFilter" onchange="renderProducts()">
+            <option value="">All Categories</option>
+            <option value="Food Prep & Processing">Food Prep & Processing</option>
+            <option value="Cooking Equipment">Cooking Equipment</option>
+            <option value="Refrigeration & Ice">Refrigeration & Ice</option>
+            <option value="Holding & Warming">Holding & Warming</option>
+            <option value="Beverage Equipment">Beverage Equipment</option>
+            <option value="Storage & Transport">Storage & Transport</option>
+            <option value="Smallwares & Accessories">Smallwares & Accessories</option>
+            <option value="Cleaning & Dishwashing">Cleaning & Dishwashing</option>
+        </select>
+    </div>
+
+    <div id="productList">Loading...</div>
+</div>
+```
+
+</section>
+
+<section id="quotes" class="section">
+    <h1>Quote Manager</h1>
+
+```
+<div class="box">
+    <select id="quoteFilter" onchange="renderQuotes()">
+        <option value="">All Quotes</option>
+        <option value="New">New</option>
+        <option value="Contacted">Contacted</option>
+        <option value="Quoted">Quoted</option>
+        <option value="Completed">Completed</option>
+    </select>
+
+    <div id="quoteList">Loading...</div>
+</div>
+```
+
+</section>
+
+<section id="settings" class="section">
+    <h1>Settings</h1>
+    <div class="box">
+        <p><strong>Supabase:</strong> Connected</p>
+        <p><strong>Storage Bucket:</strong> products</p>
+        <p><strong>Website:</strong> MorganGastro</p>
+    </div>
+</section>
+
+</main>
 </div>
 
 <script>
@@ -238,24 +357,166 @@ const SUPABASE_URL = "https://omcytrhftuivfzbwcalp.supabase.co";
 const SUPABASE_KEY = "sb_publishable_XpUZl3GZyhSQ9-NR4xFzbw_Kf5pU_cQ";
 const BUCKET_NAME = "products";
 
-function login(){
-    const password = document.getElementById("password").value;
+let allProducts = [];
+let allQuotes = [];
 
-    if(password === ADMIN_PASSWORD){
-        document.getElementById("loginBox").style.display = "none";
-        document.getElementById("adminBox").classList.remove("hidden");
-        loadDashboard();
+function login(){
+    if(document.getElementById("password").value === ADMIN_PASSWORD){
+        document.getElementById("loginPage").style.display = "none";
+        document.getElementById("app").style.display = "block";
+        loadAll();
     }else{
         alert("Wrong password");
     }
 }
 
+function showSection(id,btn){
+    document.querySelectorAll(".section").forEach(s=>s.classList.remove("active"));
+    document.getElementById(id).classList.add("active");
+
+    document.querySelectorAll(".sidebar button").forEach(b=>b.classList.remove("active"));
+    btn.classList.add("active");
+}
+
+async function loadAll(){
+    await loadProducts();
+    await loadQuotes();
+    updateDashboard();
+}
+
+async function loadProducts(){
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/products?select=*&order=id.desc`,{
+        headers:{
+            apikey:SUPABASE_KEY,
+            Authorization:`Bearer ${SUPABASE_KEY}`
+        }
+    });
+
+    allProducts = await res.json();
+    renderProducts();
+}
+
+async function loadQuotes(){
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/quotes?select=*&order=id.desc`,{
+        headers:{
+            apikey:SUPABASE_KEY,
+            Authorization:`Bearer ${SUPABASE_KEY}`
+        }
+    });
+
+    allQuotes = await res.json();
+    renderQuotes();
+}
+
+function updateDashboard(){
+    document.getElementById("productCount").innerText = allProducts.length;
+    document.getElementById("quoteCount").innerText = allQuotes.length;
+    document.getElementById("newQuoteCount").innerText =
+        allQuotes.filter(q => (q.status || "New") === "New").length;
+    document.getElementById("featuredCount").innerText =
+        allProducts.filter(p => p.featured === true).length;
+
+    const box = document.getElementById("recentQuotes");
+
+    if(allQuotes.length === 0){
+        box.innerHTML = "<p>No quotes yet.</p>";
+        return;
+    }
+
+    box.innerHTML = allQuotes.slice(0,5).map(q=>`
+        <div class="quote">
+            <h3>${q.name || "No Name"}</h3>
+            <p><strong>Product:</strong> ${q.product_name || ""}</p>
+            <p><strong>Email:</strong> ${q.email || ""}</p>
+            <span class="badge">${q.status || "New"}</span>
+        </div>
+    `).join("");
+}
+
+function renderProducts(){
+    const search = document.getElementById("productSearch")?.value.toLowerCase() || "";
+    const category = document.getElementById("categoryFilter")?.value || "";
+
+    let products = allProducts.filter(p=>{
+        const matchSearch =
+            (p.name || "").toLowerCase().includes(search) ||
+            (p.brand || "").toLowerCase().includes(search) ||
+            (p.category || "").toLowerCase().includes(search);
+
+        const matchCategory = !category || p.category === category;
+
+        return matchSearch && matchCategory;
+    });
+
+    const box = document.getElementById("productList");
+
+    if(products.length === 0){
+        box.innerHTML = "<p>No products found.</p>";
+        return;
+    }
+
+    box.innerHTML = products.slice(0,100).map(p=>`
+        <div class="product">
+            <img src="${p.image_url || ""}">
+            <div>
+                <h3>${p.name || ""}</h3>
+                <p><span class="badge">${p.category || "No Category"}</span></p>
+                <p><strong>Brand:</strong> ${p.brand || "-"}</p>
+                <p><strong>Price:</strong> $${p.price || 0}</p>
+                <p>${p.featured ? "⭐ Featured Product" : ""}</p>
+
+                <button class="small-btn" onclick="editProduct(${p.id})">Edit</button>
+                <button class="small-btn" onclick="toggleFeatured(${p.id},${p.featured ? "false" : "true"})">
+                    ${p.featured ? "Remove Featured" : "Make Featured"}
+                </button>
+                <button class="small-btn delete" onclick="deleteProduct(${p.id})">Delete</button>
+            </div>
+        </div>
+    `).join("");
+}
+
+function renderQuotes(){
+    const filter = document.getElementById("quoteFilter")?.value || "";
+
+    let quotes = allQuotes.filter(q=>{
+        if(!filter) return true;
+        return (q.status || "New") === filter;
+    });
+
+    const box = document.getElementById("quoteList");
+
+    if(quotes.length === 0){
+        box.innerHTML = "<p>No quotes found.</p>";
+        return;
+    }
+
+    box.innerHTML = quotes.map(q=>`
+        <div class="quote">
+            <h3>${q.name || "No Name"}</h3>
+            <p><strong>Email:</strong> ${q.email || ""}</p>
+            <p><strong>Phone:</strong> ${q.phone || ""}</p>
+            <p><strong>Company:</strong> ${q.company || ""}</p>
+            <p><strong>Product:</strong> ${q.product_name || ""}</p>
+            <p><strong>Message:</strong> ${q.message || ""}</p>
+
+            <select onchange="updateQuoteStatus(${q.id},this.value)">
+                <option value="New" ${(q.status || "New")==="New"?"selected":""}>New</option>
+                <option value="Contacted" ${q.status==="Contacted"?"selected":""}>Contacted</option>
+                <option value="Quoted" ${q.status==="Quoted"?"selected":""}>Quoted</option>
+                <option value="Completed" ${q.status==="Completed"?"selected":""}>Completed</option>
+            </select>
+
+            <button class="delete" onclick="deleteQuote(${q.id})">Delete Quote</button>
+        </div>
+    `).join("");
+}
+
 function clearForm(){
-    document.getElementById("productId").value = "";
-    document.getElementById("name").value = "";
-    document.getElementById("price").value = "";
-    document.getElementById("description").value = "";
-    document.getElementById("image_url").value = "";
+    [
+        "productId","name","price","brand","model","voltage",
+        "power","material","description","image_url"
+    ].forEach(id=>document.getElementById(id).value="");
+
     document.getElementById("imageFile").value = "";
     document.getElementById("category").value = "";
     document.getElementById("featured").value = "false";
@@ -263,206 +524,53 @@ function clearForm(){
 }
 
 async function uploadImageIfNeeded(){
-    const fileInput = document.getElementById("imageFile");
-    const file = fileInput.files[0];
+    const file = document.getElementById("imageFile").files[0];
 
     if(!file){
         return document.getElementById("image_url").value;
     }
 
-    const fileExt = file.name.split(".").pop();
-    const safeFileName =
-        Date.now() + "_" + Math.floor(Math.random() * 100000) + "." + fileExt;
+    const ext = file.name.split(".").pop();
+    const fileName = Date.now() + "_" + Math.floor(Math.random()*100000) + "." + ext;
 
-    const uploadResponse = await fetch(
-        `${SUPABASE_URL}/storage/v1/object/${BUCKET_NAME}/${safeFileName}`,
-        {
-            method:"POST",
-            headers:{
-                apikey:SUPABASE_KEY,
-                Authorization:`Bearer ${SUPABASE_KEY}`,
-                "Content-Type":file.type,
-                "x-upsert":"true"
-            },
-            body:file
-        }
-    );
+    const res = await fetch(`${SUPABASE_URL}/storage/v1/object/${BUCKET_NAME}/${fileName}`,{
+        method:"POST",
+        headers:{
+            apikey:SUPABASE_KEY,
+            Authorization:`Bearer ${SUPABASE_KEY}`,
+            "Content-Type":file.type,
+            "x-upsert":"true"
+        },
+        body:file
+    });
 
-    if(!uploadResponse.ok){
-        const errorText = await uploadResponse.text();
-        console.log("Upload failed:", errorText);
+    if(!res.ok){
         throw new Error("Image upload failed");
     }
 
-    return `${SUPABASE_URL}/storage/v1/object/public/${BUCKET_NAME}/${safeFileName}`;
-}
-
-async function loadDashboard(){
-    await loadProducts();
-    await loadQuotes();
-}
-
-async function loadProducts(){
-    const response = await fetch(
-        `${SUPABASE_URL}/rest/v1/products?select=*&order=id.desc`,
-        {
-            headers:{
-                apikey:SUPABASE_KEY,
-                Authorization:`Bearer ${SUPABASE_KEY}`
-            }
-        }
-    );
-
-    const products = await response.json();
-
-    document.getElementById("productCount").innerText = products.length;
-    document.getElementById("featuredCount").innerText =
-    products.filter(p => p.featured === true).length;
-
-    const list = document.getElementById("productList");
-    list.innerHTML = "";
-
-    products.slice(0,80).forEach(product=>{
-        list.innerHTML += `
-        <div class="product">
-            <img src="${product.image_url}">
-            <div>
-                <h3>${product.name}</h3>
-                <p>${product.description || ""}</p>
-                <p><strong>$${product.price}</strong></p>
-                <p><span class="badge">${product.category || "No Category"}</span></p>
-                <p>${product.featured ? "⭐ Best Seller" : ""}</p>
-
-                <button class="edit-btn" onclick="editProduct(${product.id})">
-                    Edit
-                </button>
-
-                <button class="delete-btn" onclick="deleteProduct(${product.id})">
-                    Delete
-                </button>
-            </div>
-        </div>
-        `;
-    });
-}
-
-async function loadQuotes(){
-    const response = await fetch(
-        `${SUPABASE_URL}/rest/v1/quotes?select=*&order=id.desc&limit=50`,
-        {
-            headers:{
-                apikey:SUPABASE_KEY,
-                Authorization:`Bearer ${SUPABASE_KEY}`
-            }
-        }
-    );
-
-    const quotes = await response.json();
-
-    document.getElementById("quoteCount").innerText = quotes.length;
-
-    const box = document.getElementById("quoteList");
-    box.innerHTML = "";
-
-    if(!quotes || quotes.length === 0){
-        box.innerHTML = "<p>No quotes yet.</p>";
-        return;
-    }
-
-    quotes.forEach(q=>{
-        box.innerHTML += `
-        <div class="quote">
-            <h3>${q.name || "No Name"}</h3>
-
-            <p><strong>Status:</strong>
-            <span class="badge">${q.status || "New"}</span>
-            </p>
-
-            <p><strong>Email:</strong> ${q.email || ""}</p>
-            <p><strong>Phone:</strong> ${q.phone || ""}</p>
-            <p><strong>Company:</strong> ${q.company || ""}</p>
-            <p><strong>Product:</strong> ${q.product_name || ""}</p>
-            <p>${q.message || ""}</p>
-
-            <button onclick="markContacted(${q.id})">
-                Mark Contacted
-            </button>
-
-            <button class="delete-btn" onclick="deleteQuote(${q.id})">
-                Delete Quote
-            </button>
-        </div>
-        `;
-    });
-}
-
-async function markContacted(id){
-    const response = await fetch(
-        `${SUPABASE_URL}/rest/v1/quotes?id=eq.${id}`,
-        {
-            method:"PATCH",
-            headers:{
-                apikey:SUPABASE_KEY,
-                Authorization:`Bearer ${SUPABASE_KEY}`,
-                "Content-Type":"application/json"
-            },
-            body:JSON.stringify({
-                status:"Contacted"
-            })
-        }
-    );
-
-    if(response.ok){
-        loadQuotes();
-    }else{
-        alert("Failed to update quote status.");
-    }
-}
-
-async function deleteQuote(id){
-    if(!confirm("Delete this quote?")) return;
-
-    const response = await fetch(
-        `${SUPABASE_URL}/rest/v1/quotes?id=eq.${id}`,
-        {
-            method:"DELETE",
-            headers:{
-                apikey:SUPABASE_KEY,
-                Authorization:`Bearer ${SUPABASE_KEY}`
-            }
-        }
-    );
-
-    if(response.ok){
-        loadQuotes();
-    }else{
-        alert("Delete quote failed.");
-    }
+    return `${SUPABASE_URL}/storage/v1/object/public/${BUCKET_NAME}/${fileName}`;
 }
 
 async function saveProduct(){
     try{
-        document.getElementById("message").innerText =
-        "Uploading / Saving...";
+        document.getElementById("message").innerText = "Saving...";
 
         const id = document.getElementById("productId").value;
-
         const imageUrl = await uploadImageIfNeeded();
 
         const product = {
-            name: document.getElementById("name").value,
-            price: Number(document.getElementById("price").value),
-            description: document.getElementById("description").value,
-            image_url: imageUrl,
-            category: document.getElementById("category").value,
-            featured: document.getElementById("featured").value === "true"
+            name:document.getElementById("name").value,
+            price:Number(document.getElementById("price").value),
+            brand:document.getElementById("brand").value,
+            model:document.getElementById("model").value,
+            voltage:document.getElementById("voltage").value,
+            power:document.getElementById("power").value,
+            material:document.getElementById("material").value,
+            category:document.getElementById("category").value,
+            featured:document.getElementById("featured").value === "true",
+            description:document.getElementById("description").value,
+            image_url:imageUrl
         };
-
-        if(!product.name || !product.price || !product.description || !product.image_url){
-            document.getElementById("message").innerText =
-            "Please fill in name, price, description, and image.";
-            return;
-        }
 
         let url = `${SUPABASE_URL}/rest/v1/products`;
         let method = "POST";
@@ -472,8 +580,8 @@ async function saveProduct(){
             method = "PATCH";
         }
 
-        const response = await fetch(url,{
-            method:method,
+        const res = await fetch(url,{
+            method,
             headers:{
                 apikey:SUPABASE_KEY,
                 Authorization:`Bearer ${SUPABASE_KEY}`,
@@ -483,75 +591,100 @@ async function saveProduct(){
             body:JSON.stringify(product)
         });
 
-        if(response.ok){
-            document.getElementById("message").innerText =
-            id ? "Product updated successfully!" : "Product saved successfully!";
-
+        if(res.ok){
+            document.getElementById("message").innerText = "Saved successfully!";
             clearForm();
-            loadProducts();
+            await loadProducts();
+            updateDashboard();
         }else{
-            const errorText = await response.text();
-            console.log("Save failed:", errorText);
-
-            document.getElementById("message").innerText =
-            "Save failed. Check policies or fields.";
+            document.getElementById("message").innerText = "Save failed.";
         }
 
-    }catch(error){
-        console.log(error);
-        document.getElementById("message").innerText =
-        "Image upload failed. Check Storage INSERT policy.";
+    }catch(err){
+        console.log(err);
+        document.getElementById("message").innerText = "Image upload or save failed.";
     }
 }
 
-async function editProduct(id){
-    const response = await fetch(
-        `${SUPABASE_URL}/rest/v1/products?id=eq.${id}&select=*`,
-        {
-            headers:{
-                apikey:SUPABASE_KEY,
-                Authorization:`Bearer ${SUPABASE_KEY}`
-            }
-        }
-    );
+function editProduct(id){
+    const p = allProducts.find(x=>x.id === id);
+    if(!p) return;
 
-    const data = await response.json();
-    const product = data[0];
+    document.getElementById("productId").value = p.id;
+    document.getElementById("name").value = p.name || "";
+    document.getElementById("price").value = p.price || "";
+    document.getElementById("brand").value = p.brand || "";
+    document.getElementById("model").value = p.model || "";
+    document.getElementById("voltage").value = p.voltage || "";
+    document.getElementById("power").value = p.power || "";
+    document.getElementById("material").value = p.material || "";
+    document.getElementById("description").value = p.description || "";
+    document.getElementById("image_url").value = p.image_url || "";
+    document.getElementById("category").value = p.category || "";
+    document.getElementById("featured").value = p.featured ? "true" : "false";
 
-    document.getElementById("productId").value = product.id;
-    document.getElementById("name").value = product.name || "";
-    document.getElementById("price").value = product.price || "";
-    document.getElementById("description").value = product.description || "";
-    document.getElementById("image_url").value = product.image_url || "";
-    document.getElementById("imageFile").value = "";
-    document.getElementById("category").value = product.category || "";
-    document.getElementById("featured").value = product.featured ? "true" : "false";
+    showSection("products",document.querySelectorAll(".sidebar button")[1]);
+    window.scrollTo({top:0,behavior:"smooth"});
+}
 
-    window.scrollTo({
-        top:0,
-        behavior:"smooth"
+async function toggleFeatured(id,value){
+    await fetch(`${SUPABASE_URL}/rest/v1/products?id=eq.${id}`,{
+        method:"PATCH",
+        headers:{
+            apikey:SUPABASE_KEY,
+            Authorization:`Bearer ${SUPABASE_KEY}`,
+            "Content-Type":"application/json"
+        },
+        body:JSON.stringify({featured:value})
     });
+
+    await loadProducts();
+    updateDashboard();
 }
 
 async function deleteProduct(id){
     if(!confirm("Delete this product?")) return;
 
-    const response = await fetch(
-        `${SUPABASE_URL}/rest/v1/products?id=eq.${id}`,
-        {
-            method:"DELETE",
-            headers:{
-                apikey:SUPABASE_KEY,
-                Authorization:`Bearer ${SUPABASE_KEY}`
-            }
+    await fetch(`${SUPABASE_URL}/rest/v1/products?id=eq.${id}`,{
+        method:"DELETE",
+        headers:{
+            apikey:SUPABASE_KEY,
+            Authorization:`Bearer ${SUPABASE_KEY}`
         }
-    );
+    });
 
-    if(response.ok){
-        loadProducts();
-    }else{
-        alert("Delete failed.");
-    }
+    await loadProducts();
+    updateDashboard();
+}
+
+async function updateQuoteStatus(id,status){
+    await fetch(`${SUPABASE_URL}/rest/v1/quotes?id=eq.${id}`,{
+        method:"PATCH",
+        headers:{
+            apikey:SUPABASE_KEY,
+            Authorization:`Bearer ${SUPABASE_KEY}`,
+            "Content-Type":"application/json"
+        },
+        body:JSON.stringify({status})
+    });
+
+    await loadQuotes();
+    updateDashboard();
+}
+
+async function deleteQuote(id){
+    if(!confirm("Delete this quote?")) return;
+
+    await fetch(`${SUPABASE_URL}/rest/v1/quotes?id=eq.${id}`,{
+        method:"DELETE",
+        headers:{
+            apikey:SUPABASE_KEY,
+            Authorization:`Bearer ${SUPABASE_KEY}`
+        }
+    });
+
+    await loadQuotes();
+    updateDashboard();
 }
 </script>
 
