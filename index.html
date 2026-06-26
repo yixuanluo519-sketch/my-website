@@ -1,5 +1,5 @@
+```html
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -19,7 +19,7 @@ html{
 }
 
 body{
-    font-family:Arial,sans-serif;
+    font-family:Arial, sans-serif;
     background:#0b0b0b;
     color:white;
 }
@@ -27,7 +27,7 @@ body{
 header{
     background:#050505;
     border-bottom:1px solid #d4af37;
-    padding:16px 60px;
+    padding:14px 55px;
     display:flex;
     justify-content:space-between;
     align-items:center;
@@ -43,7 +43,7 @@ header{
 }
 
 .logo img{
-    height:58px;
+    height:62px;
     width:auto;
     display:block;
 }
@@ -51,8 +51,9 @@ header{
 nav a{
     color:white;
     text-decoration:none;
-    margin-left:25px;
+    margin-left:28px;
     font-weight:bold;
+    font-size:15px;
 }
 
 nav a:hover{
@@ -62,34 +63,45 @@ nav a:hover{
 .hero{
     min-height:88vh;
     display:flex;
-    flex-direction:column;
-    justify-content:center;
     align-items:center;
+    justify-content:center;
     text-align:center;
-    padding:50px 20px;
+    padding:70px 20px;
     background:
-    linear-gradient(rgba(0,0,0,.72),rgba(0,0,0,.88)),
+    linear-gradient(rgba(0,0,0,.68),rgba(0,0,0,.88)),
     url("https://images.unsplash.com/photo-1556911220-bff31c812dba?w=1600");
     background-size:cover;
     background-position:center;
 }
 
-.hero h1{
-    font-size:72px;
+.hero-content{
+    max-width:1000px;
+}
+
+.hero-label{
     color:#d4af37;
-    letter-spacing:1px;
+    letter-spacing:3px;
+    font-weight:bold;
+    margin-bottom:18px;
+    text-transform:uppercase;
+}
+
+.hero h1{
+    font-size:68px;
+    color:#d4af37;
+    margin-bottom:18px;
 }
 
 .hero p{
     font-size:23px;
-    max-width:900px;
-    margin-top:20px;
     line-height:1.6;
     color:#eee;
+    max-width:900px;
+    margin:auto;
 }
 
 .search-area{
-    margin-top:35px;
+    margin:35px auto 0;
     width:100%;
     max-width:780px;
     position:relative;
@@ -97,17 +109,21 @@ nav a:hover{
 
 .search-box{
     width:100%;
-    padding:18px 24px;
+    padding:18px 60px 18px 24px;
     font-size:18px;
     border-radius:40px;
     border:2px solid #d4af37;
-    background:#111;
+    background:#0d0d0d;
     color:white;
     outline:none;
 }
 
-.search-box::placeholder{
-    color:#aaa;
+.search-icon{
+    position:absolute;
+    right:24px;
+    top:17px;
+    font-size:24px;
+    color:#d4af37;
 }
 
 .search-results{
@@ -157,7 +173,7 @@ nav a:hover{
 .btn{
     display:inline-block;
     margin-top:30px;
-    padding:15px 30px;
+    padding:15px 32px;
     background:#d4af37;
     color:black;
     text-decoration:none;
@@ -170,29 +186,57 @@ nav a:hover{
 }
 
 .section{
-    padding:80px 60px;
+    padding:85px 60px;
     text-align:center;
 }
 
 .section h2{
     font-size:42px;
     color:#d4af37;
-    margin-bottom:20px;
+    margin-bottom:18px;
 }
 
-.about-text{
-    max-width:920px;
-    margin:auto;
-    font-size:20px;
-    line-height:1.8;
-    color:#ddd;
+.section-subtitle{
+    color:#ccc;
+    max-width:760px;
+    margin:0 auto 40px;
+    line-height:1.7;
+    font-size:18px;
+}
+
+.about{
+    background:#101010;
+}
+
+.about-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:25px;
+    margin-top:40px;
+}
+
+.about-card{
+    background:#161616;
+    border:1px solid #333;
+    border-radius:16px;
+    padding:28px;
+}
+
+.about-card h3{
+    color:#d4af37;
+    margin-bottom:10px;
+}
+
+.about-card p{
+    color:#ccc;
+    line-height:1.6;
 }
 
 .categories{
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-    gap:30px;
-    margin-top:50px;
+    gap:28px;
+    margin-top:45px;
 }
 
 .category-card{
@@ -226,7 +270,7 @@ nav a:hover{
     top:50%;
     transform:translate(-50%,-50%);
     z-index:2;
-    font-size:28px;
+    font-size:27px;
     color:#d4af37;
     width:90%;
 }
@@ -268,6 +312,7 @@ nav a:hover{
 
 .product-body{
     padding:20px;
+    text-align:left;
 }
 
 .product-body h3{
@@ -278,13 +323,34 @@ nav a:hover{
 
 .product-body p{
     color:#ccc;
+    margin-top:8px;
 }
 
 .price{
-    color:#d4af37;
+    color:#d4af37 !important;
     font-size:24px;
     font-weight:bold;
-    margin-top:10px;
+    margin-top:12px;
+}
+
+.brands{
+    background:#101010;
+}
+
+.brand-row{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:18px;
+    margin-top:30px;
+}
+
+.brand-pill{
+    border:1px solid #d4af37;
+    color:#d4af37;
+    border-radius:30px;
+    padding:12px 24px;
+    font-weight:bold;
 }
 
 .contact{
@@ -311,7 +377,7 @@ footer{
     }
 
     .logo img{
-        height:48px;
+        height:50px;
     }
 
     nav{
@@ -332,18 +398,17 @@ footer{
     }
 
     .section{
-        padding:50px 20px;
+        padding:55px 20px;
     }
 }
 </style>
-
 </head>
 
 <body>
 
 <header>
 <a class="logo" href="index.html">
-    <img src="logo.svg" alt="MorganGastro Logo">
+    <img src="logo.png" alt="MorganGastro">
 </a>
 
 <nav>
@@ -355,12 +420,16 @@ footer{
 </header>
 
 <section class="hero">
+<div class="hero-content">
+
+<div class="hero-label">Commercial Kitchen Equipment Supplier</div>
 
 <h1>MorganGastro</h1>
 
 <p>
-Premium Commercial Food Machinery, Restaurant Equipment,
-Food Processing Systems, Warmers, Refrigeration, and Kitchen Supplies.
+Premium commercial food machinery, restaurant equipment,
+food processing systems, warmers, refrigeration, and kitchen supplies
+for restaurants, supermarkets, food factories, and distributors.
 </p>
 
 <div class="search-area">
@@ -370,31 +439,53 @@ id="searchInput"
 class="search-box"
 placeholder="Search products, machines, parts..."
 >
-
+<span class="search-icon">⌕</span>
 <div id="searchResults" class="search-results"></div>
 </div>
 
-<a class="btn" href="#categories">
-Explore Products
-</a>
+<a class="btn" href="#categories">Explore Products</a>
 
+</div>
 </section>
 
-<section class="section" id="about">
+<section class="section about" id="about">
 
 <h2>About MorganGastro</h2>
 
-<p class="about-text">
-MorganGastro supplies professional commercial food equipment for restaurants,
-food manufacturers, butchers, supermarkets, distributors, and commercial kitchens
-throughout North America.
+<p class="section-subtitle">
+MorganGastro supplies professional commercial food equipment for food service
+businesses across North America, including restaurants, butchers, supermarkets,
+food manufacturers, and distributors.
 </p>
+
+<div class="about-grid">
+
+<div class="about-card">
+<h3>Commercial Grade</h3>
+<p>Reliable equipment designed for demanding restaurant and food processing environments.</p>
+</div>
+
+<div class="about-card">
+<h3>Wide Product Range</h3>
+<p>Explore hundreds of products across cooking, refrigeration, food prep, warming, and accessories.</p>
+</div>
+
+<div class="about-card">
+<h3>Fast Quote Support</h3>
+<p>Request a quote directly from any product page and our sales team will follow up.</p>
+</div>
+
+</div>
 
 </section>
 
 <section class="section" id="categories">
 
 <h2>Shop By Category</h2>
+
+<p class="section-subtitle">
+Browse equipment by category and find the right commercial solution for your business.
+</p>
 
 <div class="categories">
 
@@ -446,8 +537,26 @@ throughout North America.
 
 <h2>Best Sellers</h2>
 
+<p class="section-subtitle">
+Popular equipment selected from our commercial product catalog.
+</p>
+
 <div class="products" id="bestSellerList">
-Loading...
+Loading products...
+</div>
+
+</section>
+
+<section class="section brands">
+
+<h2>Featured Brands</h2>
+
+<div class="brand-row">
+<span class="brand-pill">Hakka</span>
+<span class="brand-pill">EasyRose</span>
+<span class="brand-pill">Morgangastro</span>
+<span class="brand-pill">Caterway</span>
+<span class="brand-pill">Planetary</span>
 </div>
 
 </section>
@@ -460,14 +569,12 @@ Loading...
 <p><strong>Phone:</strong> 313-899-9696</p>
 <p><strong>Address:</strong> 3231 S Gulley Rd. STE B, Dearborn, MI 48124 USA</p>
 
-<a class="btn" href="mailto:sales@morgangastros.com">
-Contact Sales
-</a>
+<a class="btn" href="mailto:sales@morgangastros.com">Contact Sales</a>
 
 </section>
 
 <footer>
-<p>© 2026 MorganGastro. All Rights Reserved.</p>
+<p>© 2026 MorganGastro. Commercial Food Machinery & Restaurant Equipment.</p>
 </footer>
 
 <script>
@@ -476,13 +583,18 @@ const SUPABASE_KEY = "sb_publishable_XpUZl3GZyhSQ9-NR4xFzbw_Kf5pU_cQ";
 
 let allProducts = [];
 
+function safeImage(url){
+    return url || "https://images.unsplash.com/photo-1556911220-bff31c812dba?w=800";
+}
+
 function productCard(product){
     return `
     <div class="product-card">
-        <img src="${product.image_url}" alt="${product.name}">
+        <img src="${safeImage(product.image_url)}" alt="${product.name}">
         <div class="product-body">
             <h3>${product.name}</h3>
-            <p>${product.description || ""}</p>
+            <p>${product.category || ""}</p>
+            <p>${product.brand || ""}</p>
             <p class="price">$${product.price}</p>
             <a class="btn" href="product.html?id=${product.id}">
                 View Details
@@ -505,13 +617,17 @@ async function loadProducts(){
 
     allProducts = await response.json();
 
-    const bestSellers =
-    allProducts.filter(product => product.featured === true).slice(0,6);
+    let bestSellers =
+    allProducts.filter(product => product.featured === true).slice(0,8);
+
+    if(bestSellers.length === 0){
+        bestSellers = allProducts.slice(0,8);
+    }
 
     const box = document.getElementById("bestSellerList");
 
     if(!bestSellers || bestSellers.length === 0){
-        box.innerHTML = "<p>No best sellers yet.</p>";
+        box.innerHTML = "<p>No products available yet.</p>";
     }else{
         box.innerHTML = bestSellers.map(productCard).join("");
     }
@@ -556,9 +672,10 @@ function setupSearch(){
 
         results.innerHTML = filtered.map(product => `
             <a class="search-item" href="product.html?id=${product.id}">
-                <img src="${product.image_url}" alt="${product.name}">
+                <img src="${safeImage(product.image_url)}" alt="${product.name}">
                 <div>
                     <h4>${product.name}</h4>
+                    <p>${product.category || ""}</p>
                     <p>$${product.price}</p>
                 </div>
             </a>
@@ -571,3 +688,4 @@ loadProducts().then(setupSearch);
 
 </body>
 </html>
+```
