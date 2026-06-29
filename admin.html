@@ -1,314 +1,76 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>MorganGastro Admin V3</title>
+<title>MorganGastro Admin V4</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-}
-
-body{
-    font-family:Arial,sans-serif;
-    background:#0b0b0b;
-    color:white;
-}
-
-h1,h2,h3{
-    color:#d4af37;
-}
-
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,sans-serif;background:#0b0b0b;color:white}
+h1,h2,h3{color:#d4af37}
 input,textarea,select,button{
-    width:100%;
-    padding:12px;
-    margin:8px 0;
-    border-radius:8px;
-    border:1px solid #333;
-    font-family:Arial,sans-serif;
+    width:100%;padding:12px;margin:8px 0;border-radius:8px;
+    border:1px solid #333;font-family:Arial,sans-serif
 }
-
-input,textarea,select{
-    background:#0f0f0f;
-    color:white;
-}
-
-button{
-    background:#d4af37;
-    color:black;
-    font-weight:bold;
-    border:none;
-    cursor:pointer;
-}
-
-button:hover{
-    background:#b9962f;
-}
-
+input,textarea,select{background:#101010;color:white}
+button{background:#d4af37;color:black;font-weight:bold;border:none;cursor:pointer}
+button:hover{background:#b9962f}
 .login{
-    min-height:100vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:
-    linear-gradient(rgba(0,0,0,.75),rgba(0,0,0,.9)),
+    min-height:100vh;display:flex;justify-content:center;align-items:center;
+    background:linear-gradient(rgba(0,0,0,.75),rgba(0,0,0,.92)),
     url("https://images.unsplash.com/photo-1556911220-bff31c812dba?w=1600");
-    background-size:cover;
-    background-position:center;
+    background-size:cover;background-position:center
 }
-
 .login-box{
-    width:380px;
-    background:#151515;
-    border:1px solid #d4af37;
-    border-radius:18px;
-    padding:32px;
-    box-shadow:0 0 35px rgba(0,0,0,.45);
+    width:380px;background:#151515;border:1px solid #d4af37;
+    border-radius:18px;padding:32px;box-shadow:0 0 40px rgba(0,0,0,.6)
 }
-
-.login-box img{
-    width:160px;
-    display:block;
-    margin:0 auto 25px;
-}
-
-.app{
-    display:none;
-    min-height:100vh;
-}
-
+.login-box img{width:160px;display:block;margin:0 auto 25px}
+.app{display:none;min-height:100vh}
 .sidebar{
-    width:250px;
-    background:#050505;
-    border-right:1px solid #d4af37;
-    position:fixed;
-    top:0;
-    bottom:0;
-    padding:25px 18px;
-    overflow-y:auto;
+    width:250px;background:#050505;border-right:1px solid #d4af37;
+    position:fixed;top:0;bottom:0;padding:25px 18px;overflow:auto
 }
-
-.sidebar img{
-    width:160px;
-    display:block;
-    margin:0 auto 30px;
-}
-
-.sidebar button{
-    margin:8px 0;
-    text-align:left;
-    background:#151515;
-    color:white;
-    border:1px solid #333;
-}
-
-.sidebar button.active{
-    background:#d4af37;
-    color:black;
-}
-
-.main{
-    margin-left:250px;
-    padding:32px;
-}
-
-.top-title{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:25px;
-}
-
-.top-title p{
-    color:#aaa;
-    margin-top:5px;
-}
-
-.section{
-    display:none;
-}
-
-.section.active{
-    display:block;
-}
-
-.stats{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
-    gap:18px;
-    margin:25px 0;
-}
-
-.stat{
-    background:#151515;
-    border:1px solid #333;
-    border-radius:16px;
-    padding:24px;
-}
-
-.stat p{
-    color:#aaa;
-    margin-bottom:8px;
-}
-
-.stat h2{
-    font-size:42px;
-}
-
+.sidebar img{width:160px;display:block;margin:0 auto 30px}
+.sidebar button{text-align:left;background:#151515;color:white;border:1px solid #333}
+.sidebar button.active{background:#d4af37;color:black}
+.main{margin-left:250px;padding:32px}
+.section{display:none}.section.active{display:block}
 .box{
-    background:#151515;
-    border:1px solid #333;
-    border-radius:16px;
-    padding:22px;
-    margin:20px 0;
+    background:#151515;border:1px solid #333;border-radius:16px;
+    padding:22px;margin:20px 0
 }
-
-.grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:12px;
-}
-
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:18px;margin:25px 0}
+.stat{background:#151515;border:1px solid #333;border-radius:16px;padding:24px}
+.stat p{color:#aaa;margin-bottom:8px}.stat h2{font-size:42px}
 .product,.quote{
-    background:#111;
-    border:1px solid #333;
-    border-radius:14px;
-    padding:15px;
-    margin:15px 0;
+    background:#111;border:1px solid #333;border-radius:14px;
+    padding:15px;margin:15px 0
 }
-
-.product{
-    display:grid;
-    grid-template-columns:130px 1fr;
-    gap:18px;
-}
-
-.product img{
-    width:130px;
-    height:115px;
-    object-fit:cover;
-    border-radius:10px;
-    background:#222;
-}
-
-.product h3,.quote h3{
-    color:white;
-    margin-bottom:8px;
-}
-
-.product p,.quote p{
-    color:#ccc;
-    margin:6px 0;
-}
-
+.product{display:grid;grid-template-columns:130px 1fr;gap:18px}
+.product img{width:130px;height:115px;object-fit:cover;border-radius:10px;background:#222}
+.product p,.quote p{color:#ccc;margin:6px 0}
 .badge{
-    display:inline-block;
-    background:#d4af37;
-    color:black;
-    padding:4px 10px;
-    border-radius:20px;
-    font-size:12px;
-    font-weight:bold;
-    margin:4px 4px 4px 0;
+    display:inline-block;background:#d4af37;color:black;padding:4px 10px;
+    border-radius:20px;font-size:12px;font-weight:bold;margin:4px 4px 4px 0
 }
-
-.badge-dark{
-    background:#333;
-    color:#ddd;
-}
-
-.danger{
-    background:#b3261e;
-    color:white;
-}
-
-.secondary{
-    background:#666;
-    color:white;
-}
-
-.small-btn{
-    width:auto;
-    padding:9px 14px;
-    margin-right:8px;
-    margin-top:8px;
-}
-
-.message{
-    color:#d4af37;
-    font-weight:bold;
-    margin-top:10px;
-}
-
-.pagination{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    gap:12px;
-    margin-top:20px;
-    flex-wrap:wrap;
-}
-
-.pagination button{
-    width:auto;
-    padding:10px 16px;
-}
-
-.page-info{
-    color:#d4af37;
-    font-weight:bold;
-}
-
-.table-like{
-    width:100%;
-}
-
-.empty{
-    color:#aaa;
-    padding:20px 0;
-}
-
-.setting-row{
-    border-bottom:1px solid #333;
-    padding:15px 0;
-}
-
-.setting-row:last-child{
-    border-bottom:none;
-}
-
+.small-btn{width:auto;padding:9px 14px;margin-right:8px;margin-top:8px}
+.danger{background:#b3261e;color:white}.secondary{background:#666;color:white}
+.message{color:#d4af37;font-weight:bold}
+.pagination{display:flex;justify-content:center;align-items:center;gap:12px;margin-top:20px;flex-wrap:wrap}
+.pagination button{width:auto;padding:10px 16px}.page-info{color:#d4af37;font-weight:bold}
+.empty{color:#aaa;padding:20px 0}
 @media(max-width:900px){
-    .sidebar{
-        position:static;
-        width:100%;
-        border-right:none;
-        border-bottom:1px solid #d4af37;
-    }
-
-    .main{
-        margin-left:0;
-        padding:22px;
-    }
-
-    .product{
-        grid-template-columns:1fr;
-    }
-
-    .product img{
-        width:100%;
-        height:190px;
-    }
-
-    .top-title{
-        flex-direction:column;
-        align-items:flex-start;
-        gap:10px;
-    }
+    .sidebar{position:static;width:100%;border-right:none;border-bottom:1px solid #d4af37}
+    .main{margin-left:0;padding:22px}
+    .product{grid-template-columns:1fr}
+    .product img{width:100%;height:190px}
 }
 </style>
+
 </head>
 
 <body>
@@ -323,172 +85,116 @@ button:hover{
 </div>
 
 <div class="app" id="app">
-
 <aside class="sidebar">
     <img src="logo.png" alt="MorganGastro">
-
-    <button class="active" onclick="showSection('dashboard',this)">
-        📊 Dashboard
-    </button>
-
-    <button onclick="showSection('products',this)">
-        📦 Products
-    </button>
-
-    <button onclick="showSection('quotes',this)">
-        📨 Quotes
-    </button>
-
-    <button onclick="showSection('settings',this)">
-        ⚙ Settings
-    </button>
+    <button class="active" onclick="showSection('dashboard',this)">📊 Dashboard</button>
+    <button onclick="showSection('products',this)">📦 Products</button>
+    <button onclick="showSection('quotes',this)">📨 Quotes</button>
+    <button onclick="showSection('settings',this)">⚙ Settings</button>
 </aside>
 
 <main class="main">
 
 <section id="dashboard" class="section active">
-
-    <div class="top-title">
-        <div>
-            <h1>Dashboard</h1>
-            <p>Overview of products, quotes, and featured items.</p>
-        </div>
-    </div>
-
+    <h1>Dashboard</h1>
     <div class="stats">
-        <div class="stat">
-            <p>Total Products</p>
-            <h2 id="productCount">0</h2>
-        </div>
-
-        <div class="stat">
-            <p>Total Quotes</p>
-            <h2 id="quoteCount">0</h2>
-        </div>
-
-        <div class="stat">
-            <p>New Quotes</p>
-            <h2 id="newQuoteCount">0</h2>
-        </div>
-
-        <div class="stat">
-            <p>Featured Products</p>
-            <h2 id="featuredCount">0</h2>
-        </div>
+        <div class="stat"><p>Total Products</p><h2 id="productCount">0</h2></div>
+        <div class="stat"><p>Total Quotes</p><h2 id="quoteCount">0</h2></div>
+        <div class="stat"><p>New Quotes</p><h2 id="newQuoteCount">0</h2></div>
+        <div class="stat"><p>Featured</p><h2 id="featuredCount">0</h2></div>
     </div>
-
     <div class="box">
         <h2>Recent Quotes</h2>
         <div id="recentQuotes">Loading...</div>
     </div>
-
 </section>
 
 <section id="products" class="section">
+    <h1>Product Manager</h1>
 
-    <div class="top-title">
-        <div>
-            <h1>Product Manager</h1>
-            <p>Add, edit, search, filter, and feature products.</p>
-        </div>
+```
+<div class="box">
+    <h2>Add / Edit Product</h2>
+    <input type="hidden" id="productId">
+
+    <div class="grid">
+        <input id="name" placeholder="Product Name">
+        <input id="price" placeholder="Price">
+        <input id="brand" placeholder="Brand">
+        <input id="model" placeholder="Model">
+        <input id="voltage" placeholder="Voltage">
+        <input id="power" placeholder="Power">
+        <input id="material" placeholder="Material">
+
+        <select id="category">
+            <option value="">Select Category</option>
+            <option value="Food Prep & Processing">Food Prep & Processing</option>
+            <option value="Cooking Equipment">Cooking Equipment</option>
+            <option value="Refrigeration & Ice">Refrigeration & Ice</option>
+            <option value="Holding & Warming">Holding & Warming</option>
+            <option value="Beverage Equipment">Beverage Equipment</option>
+            <option value="Storage & Transport">Storage & Transport</option>
+            <option value="Smallwares & Accessories">Smallwares & Accessories</option>
+            <option value="Cleaning & Dishwashing">Cleaning & Dishwashing</option>
+        </select>
+
+        <select id="featured">
+            <option value="false">Not Featured</option>
+            <option value="true">Featured Product</option>
+        </select>
     </div>
 
-    <div class="box">
-        <h2>Add / Edit Product</h2>
+    <textarea id="description" placeholder="Description"></textarea>
+    <input type="file" id="imageFile" accept="image/*">
+    <input id="image_url" placeholder="Image URL optional">
 
-        <input type="hidden" id="productId">
+    <button onclick="saveProduct()">Save Product</button>
+    <button class="secondary" onclick="clearForm()">Clear Form</button>
+    <p class="message" id="message"></p>
+</div>
 
-        <div class="grid">
-            <input id="name" placeholder="Product Name">
-            <input id="price" placeholder="Price">
-            <input id="brand" placeholder="Brand">
-            <input id="model" placeholder="Model">
-            <input id="voltage" placeholder="Voltage">
-            <input id="power" placeholder="Power">
-            <input id="material" placeholder="Material">
-
-            <select id="category">
-                <option value="">Select Category</option>
-                <option value="Food Prep & Processing">Food Prep & Processing</option>
-                <option value="Cooking Equipment">Cooking Equipment</option>
-                <option value="Refrigeration & Ice">Refrigeration & Ice</option>
-                <option value="Holding & Warming">Holding & Warming</option>
-                <option value="Beverage Equipment">Beverage Equipment</option>
-                <option value="Storage & Transport">Storage & Transport</option>
-                <option value="Smallwares & Accessories">Smallwares & Accessories</option>
-                <option value="Cleaning & Dishwashing">Cleaning & Dishwashing</option>
-            </select>
-
-            <select id="featured">
-                <option value="false">Not Featured</option>
-                <option value="true">Featured Product</option>
-            </select>
-        </div>
-
-        <textarea id="description" placeholder="Description"></textarea>
-
-        <input type="file" id="imageFile" accept="image/*">
-        <input id="image_url" placeholder="Image URL optional">
-
-        <button onclick="saveProduct()">Save Product</button>
-        <button class="secondary" onclick="clearForm()">Clear Form</button>
-
-        <p class="message" id="message"></p>
+<div class="box">
+    <h2>Product List</h2>
+    <div class="grid">
+        <input id="productSearch" placeholder="Search products..." oninput="goToProductPage(1)">
+        <select id="categoryFilter" onchange="goToProductPage(1)">
+            <option value="">All Categories</option>
+            <option value="Food Prep & Processing">Food Prep & Processing</option>
+            <option value="Cooking Equipment">Cooking Equipment</option>
+            <option value="Refrigeration & Ice">Refrigeration & Ice</option>
+            <option value="Holding & Warming">Holding & Warming</option>
+            <option value="Beverage Equipment">Beverage Equipment</option>
+            <option value="Storage & Transport">Storage & Transport</option>
+            <option value="Smallwares & Accessories">Smallwares & Accessories</option>
+            <option value="Cleaning & Dishwashing">Cleaning & Dishwashing</option>
+        </select>
+        <select id="brandFilter" onchange="goToProductPage(1)">
+            <option value="">All Brands</option>
+        </select>
+        <select id="featuredFilter" onchange="goToProductPage(1)">
+            <option value="">All Products</option>
+            <option value="true">Featured Only</option>
+            <option value="false">Not Featured Only</option>
+        </select>
     </div>
 
-    <div class="box">
-        <h2>Product List</h2>
+    <div id="productList">Loading...</div>
 
-        <div class="grid">
-            <input id="productSearch" placeholder="Search by name, brand, category..." oninput="goToProductPage(1)">
-
-            <select id="categoryFilter" onchange="goToProductPage(1)">
-                <option value="">All Categories</option>
-                <option value="Food Prep & Processing">Food Prep & Processing</option>
-                <option value="Cooking Equipment">Cooking Equipment</option>
-                <option value="Refrigeration & Ice">Refrigeration & Ice</option>
-                <option value="Holding & Warming">Holding & Warming</option>
-                <option value="Beverage Equipment">Beverage Equipment</option>
-                <option value="Storage & Transport">Storage & Transport</option>
-                <option value="Smallwares & Accessories">Smallwares & Accessories</option>
-                <option value="Cleaning & Dishwashing">Cleaning & Dishwashing</option>
-            </select>
-
-            <select id="brandFilter" onchange="goToProductPage(1)">
-                <option value="">All Brands</option>
-            </select>
-
-            <select id="featuredFilter" onchange="goToProductPage(1)">
-                <option value="">Featured + Not Featured</option>
-                <option value="true">Featured Only</option>
-                <option value="false">Not Featured Only</option>
-            </select>
-        </div>
-
-        <div id="productList">Loading...</div>
-
-        <div class="pagination">
-            <button onclick="previousProductPage()">← Previous</button>
-            <span class="page-info" id="productPageInfo">Page 1</span>
-            <button onclick="nextProductPage()">Next →</button>
-        </div>
+    <div class="pagination">
+        <button onclick="previousProductPage()">← Previous</button>
+        <span class="page-info" id="productPageInfo">Page 1</span>
+        <button onclick="nextProductPage()">Next →</button>
     </div>
+</div>
+```
 
 </section>
 
 <section id="quotes" class="section">
-
-    <div class="top-title">
-        <div>
-            <h1>Quote Manager</h1>
-            <p>Manage customer quote requests and follow-up status.</p>
-        </div>
-    </div>
-
+    <h1>Quote Manager</h1>
     <div class="box">
         <div class="grid">
             <input id="quoteSearch" placeholder="Search quotes..." oninput="renderQuotes()">
-
             <select id="quoteFilter" onchange="renderQuotes()">
                 <option value="">All Status</option>
                 <option value="New">New</option>
@@ -497,56 +203,36 @@ button:hover{
                 <option value="Completed">Completed</option>
             </select>
         </div>
-
         <div id="quoteList">Loading...</div>
     </div>
-
 </section>
 
 <section id="settings" class="section">
-
-    <div class="top-title">
-        <div>
-            <h1>Settings</h1>
-            <p>Website and database connection information.</p>
-        </div>
-    </div>
-
+    <h1>Settings</h1>
     <div class="box">
-        <div class="setting-row">
-            <strong>Website:</strong> MorganGastro
-        </div>
-
-        <div class="setting-row">
-            <strong>Supabase:</strong> Connected
-        </div>
-
-        <div class="setting-row">
-            <strong>Storage Bucket:</strong> products
-        </div>
-
-        <div class="setting-row">
-            <strong>Admin Version:</strong> V3
-        </div>
+        <p><strong>Website:</strong> MorganGastro</p>
+        <p><strong>Supabase:</strong> Connected</p>
+        <p><strong>Storage Bucket:</strong> products</p>
+        <p><strong>Admin Version:</strong> V4</p>
     </div>
-
 </section>
+
+</main>
+</div>
+
 <script>
 const ADMIN_PASSWORD = "morgan123";
-
 const SUPABASE_URL = "https://omcytrhftuivfzbwcalp.supabase.co";
 const SUPABASE_KEY = "sb_publishable_XpUZl3GZyhSQ9-NR4xFzbw_Kf5pU_cQ";
 const BUCKET_NAME = "products";
 
 let allProducts = [];
 let allQuotes = [];
-
 let currentProductPage = 1;
 const PRODUCTS_PER_PAGE = 20;
 
 function login(){
     const password = document.getElementById("password").value;
-
     if(password === ADMIN_PASSWORD){
         document.getElementById("loginPage").style.display = "none";
         document.getElementById("app").style.display = "block";
@@ -557,16 +243,9 @@ function login(){
 }
 
 function showSection(id,btn){
-    document.querySelectorAll(".section").forEach(section=>{
-        section.classList.remove("active");
-    });
-
+    document.querySelectorAll(".section").forEach(s=>s.classList.remove("active"));
     document.getElementById(id).classList.add("active");
-
-    document.querySelectorAll(".sidebar button").forEach(button=>{
-        button.classList.remove("active");
-    });
-
+    document.querySelectorAll(".sidebar button").forEach(b=>b.classList.remove("active"));
     btn.classList.add("active");
 }
 
@@ -577,171 +256,104 @@ async function loadAll(){
 }
 
 async function loadProducts(){
-    const response = await fetch(
-        `${SUPABASE_URL}/rest/v1/products?select=*&order=id.desc`,
-        {
-            headers:{
-                apikey:SUPABASE_KEY,
-                Authorization:`Bearer ${SUPABASE_KEY}`
-            }
-        }
-    );
-
-    allProducts = await response.json();
-
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/products?select=*&order=id.desc`,{
+        headers:{apikey:SUPABASE_KEY,Authorization:`Bearer ${SUPABASE_KEY}`}
+    });
+    allProducts = await res.json();
     populateBrandFilter();
     renderProducts();
 }
 
+async function loadQuotes(){
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/quotes?select=*&order=id.desc`,{
+        headers:{apikey:SUPABASE_KEY,Authorization:`Bearer ${SUPABASE_KEY}`}
+    });
+    allQuotes = await res.json();
+    renderQuotes();
+}
+
 function populateBrandFilter(){
     const brandFilter = document.getElementById("brandFilter");
-    if(!brandFilter) return;
-
-    const brands = [...new Set(
-        allProducts
-        .map(product => product.brand)
-        .filter(Boolean)
-    )].sort();
-
+    const brands = [...new Set(allProducts.map(p=>p.brand).filter(Boolean))].sort();
     brandFilter.innerHTML = `<option value="">All Brands</option>`;
-
     brands.forEach(brand=>{
-        brandFilter.innerHTML += `
-            <option value="${brand}">
-                ${brand}
-            </option>
-        `;
+        brandFilter.innerHTML += `<option value="${brand}">${brand}</option>`;
     });
 }
 
-function getFilteredProducts(){
-    const search =
-    document.getElementById("productSearch")?.value.toLowerCase().trim() || "";
+function filteredProducts(){
+    const search = document.getElementById("productSearch").value.toLowerCase().trim();
+    const category = document.getElementById("categoryFilter").value;
+    const brand = document.getElementById("brandFilter").value;
+    const featured = document.getElementById("featuredFilter").value;
 
-    const category =
-    document.getElementById("categoryFilter")?.value || "";
-
-    const brand =
-    document.getElementById("brandFilter")?.value || "";
-
-    const featured =
-    document.getElementById("featuredFilter")?.value || "";
-
-    return allProducts.filter(product=>{
+    return allProducts.filter(p=>{
         const matchSearch =
-        (product.name || "").toLowerCase().includes(search) ||
-        (product.brand || "").toLowerCase().includes(search) ||
-        (product.category || "").toLowerCase().includes(search) ||
-        (product.description || "").toLowerCase().includes(search);
+            (p.name || "").toLowerCase().includes(search) ||
+            (p.brand || "").toLowerCase().includes(search) ||
+            (p.category || "").toLowerCase().includes(search) ||
+            (p.description || "").toLowerCase().includes(search);
 
-        const matchCategory =
-        !category || product.category === category;
-
-        const matchBrand =
-        !brand || product.brand === brand;
-
-        const matchFeatured =
-        featured === "" ||
-        String(product.featured) === featured;
+        const matchCategory = !category || p.category === category;
+        const matchBrand = !brand || p.brand === brand;
+        const matchFeatured = featured === "" || String(p.featured) === featured;
 
         return matchSearch && matchCategory && matchBrand && matchFeatured;
     });
 }
 
 function renderProducts(){
-    const products = getFilteredProducts();
-    const box = document.getElementById("productList");
+    const list = document.getElementById("productList");
+    const products = filteredProducts();
 
-    if(!products || products.length === 0){
-        box.innerHTML = `<p class="empty">No products found.</p>`;
+    if(products.length === 0){
+        list.innerHTML = `<p class="empty">No products found.</p>`;
         document.getElementById("productPageInfo").innerText = "Page 0 of 0";
         return;
     }
 
     const totalPages = Math.ceil(products.length / PRODUCTS_PER_PAGE);
-
     if(currentProductPage < 1) currentProductPage = 1;
     if(currentProductPage > totalPages) currentProductPage = totalPages;
 
     const start = (currentProductPage - 1) * PRODUCTS_PER_PAGE;
-    const end = start + PRODUCTS_PER_PAGE;
-
-    const pageProducts = products.slice(start,end);
+    const pageProducts = products.slice(start,start + PRODUCTS_PER_PAGE);
 
     document.getElementById("productPageInfo").innerText =
-    `Page ${currentProductPage} of ${totalPages} · ${products.length} products`;
+        `Page ${currentProductPage} of ${totalPages} · ${products.length} products`;
 
-    box.innerHTML = pageProducts.map(product=>`
+    list.innerHTML = pageProducts.map(p=>`
         <div class="product">
-
-            <img src="${product.image_url || ""}" alt="${product.name || ""}">
-
+            <img src="${p.image_url || ""}" alt="${p.name || ""}">
             <div>
-                <h3>${product.name || ""}</h3>
-
+                <h3>${p.name || ""}</h3>
                 <p>
-                    <span class="badge">
-                        ${product.category || "No Category"}
-                    </span>
-
-                    ${product.featured ? `<span class="badge">Featured</span>` : ""}
+                    <span class="badge">${p.category || "No Category"}</span>
+                    ${p.featured ? `<span class="badge">Featured</span>` : ""}
                 </p>
-
-                <p><strong>Brand:</strong> ${product.brand || "-"}</p>
-                <p><strong>Model:</strong> ${product.model || "-"}</p>
-                <p><strong>Voltage:</strong> ${product.voltage || "-"}</p>
-                <p><strong>Power:</strong> ${product.power || "-"}</p>
-                <p><strong>Material:</strong> ${product.material || "-"}</p>
-                <p><strong>Price:</strong> $${product.price || 0}</p>
-
-                <button class="small-btn" onclick="editProduct(${product.id})">
-                    Edit
+                <p><strong>Brand:</strong> ${p.brand || "-"}</p>
+                <p><strong>Model:</strong> ${p.model || "-"}</p>
+                <p><strong>Voltage:</strong> ${p.voltage || "-"}</p>
+                <p><strong>Power:</strong> ${p.power || "-"}</p>
+                <p><strong>Material:</strong> ${p.material || "-"}</p>
+                <p><strong>Price:</strong> $${p.price || 0}</p>
+                <button class="small-btn" onclick="editProduct(${p.id})">Edit</button>
+                <button class="small-btn" onclick="toggleFeatured(${p.id},${p.featured ? "false" : "true"})">
+                    ${p.featured ? "Remove Featured" : "Make Featured"}
                 </button>
-
-                <button class="small-btn" onclick="toggleFeatured(${product.id}, ${product.featured ? "false" : "true"})">
-                    ${product.featured ? "Remove Featured" : "Make Featured"}
-                </button>
-
-                <button class="small-btn danger" onclick="deleteProduct(${product.id})">
-                    Delete
-                </button>
+                <button class="small-btn danger" onclick="deleteProduct(${p.id})">Delete</button>
             </div>
-
         </div>
     `).join("");
 }
 
-function goToProductPage(page){
-    currentProductPage = page;
-    renderProducts();
-}
-
-function nextProductPage(){
-    currentProductPage++;
-    renderProducts();
-}
-
-function previousProductPage(){
-    currentProductPage--;
-    renderProducts();
-}
+function goToProductPage(page){currentProductPage = page;renderProducts()}
+function nextProductPage(){currentProductPage++;renderProducts()}
+function previousProductPage(){currentProductPage--;renderProducts()}
 
 function clearForm(){
-    [
-        "productId",
-        "name",
-        "price",
-        "brand",
-        "model",
-        "voltage",
-        "power",
-        "material",
-        "description",
-        "image_url"
-    ].forEach(id=>{
-        document.getElementById(id).value = "";
-    });
-
+    ["productId","name","price","brand","model","voltage","power","material","description","image_url"]
+    .forEach(id=>document.getElementById(id).value = "");
     document.getElementById("imageFile").value = "";
     document.getElementById("category").value = "";
     document.getElementById("featured").value = "false";
@@ -749,42 +361,31 @@ function clearForm(){
 }
 
 async function uploadImageIfNeeded(){
-    const fileInput = document.getElementById("imageFile");
-    const file = fileInput.files[0];
-
-    if(!file){
-        return document.getElementById("image_url").value;
-    }
+    const file = document.getElementById("imageFile").files[0];
+    if(!file) return document.getElementById("image_url").value;
 
     const ext = file.name.split(".").pop();
-    const fileName =
-    Date.now() + "_" + Math.floor(Math.random() * 100000) + "." + ext;
+    const filename = `${Date.now()}_${Math.floor(Math.random()*100000)}.${ext}`;
 
-    const response = await fetch(
-        `${SUPABASE_URL}/storage/v1/object/${BUCKET_NAME}/${fileName}`,
-        {
-            method:"POST",
-            headers:{
-                apikey:SUPABASE_KEY,
-                Authorization:`Bearer ${SUPABASE_KEY}`,
-                "Content-Type":file.type,
-                "x-upsert":"true"
-            },
-            body:file
-        }
-    );
+    const res = await fetch(`${SUPABASE_URL}/storage/v1/object/${BUCKET_NAME}/${filename}`,{
+        method:"POST",
+        headers:{
+            apikey:SUPABASE_KEY,
+            Authorization:`Bearer ${SUPABASE_KEY}`,
+            "Content-Type":file.type,
+            "x-upsert":"true"
+        },
+        body:file
+    });
 
-    if(!response.ok){
-        throw new Error("Image upload failed");
-    }
+    if(!res.ok) throw new Error("Image upload failed");
 
-    return `${SUPABASE_URL}/storage/v1/object/public/${BUCKET_NAME}/${fileName}`;
+    return `${SUPABASE_URL}/storage/v1/object/public/${BUCKET_NAME}/${filename}`;
 }
 
 async function saveProduct(){
     try{
         document.getElementById("message").innerText = "Saving...";
-
         const id = document.getElementById("productId").value;
         const imageUrl = await uploadImageIfNeeded();
 
@@ -810,8 +411,8 @@ async function saveProduct(){
             method = "PATCH";
         }
 
-        const response = await fetch(url,{
-            method:method,
+        const res = await fetch(url,{
+            method,
             headers:{
                 apikey:SUPABASE_KEY,
                 Authorization:`Bearer ${SUPABASE_KEY}`,
@@ -821,68 +422,50 @@ async function saveProduct(){
             body:JSON.stringify(product)
         });
 
-        if(response.ok){
-            document.getElementById("message").innerText =
-            id ? "Product updated successfully!" : "Product saved successfully!";
+        if(!res.ok) throw new Error(await res.text());
 
-            clearForm();
-            await loadProducts();
-            updateDashboard();
-        }else{
-            const errorText = await response.text();
-            console.log(errorText);
-            document.getElementById("message").innerText = "Save failed.";
-        }
+        document.getElementById("message").innerText = "Saved successfully!";
+        clearForm();
+        await loadProducts();
+        updateDashboard();
 
     }catch(error){
         console.log(error);
-        document.getElementById("message").innerText =
-        "Image upload or save failed.";
+        document.getElementById("message").innerText = "Save failed.";
     }
 }
 
 function editProduct(id){
-    const product = allProducts.find(item => item.id === id);
-    if(!product) return;
+    const p = allProducts.find(item=>item.id === id);
+    if(!p) return;
 
-    document.getElementById("productId").value = product.id;
-    document.getElementById("name").value = product.name || "";
-    document.getElementById("price").value = product.price || "";
-    document.getElementById("brand").value = product.brand || "";
-    document.getElementById("model").value = product.model || "";
-    document.getElementById("voltage").value = product.voltage || "";
-    document.getElementById("power").value = product.power || "";
-    document.getElementById("material").value = product.material || "";
-    document.getElementById("description").value = product.description || "";
-    document.getElementById("image_url").value = product.image_url || "";
-    document.getElementById("category").value = product.category || "";
-    document.getElementById("featured").value = product.featured ? "true" : "false";
-    document.getElementById("imageFile").value = "";
+    document.getElementById("productId").value = p.id;
+    document.getElementById("name").value = p.name || "";
+    document.getElementById("price").value = p.price || "";
+    document.getElementById("brand").value = p.brand || "";
+    document.getElementById("model").value = p.model || "";
+    document.getElementById("voltage").value = p.voltage || "";
+    document.getElementById("power").value = p.power || "";
+    document.getElementById("material").value = p.material || "";
+    document.getElementById("description").value = p.description || "";
+    document.getElementById("image_url").value = p.image_url || "";
+    document.getElementById("category").value = p.category || "";
+    document.getElementById("featured").value = p.featured ? "true" : "false";
 
-    showSection("products", document.querySelectorAll(".sidebar button")[1]);
-
-    window.scrollTo({
-        top:0,
-        behavior:"smooth"
-    });
+    showSection("products",document.querySelectorAll(".sidebar button")[1]);
+    window.scrollTo({top:0,behavior:"smooth"});
 }
 
 async function toggleFeatured(id,value){
-    await fetch(
-        `${SUPABASE_URL}/rest/v1/products?id=eq.${id}`,
-        {
-            method:"PATCH",
-            headers:{
-                apikey:SUPABASE_KEY,
-                Authorization:`Bearer ${SUPABASE_KEY}`,
-                "Content-Type":"application/json"
-            },
-            body:JSON.stringify({
-                featured:value
-            })
-        }
-    );
-
+    await fetch(`${SUPABASE_URL}/rest/v1/products?id=eq.${id}`,{
+        method:"PATCH",
+        headers:{
+            apikey:SUPABASE_KEY,
+            Authorization:`Bearer ${SUPABASE_KEY}`,
+            "Content-Type":"application/json"
+        },
+        body:JSON.stringify({featured:value})
+    });
     await loadProducts();
     updateDashboard();
 }
@@ -890,196 +473,129 @@ async function toggleFeatured(id,value){
 async function deleteProduct(id){
     if(!confirm("Delete this product?")) return;
 
-    await fetch(
-        `${SUPABASE_URL}/rest/v1/products?id=eq.${id}`,
-        {
-            method:"DELETE",
-            headers:{
-                apikey:SUPABASE_KEY,
-                Authorization:`Bearer ${SUPABASE_KEY}`
-            }
-        }
-    );
+    await fetch(`${SUPABASE_URL}/rest/v1/products?id=eq.${id}`,{
+        method:"DELETE",
+        headers:{apikey:SUPABASE_KEY,Authorization:`Bearer ${SUPABASE_KEY}`}
+    });
 
     await loadProducts();
     updateDashboard();
 }
-async function loadQuotes(){
-const response = await fetch(
-`${SUPABASE_URL}/rest/v1/quotes?select=*&order=id.desc`,
-{
-headers:{
-apikey:SUPABASE_KEY,
-Authorization:`Bearer ${SUPABASE_KEY}`
-}
-}
-);
 
-```
-allQuotes = await response.json();
-renderQuotes();
-```
-
+function normalizeStatus(status){
+    if(!status) return "New";
+    const s = String(status).toLowerCase();
+    if(s === "new") return "New";
+    if(s === "contacted") return "Contacted";
+    if(s === "quoted") return "Quoted";
+    if(s === "completed" || s === "closed") return "Completed";
+    return status;
 }
 
-function getFilteredQuotes(){
-const search =
-document.getElementById("quoteSearch")?.value.toLowerCase().trim() || "";
+function filteredQuotes(){
+    const search = document.getElementById("quoteSearch").value.toLowerCase().trim();
+    const status = document.getElementById("quoteFilter").value;
 
-```
-const status =
-document.getElementById("quoteFilter")?.value || "";
-
-return allQuotes.filter(quote=>{
-    const matchSearch =
-    (quote.name || "").toLowerCase().includes(search) ||
-    (quote.email || "").toLowerCase().includes(search) ||
-    (quote.phone || "").toLowerCase().includes(search) ||
-    (quote.company || "").toLowerCase().includes(search) ||
-    (quote.product_name || "").toLowerCase().includes(search) ||
-    (quote.message || "").toLowerCase().includes(search);
-
-    const quoteStatus = quote.status || "New";
-    const matchStatus = !status || quoteStatus === status;
-
-    return matchSearch && matchStatus;
-});
-```
-
+    return allQuotes.filter(q=>{
+        const qStatus = normalizeStatus(q.status);
+        const matchStatus = !status || qStatus === status;
+        const matchSearch =
+            (q.name || "").toLowerCase().includes(search) ||
+            (q.email || "").toLowerCase().includes(search) ||
+            (q.phone || "").toLowerCase().includes(search) ||
+            (q.company || "").toLowerCase().includes(search) ||
+            (q.product_name || "").toLowerCase().includes(search) ||
+            (q.message || "").toLowerCase().includes(search);
+        return matchStatus && matchSearch;
+    });
 }
 
 function renderQuotes(){
-const quotes = getFilteredQuotes();
-const box = document.getElementById("quoteList");
+    const box = document.getElementById("quoteList");
+    const quotes = filteredQuotes();
 
-```
-if(!quotes || quotes.length === 0){
-    box.innerHTML = `<p class="empty">No quotes found.</p>`;
-    return;
-}
+    if(quotes.length === 0){
+        box.innerHTML = `<p class="empty">No quotes found.</p>`;
+        return;
+    }
 
-box.innerHTML = quotes.map(quote=>`
-    <div class="quote">
+    box.innerHTML = quotes.map(q=>{
+        const status = normalizeStatus(q.status);
+        return `
+        <div class="quote">
+            <h3>${q.name || "No Name"}</h3>
+            <p><span class="badge">${status}</span></p>
+            <p><strong>Email:</strong> ${q.email || ""}</p>
+            <p><strong>Phone:</strong> ${q.phone || ""}</p>
+            <p><strong>Company:</strong> ${q.company || ""}</p>
+            <p><strong>Product:</strong> ${q.product_name || ""}</p>
+            <p><strong>Message:</strong> ${q.message || ""}</p>
 
-        <h3>${quote.name || "No Name"}</h3>
+            <select onchange="updateQuoteStatus(${q.id},this.value)">
+                <option value="New" ${status==="New"?"selected":""}>New</option>
+                <option value="Contacted" ${status==="Contacted"?"selected":""}>Contacted</option>
+                <option value="Quoted" ${status==="Quoted"?"selected":""}>Quoted</option>
+                <option value="Completed" ${status==="Completed"?"selected":""}>Completed</option>
+            </select>
 
-        <p>
-            <span class="badge">
-                ${quote.status || "New"}
-            </span>
-        </p>
-
-        <p><strong>Email:</strong> ${quote.email || ""}</p>
-        <p><strong>Phone:</strong> ${quote.phone || ""}</p>
-        <p><strong>Company:</strong> ${quote.company || ""}</p>
-        <p><strong>Product:</strong> ${quote.product_name || ""}</p>
-        <p><strong>Message:</strong> ${quote.message || ""}</p>
-
-        <select onchange="updateQuoteStatus(${quote.id}, this.value)">
-            <option value="New" ${(quote.status || "New") === "New" ? "selected" : ""}>New</option>
-            <option value="Contacted" ${quote.status === "Contacted" ? "selected" : ""}>Contacted</option>
-            <option value="Quoted" ${quote.status === "Quoted" ? "selected" : ""}>Quoted</option>
-            <option value="Completed" ${quote.status === "Completed" ? "selected" : ""}>Completed</option>
-        </select>
-
-        <button class="danger" onclick="deleteQuote(${quote.id})">
-            Delete Quote
-        </button>
-
-    </div>
-`).join("");
-```
-
+            <button class="danger" onclick="deleteQuote(${q.id})">Delete Quote</button>
+        </div>`;
+    }).join("");
 }
 
 async function updateQuoteStatus(id,status){
-await fetch(
-`${SUPABASE_URL}/rest/v1/quotes?id=eq.${id}`,
-{
-method:"PATCH",
-headers:{
-apikey:SUPABASE_KEY,
-Authorization:`Bearer ${SUPABASE_KEY}`,
-"Content-Type":"application/json"
-},
-body:JSON.stringify({
-status:status
-})
-}
-);
+    await fetch(`${SUPABASE_URL}/rest/v1/quotes?id=eq.${id}`,{
+        method:"PATCH",
+        headers:{
+            apikey:SUPABASE_KEY,
+            Authorization:`Bearer ${SUPABASE_KEY}`,
+            "Content-Type":"application/json"
+        },
+        body:JSON.stringify({status})
+    });
 
-```
-await loadQuotes();
-updateDashboard();
-```
-
+    await loadQuotes();
+    updateDashboard();
 }
 
 async function deleteQuote(id){
-if(!confirm("Delete this quote?")) return;
+    if(!confirm("Delete this quote?")) return;
 
-```
-await fetch(
-    `${SUPABASE_URL}/rest/v1/quotes?id=eq.${id}`,
-    {
+    await fetch(`${SUPABASE_URL}/rest/v1/quotes?id=eq.${id}`,{
         method:"DELETE",
-        headers:{
-            apikey:SUPABASE_KEY,
-            Authorization:`Bearer ${SUPABASE_KEY}`
-        }
-    }
-);
+        headers:{apikey:SUPABASE_KEY,Authorization:`Bearer ${SUPABASE_KEY}`}
+    });
 
-await loadQuotes();
-updateDashboard();
-```
-
+    await loadQuotes();
+    updateDashboard();
 }
 
 function updateDashboard(){
-document.getElementById("productCount").innerText =
-allProducts.length;
+    document.getElementById("productCount").innerText = allProducts.length;
+    document.getElementById("quoteCount").innerText = allQuotes.length;
+    document.getElementById("newQuoteCount").innerText =
+        allQuotes.filter(q=>normalizeStatus(q.status)==="New").length;
+    document.getElementById("featuredCount").innerText =
+        allProducts.filter(p=>p.featured === true).length;
 
-```
-document.getElementById("quoteCount").innerText =
-allQuotes.length;
+    const recent = document.getElementById("recentQuotes");
 
-document.getElementById("newQuoteCount").innerText =
-allQuotes.filter(quote => (quote.status || "New") === "New").length;
+    if(allQuotes.length === 0){
+        recent.innerHTML = `<p class="empty">No quotes yet.</p>`;
+        return;
+    }
 
-document.getElementById("featuredCount").innerText =
-allProducts.filter(product => product.featured === true).length;
-
-const recentBox = document.getElementById("recentQuotes");
-
-if(!allQuotes || allQuotes.length === 0){
-    recentBox.innerHTML = `<p class="empty">No quotes yet.</p>`;
-    return;
+    recent.innerHTML = allQuotes.slice(0,6).map(q=>`
+        <div class="quote">
+            <h3>${q.name || "No Name"}</h3>
+            <p><span class="badge">${normalizeStatus(q.status)}</span></p>
+            <p><strong>Product:</strong> ${q.product_name || ""}</p>
+            <p><strong>Email:</strong> ${q.email || ""}</p>
+            <p><strong>Phone:</strong> ${q.phone || ""}</p>
+        </div>
+    `).join("");
 }
-
-recentBox.innerHTML = allQuotes.slice(0,6).map(quote=>`
-    <div class="quote">
-
-        <h3>${quote.name || "No Name"}</h3>
-
-        <p>
-            <span class="badge">
-                ${quote.status || "New"}
-            </span>
-        </p>
-
-        <p><strong>Product:</strong> ${quote.product_name || ""}</p>
-        <p><strong>Email:</strong> ${quote.email || ""}</p>
-        <p><strong>Phone:</strong> ${quote.phone || ""}</p>
-
-    </div>
-`).join("");
-```
-
-} </script>
-
-</main>
-</div>
+</script>
 
 </body>
 </html>
