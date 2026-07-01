@@ -1,0 +1,194 @@
+/* MorganGastro V7 Responsive Styles */
+
+@media(max-width:1180px){
+    .site-header{
+        gap:18px;
+        padding:14px 28px;
+    }
+
+    .topbar,
+    .main-nav,
+    .section,
+    .contact-cta,
+    .site-footer{
+        padding-left:28px;
+        padding-right:28px;
+    }
+
+    .category-grid,
+    .product-grid{
+        grid-template-columns:repeat(3,1fr);
+    }
+
+    .hero-slide h1{
+        font-size:56px;
+    }
+}
+
+@media(max-width:900px){
+    .topbar{
+        display:none;
+    }
+
+    .site-header{
+        flex-wrap:wrap;
+    }
+
+    .logo img{
+        width:132px;
+    }
+
+    .search-box{
+        order:3;
+        max-width:none;
+        width:100%;
+        flex-basis:100%;
+    }
+
+    .header-links{
+        display:none;
+    }
+
+    .mobile-menu-btn{
+        display:block;
+        margin-left:auto;
+    }
+
+    .mobile-menu.show{
+        display:block;
+    }
+
+    .main-nav{
+        display:none;
+    }
+
+    .hero-slider{
+        min-height:610px;
+    }
+
+    .hero-slide{
+        padding:65px 28px;
+    }
+
+    .hero-slide h1{
+        font-size:44px;
+    }
+
+    .hero-text{
+        font-size:18px;
+    }
+
+    .slider-arrow{
+        width:42px;
+        height:42px;
+        font-size:32px;
+    }
+
+    .slider-prev{
+        left:12px;
+    }
+
+    .slider-next{
+        right:12px;
+    }
+
+    .trust-strip{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .category-grid,
+    .product-grid,
+    .promo-grid,
+    .why-grid,
+    .footer-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .section-heading h2{
+        font-size:34px;
+    }
+
+    .contact-content h2{
+        font-size:38px;
+    }
+}
+
+@media(max-width:620px){
+    .site-header{
+        padding:13px 18px;
+    }
+
+    .section,
+    .contact-cta,
+    .site-footer{
+        padding:52px 18px;
+    }
+
+    .hero-slider{
+        min-height:560px;
+    }
+
+    .hero-slide{
+        padding:50px 20px;
+        align-items:center;
+    }
+
+    .hero-slide h1{
+        font-size:34px;
+    }
+
+    .hero-text{
+        font-size:16px;
+    }
+
+    .hero-actions,
+    .contact-actions{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .btn{
+        width:100%;
+    }
+
+    .trust-strip,
+    .category-grid,
+    .product-grid,
+    .promo-grid,
+    .why-grid,
+    .footer-grid{
+        grid-template-columns:1fr;
+    }
+
+    .category-card img,
+    .product-image{
+        height:210px;
+    }
+
+    .section-heading h2{
+        font-size:30px;
+    }
+
+    .promo-card h3{
+        font-size:24px;
+    }
+
+    .contact-content h2{
+        font-size:32px;
+    }
+
+    .search-box{
+        flex-direction:column;
+        gap:8px;
+    }
+
+    .search-box input,
+    .search-box button{
+        border-radius:8px;
+        min-height:46px;
+    }
+
+    .search-results{
+        top:102px;
+    }
+}
