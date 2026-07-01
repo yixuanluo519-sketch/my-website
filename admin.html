@@ -1,601 +1,298 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>MorganGastro Admin V4</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:Arial,sans-serif;background:#0b0b0b;color:white}
-h1,h2,h3{color:#d4af37}
-input,textarea,select,button{
-    width:100%;padding:12px;margin:8px 0;border-radius:8px;
-    border:1px solid #333;font-family:Arial,sans-serif
-}
-input,textarea,select{background:#101010;color:white}
-button{background:#d4af37;color:black;font-weight:bold;border:none;cursor:pointer}
-button:hover{background:#b9962f}
-.login{
-    min-height:100vh;display:flex;justify-content:center;align-items:center;
-    background:linear-gradient(rgba(0,0,0,.75),rgba(0,0,0,.92)),
-    url("https://images.unsplash.com/photo-1556911220-bff31c812dba?w=1600");
-    background-size:cover;background-position:center
-}
-.login-box{
-    width:380px;background:#151515;border:1px solid #d4af37;
-    border-radius:18px;padding:32px;box-shadow:0 0 40px rgba(0,0,0,.6)
-}
-.login-box img{width:160px;display:block;margin:0 auto 25px}
-.app{display:none;min-height:100vh}
-.sidebar{
-    width:250px;background:#050505;border-right:1px solid #d4af37;
-    position:fixed;top:0;bottom:0;padding:25px 18px;overflow:auto
-}
-.sidebar img{width:160px;display:block;margin:0 auto 30px}
-.sidebar button{text-align:left;background:#151515;color:white;border:1px solid #333}
-.sidebar button.active{background:#d4af37;color:black}
-.main{margin-left:250px;padding:32px}
-.section{display:none}.section.active{display:block}
-.box{
-    background:#151515;border:1px solid #333;border-radius:16px;
-    padding:22px;margin:20px 0
-}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
-.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:18px;margin:25px 0}
-.stat{background:#151515;border:1px solid #333;border-radius:16px;padding:24px}
-.stat p{color:#aaa;margin-bottom:8px}.stat h2{font-size:42px}
-.product,.quote{
-    background:#111;border:1px solid #333;border-radius:14px;
-    padding:15px;margin:15px 0
-}
-.product{display:grid;grid-template-columns:130px 1fr;gap:18px}
-.product img{width:130px;height:115px;object-fit:cover;border-radius:10px;background:#222}
-.product p,.quote p{color:#ccc;margin:6px 0}
-.badge{
-    display:inline-block;background:#d4af37;color:black;padding:4px 10px;
-    border-radius:20px;font-size:12px;font-weight:bold;margin:4px 4px 4px 0
-}
-.small-btn{width:auto;padding:9px 14px;margin-right:8px;margin-top:8px}
-.danger{background:#b3261e;color:white}.secondary{background:#666;color:white}
-.message{color:#d4af37;font-weight:bold}
-.pagination{display:flex;justify-content:center;align-items:center;gap:12px;margin-top:20px;flex-wrap:wrap}
-.pagination button{width:auto;padding:10px 16px}.page-info{color:#d4af37;font-weight:bold}
-.empty{color:#aaa;padding:20px 0}
-@media(max-width:900px){
-    .sidebar{position:static;width:100%;border-right:none;border-bottom:1px solid #d4af37}
-    .main{margin-left:0;padding:22px}
-    .product{grid-template-columns:1fr}
-    .product img{width:100%;height:190px}
-}
-</style>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MorganGastro Admin V7 Secure</title>
+    <link rel="stylesheet" href="assets/css/admin.css">
 </head>
-
 <body>
 
-<div class="login" id="loginPage">
-    <div class="login-box">
-        <img src="logo.png" alt="MorganGastro">
-        <h2>Admin Login</h2>
-        <input type="password" id="password" placeholder="Admin Password">
-        <button onclick="login()">Login</button>
-    </div>
-</div>
+<!-- Login -->
+<section id="loginScreen" class="login-screen">
+    <div class="login-card">
+        <img src="logo.png" alt="MorganGastro" class="login-logo">
+        <p class="eyebrow">Secure Admin Portal</p>
+        <h1>MorganGastro Admin</h1>
+        <p class="login-text">Sign in with your admin email and password.</p>
 
-<div class="app" id="app">
-<aside class="sidebar">
-    <img src="logo.png" alt="MorganGastro">
-    <button class="active" onclick="showSection('dashboard',this)">📊 Dashboard</button>
-    <button onclick="showSection('products',this)">📦 Products</button>
-    <button onclick="showSection('quotes',this)">📨 Quotes</button>
-    <button onclick="showSection('settings',this)">⚙ Settings</button>
-</aside>
+        <label>Email</label>
+        <input id="loginEmail" type="email" placeholder="admin@example.com" autocomplete="email">
 
-<main class="main">
+        <label>Password</label>
+        <input id="loginPassword" type="password" placeholder="Password" autocomplete="current-password">
 
-<section id="dashboard" class="section active">
-    <h1>Dashboard</h1>
-    <div class="stats">
-        <div class="stat"><p>Total Products</p><h2 id="productCount">0</h2></div>
-        <div class="stat"><p>Total Quotes</p><h2 id="quoteCount">0</h2></div>
-        <div class="stat"><p>New Quotes</p><h2 id="newQuoteCount">0</h2></div>
-        <div class="stat"><p>Featured</p><h2 id="featuredCount">0</h2></div>
-    </div>
-    <div class="box">
-        <h2>Recent Quotes</h2>
-        <div id="recentQuotes">Loading...</div>
+        <button id="loginBtn" class="primary-btn">Login</button>
+        <div id="loginMessage" class="message"></div>
     </div>
 </section>
 
-<section id="products" class="section">
-    <h1>Product Manager</h1>
+<!-- App -->
+<section id="adminApp" class="admin-app hidden">
 
-```
-<div class="box">
-    <h2>Add / Edit Product</h2>
-    <input type="hidden" id="productId">
-
-    <div class="grid">
-        <input id="name" placeholder="Product Name">
-        <input id="price" placeholder="Price">
-        <input id="brand" placeholder="Brand">
-        <input id="model" placeholder="Model">
-        <input id="voltage" placeholder="Voltage">
-        <input id="power" placeholder="Power">
-        <input id="material" placeholder="Material">
-
-        <select id="category">
-            <option value="">Select Category</option>
-            <option value="Food Prep & Processing">Food Prep & Processing</option>
-            <option value="Cooking Equipment">Cooking Equipment</option>
-            <option value="Refrigeration & Ice">Refrigeration & Ice</option>
-            <option value="Holding & Warming">Holding & Warming</option>
-            <option value="Beverage Equipment">Beverage Equipment</option>
-            <option value="Storage & Transport">Storage & Transport</option>
-            <option value="Smallwares & Accessories">Smallwares & Accessories</option>
-            <option value="Cleaning & Dishwashing">Cleaning & Dishwashing</option>
-        </select>
-
-        <select id="featured">
-            <option value="false">Not Featured</option>
-            <option value="true">Featured Product</option>
-        </select>
-    </div>
-
-    <textarea id="description" placeholder="Description"></textarea>
-    <input type="file" id="imageFile" accept="image/*">
-    <input id="image_url" placeholder="Image URL optional">
-
-    <button onclick="saveProduct()">Save Product</button>
-    <button class="secondary" onclick="clearForm()">Clear Form</button>
-    <p class="message" id="message"></p>
-</div>
-
-<div class="box">
-    <h2>Product List</h2>
-    <div class="grid">
-        <input id="productSearch" placeholder="Search products..." oninput="goToProductPage(1)">
-        <select id="categoryFilter" onchange="goToProductPage(1)">
-            <option value="">All Categories</option>
-            <option value="Food Prep & Processing">Food Prep & Processing</option>
-            <option value="Cooking Equipment">Cooking Equipment</option>
-            <option value="Refrigeration & Ice">Refrigeration & Ice</option>
-            <option value="Holding & Warming">Holding & Warming</option>
-            <option value="Beverage Equipment">Beverage Equipment</option>
-            <option value="Storage & Transport">Storage & Transport</option>
-            <option value="Smallwares & Accessories">Smallwares & Accessories</option>
-            <option value="Cleaning & Dishwashing">Cleaning & Dishwashing</option>
-        </select>
-        <select id="brandFilter" onchange="goToProductPage(1)">
-            <option value="">All Brands</option>
-        </select>
-        <select id="featuredFilter" onchange="goToProductPage(1)">
-            <option value="">All Products</option>
-            <option value="true">Featured Only</option>
-            <option value="false">Not Featured Only</option>
-        </select>
-    </div>
-
-    <div id="productList">Loading...</div>
-
-    <div class="pagination">
-        <button onclick="previousProductPage()">← Previous</button>
-        <span class="page-info" id="productPageInfo">Page 1</span>
-        <button onclick="nextProductPage()">Next →</button>
-    </div>
-</div>
-```
-
-</section>
-
-<section id="quotes" class="section">
-    <h1>Quote Manager</h1>
-    <div class="box">
-        <div class="grid">
-            <input id="quoteSearch" placeholder="Search quotes..." oninput="renderQuotes()">
-            <select id="quoteFilter" onchange="renderQuotes()">
-                <option value="">All Status</option>
-                <option value="New">New</option>
-                <option value="Contacted">Contacted</option>
-                <option value="Quoted">Quoted</option>
-                <option value="Completed">Completed</option>
-            </select>
-        </div>
-        <div id="quoteList">Loading...</div>
-    </div>
-</section>
-
-<section id="settings" class="section">
-    <h1>Settings</h1>
-    <div class="box">
-        <p><strong>Website:</strong> MorganGastro</p>
-        <p><strong>Supabase:</strong> Connected</p>
-        <p><strong>Storage Bucket:</strong> products</p>
-        <p><strong>Admin Version:</strong> V4</p>
-    </div>
-</section>
-
-</main>
-</div>
-
-<script>
-const ADMIN_PASSWORD = "morgan123";
-const SUPABASE_URL = "https://omcytrhftuivfzbwcalp.supabase.co";
-const SUPABASE_KEY = "sb_publishable_XpUZl3GZyhSQ9-NR4xFzbw_Kf5pU_cQ";
-const BUCKET_NAME = "products";
-
-let allProducts = [];
-let allQuotes = [];
-let currentProductPage = 1;
-const PRODUCTS_PER_PAGE = 20;
-
-function login(){
-    const password = document.getElementById("password").value;
-    if(password === ADMIN_PASSWORD){
-        document.getElementById("loginPage").style.display = "none";
-        document.getElementById("app").style.display = "block";
-        loadAll();
-    }else{
-        alert("Wrong password");
-    }
-}
-
-function showSection(id,btn){
-    document.querySelectorAll(".section").forEach(s=>s.classList.remove("active"));
-    document.getElementById(id).classList.add("active");
-    document.querySelectorAll(".sidebar button").forEach(b=>b.classList.remove("active"));
-    btn.classList.add("active");
-}
-
-async function loadAll(){
-    await loadProducts();
-    await loadQuotes();
-    updateDashboard();
-}
-
-async function loadProducts(){
-    const res = await fetch(`${SUPABASE_URL}/rest/v1/products?select=*&order=id.desc`,{
-        headers:{apikey:SUPABASE_KEY,Authorization:`Bearer ${SUPABASE_KEY}`}
-    });
-    allProducts = await res.json();
-    populateBrandFilter();
-    renderProducts();
-}
-
-async function loadQuotes(){
-    const res = await fetch(`${SUPABASE_URL}/rest/v1/quotes?select=*&order=id.desc`,{
-        headers:{apikey:SUPABASE_KEY,Authorization:`Bearer ${SUPABASE_KEY}`}
-    });
-    allQuotes = await res.json();
-    renderQuotes();
-}
-
-function populateBrandFilter(){
-    const brandFilter = document.getElementById("brandFilter");
-    const brands = [...new Set(allProducts.map(p=>p.brand).filter(Boolean))].sort();
-    brandFilter.innerHTML = `<option value="">All Brands</option>`;
-    brands.forEach(brand=>{
-        brandFilter.innerHTML += `<option value="${brand}">${brand}</option>`;
-    });
-}
-
-function filteredProducts(){
-    const search = document.getElementById("productSearch").value.toLowerCase().trim();
-    const category = document.getElementById("categoryFilter").value;
-    const brand = document.getElementById("brandFilter").value;
-    const featured = document.getElementById("featuredFilter").value;
-
-    return allProducts.filter(p=>{
-        const matchSearch =
-            (p.name || "").toLowerCase().includes(search) ||
-            (p.brand || "").toLowerCase().includes(search) ||
-            (p.category || "").toLowerCase().includes(search) ||
-            (p.description || "").toLowerCase().includes(search);
-
-        const matchCategory = !category || p.category === category;
-        const matchBrand = !brand || p.brand === brand;
-        const matchFeatured = featured === "" || String(p.featured) === featured;
-
-        return matchSearch && matchCategory && matchBrand && matchFeatured;
-    });
-}
-
-function renderProducts(){
-    const list = document.getElementById("productList");
-    const products = filteredProducts();
-
-    if(products.length === 0){
-        list.innerHTML = `<p class="empty">No products found.</p>`;
-        document.getElementById("productPageInfo").innerText = "Page 0 of 0";
-        return;
-    }
-
-    const totalPages = Math.ceil(products.length / PRODUCTS_PER_PAGE);
-    if(currentProductPage < 1) currentProductPage = 1;
-    if(currentProductPage > totalPages) currentProductPage = totalPages;
-
-    const start = (currentProductPage - 1) * PRODUCTS_PER_PAGE;
-    const pageProducts = products.slice(start,start + PRODUCTS_PER_PAGE);
-
-    document.getElementById("productPageInfo").innerText =
-        `Page ${currentProductPage} of ${totalPages} · ${products.length} products`;
-
-    list.innerHTML = pageProducts.map(p=>`
-        <div class="product">
-            <img src="${p.image_url || ""}" alt="${p.name || ""}">
+    <aside class="sidebar">
+        <div class="brand">
+            <img src="logo.png" alt="MorganGastro">
             <div>
-                <h3>${p.name || ""}</h3>
-                <p>
-                    <span class="badge">${p.category || "No Category"}</span>
-                    ${p.featured ? `<span class="badge">Featured</span>` : ""}
-                </p>
-                <p><strong>Brand:</strong> ${p.brand || "-"}</p>
-                <p><strong>Model:</strong> ${p.model || "-"}</p>
-                <p><strong>Voltage:</strong> ${p.voltage || "-"}</p>
-                <p><strong>Power:</strong> ${p.power || "-"}</p>
-                <p><strong>Material:</strong> ${p.material || "-"}</p>
-                <p><strong>Price:</strong> $${p.price || 0}</p>
-                <button class="small-btn" onclick="editProduct(${p.id})">Edit</button>
-                <button class="small-btn" onclick="toggleFeatured(${p.id},${p.featured ? "false" : "true"})">
-                    ${p.featured ? "Remove Featured" : "Make Featured"}
-                </button>
-                <button class="small-btn danger" onclick="deleteProduct(${p.id})">Delete</button>
+                <strong>Admin V7</strong>
+                <span>Secure CRM</span>
             </div>
         </div>
-    `).join("");
-}
 
-function goToProductPage(page){currentProductPage = page;renderProducts()}
-function nextProductPage(){currentProductPage++;renderProducts()}
-function previousProductPage(){currentProductPage--;renderProducts()}
+        <button class="nav-btn active" data-page="dashboard">Dashboard</button>
+        <button class="nav-btn" data-page="quotes">Quote CRM</button>
+        <button class="nav-btn" data-page="customers">Customers</button>
+        <button class="nav-btn" data-page="products">Products</button>
+        <button class="nav-btn" data-page="settings">Settings</button>
 
-function clearForm(){
-    ["productId","name","price","brand","model","voltage","power","material","description","image_url"]
-    .forEach(id=>document.getElementById(id).value = "");
-    document.getElementById("imageFile").value = "";
-    document.getElementById("category").value = "";
-    document.getElementById("featured").value = "false";
-    document.getElementById("message").innerText = "";
-}
-
-async function uploadImageIfNeeded(){
-    const file = document.getElementById("imageFile").files[0];
-    if(!file) return document.getElementById("image_url").value;
-
-    const ext = file.name.split(".").pop();
-    const filename = `${Date.now()}_${Math.floor(Math.random()*100000)}.${ext}`;
-
-    const res = await fetch(`${SUPABASE_URL}/storage/v1/object/${BUCKET_NAME}/${filename}`,{
-        method:"POST",
-        headers:{
-            apikey:SUPABASE_KEY,
-            Authorization:`Bearer ${SUPABASE_KEY}`,
-            "Content-Type":file.type,
-            "x-upsert":"true"
-        },
-        body:file
-    });
-
-    if(!res.ok) throw new Error("Image upload failed");
-
-    return `${SUPABASE_URL}/storage/v1/object/public/${BUCKET_NAME}/${filename}`;
-}
-
-async function saveProduct(){
-    try{
-        document.getElementById("message").innerText = "Saving...";
-        const id = document.getElementById("productId").value;
-        const imageUrl = await uploadImageIfNeeded();
-
-        const product = {
-            name:document.getElementById("name").value,
-            price:Number(document.getElementById("price").value),
-            brand:document.getElementById("brand").value,
-            model:document.getElementById("model").value,
-            voltage:document.getElementById("voltage").value,
-            power:document.getElementById("power").value,
-            material:document.getElementById("material").value,
-            category:document.getElementById("category").value,
-            featured:document.getElementById("featured").value === "true",
-            description:document.getElementById("description").value,
-            image_url:imageUrl
-        };
-
-        let url = `${SUPABASE_URL}/rest/v1/products`;
-        let method = "POST";
-
-        if(id){
-            url = `${SUPABASE_URL}/rest/v1/products?id=eq.${id}`;
-            method = "PATCH";
-        }
-
-        const res = await fetch(url,{
-            method,
-            headers:{
-                apikey:SUPABASE_KEY,
-                Authorization:`Bearer ${SUPABASE_KEY}`,
-                "Content-Type":"application/json",
-                "Prefer":"return=representation"
-            },
-            body:JSON.stringify(product)
-        });
-
-        if(!res.ok) throw new Error(await res.text());
-
-        document.getElementById("message").innerText = "Saved successfully!";
-        clearForm();
-        await loadProducts();
-        updateDashboard();
-
-    }catch(error){
-        console.log(error);
-        document.getElementById("message").innerText = "Save failed.";
-    }
-}
-
-function editProduct(id){
-    const p = allProducts.find(item=>item.id === id);
-    if(!p) return;
-
-    document.getElementById("productId").value = p.id;
-    document.getElementById("name").value = p.name || "";
-    document.getElementById("price").value = p.price || "";
-    document.getElementById("brand").value = p.brand || "";
-    document.getElementById("model").value = p.model || "";
-    document.getElementById("voltage").value = p.voltage || "";
-    document.getElementById("power").value = p.power || "";
-    document.getElementById("material").value = p.material || "";
-    document.getElementById("description").value = p.description || "";
-    document.getElementById("image_url").value = p.image_url || "";
-    document.getElementById("category").value = p.category || "";
-    document.getElementById("featured").value = p.featured ? "true" : "false";
-
-    showSection("products",document.querySelectorAll(".sidebar button")[1]);
-    window.scrollTo({top:0,behavior:"smooth"});
-}
-
-async function toggleFeatured(id,value){
-    await fetch(`${SUPABASE_URL}/rest/v1/products?id=eq.${id}`,{
-        method:"PATCH",
-        headers:{
-            apikey:SUPABASE_KEY,
-            Authorization:`Bearer ${SUPABASE_KEY}`,
-            "Content-Type":"application/json"
-        },
-        body:JSON.stringify({featured:value})
-    });
-    await loadProducts();
-    updateDashboard();
-}
-
-async function deleteProduct(id){
-    if(!confirm("Delete this product?")) return;
-
-    await fetch(`${SUPABASE_URL}/rest/v1/products?id=eq.${id}`,{
-        method:"DELETE",
-        headers:{apikey:SUPABASE_KEY,Authorization:`Bearer ${SUPABASE_KEY}`}
-    });
-
-    await loadProducts();
-    updateDashboard();
-}
-
-function normalizeStatus(status){
-    if(!status) return "New";
-    const s = String(status).toLowerCase();
-    if(s === "new") return "New";
-    if(s === "contacted") return "Contacted";
-    if(s === "quoted") return "Quoted";
-    if(s === "completed" || s === "closed") return "Completed";
-    return status;
-}
-
-function filteredQuotes(){
-    const search = document.getElementById("quoteSearch").value.toLowerCase().trim();
-    const status = document.getElementById("quoteFilter").value;
-
-    return allQuotes.filter(q=>{
-        const qStatus = normalizeStatus(q.status);
-        const matchStatus = !status || qStatus === status;
-        const matchSearch =
-            (q.name || "").toLowerCase().includes(search) ||
-            (q.email || "").toLowerCase().includes(search) ||
-            (q.phone || "").toLowerCase().includes(search) ||
-            (q.company || "").toLowerCase().includes(search) ||
-            (q.product_name || "").toLowerCase().includes(search) ||
-            (q.message || "").toLowerCase().includes(search);
-        return matchStatus && matchSearch;
-    });
-}
-
-function renderQuotes(){
-    const box = document.getElementById("quoteList");
-    const quotes = filteredQuotes();
-
-    if(quotes.length === 0){
-        box.innerHTML = `<p class="empty">No quotes found.</p>`;
-        return;
-    }
-
-    box.innerHTML = quotes.map(q=>{
-        const status = normalizeStatus(q.status);
-        return `
-        <div class="quote">
-            <h3>${q.name || "No Name"}</h3>
-            <p><span class="badge">${status}</span></p>
-            <p><strong>Email:</strong> ${q.email || ""}</p>
-            <p><strong>Phone:</strong> ${q.phone || ""}</p>
-            <p><strong>Company:</strong> ${q.company || ""}</p>
-            <p><strong>Product:</strong> ${q.product_name || ""}</p>
-            <p><strong>Message:</strong> ${q.message || ""}</p>
-
-            <select onchange="updateQuoteStatus(${q.id},this.value)">
-                <option value="New" ${status==="New"?"selected":""}>New</option>
-                <option value="Contacted" ${status==="Contacted"?"selected":""}>Contacted</option>
-                <option value="Quoted" ${status==="Quoted"?"selected":""}>Quoted</option>
-                <option value="Completed" ${status==="Completed"?"selected":""}>Completed</option>
-            </select>
-
-            <button class="danger" onclick="deleteQuote(${q.id})">Delete Quote</button>
-        </div>`;
-    }).join("");
-}
-
-async function updateQuoteStatus(id,status){
-    await fetch(`${SUPABASE_URL}/rest/v1/quotes?id=eq.${id}`,{
-        method:"PATCH",
-        headers:{
-            apikey:SUPABASE_KEY,
-            Authorization:`Bearer ${SUPABASE_KEY}`,
-            "Content-Type":"application/json"
-        },
-        body:JSON.stringify({status})
-    });
-
-    await loadQuotes();
-    updateDashboard();
-}
-
-async function deleteQuote(id){
-    if(!confirm("Delete this quote?")) return;
-
-    await fetch(`${SUPABASE_URL}/rest/v1/quotes?id=eq.${id}`,{
-        method:"DELETE",
-        headers:{apikey:SUPABASE_KEY,Authorization:`Bearer ${SUPABASE_KEY}`}
-    });
-
-    await loadQuotes();
-    updateDashboard();
-}
-
-function updateDashboard(){
-    document.getElementById("productCount").innerText = allProducts.length;
-    document.getElementById("quoteCount").innerText = allQuotes.length;
-    document.getElementById("newQuoteCount").innerText =
-        allQuotes.filter(q=>normalizeStatus(q.status)==="New").length;
-    document.getElementById("featuredCount").innerText =
-        allProducts.filter(p=>p.featured === true).length;
-
-    const recent = document.getElementById("recentQuotes");
-
-    if(allQuotes.length === 0){
-        recent.innerHTML = `<p class="empty">No quotes yet.</p>`;
-        return;
-    }
-
-    recent.innerHTML = allQuotes.slice(0,6).map(q=>`
-        <div class="quote">
-            <h3>${q.name || "No Name"}</h3>
-            <p><span class="badge">${normalizeStatus(q.status)}</span></p>
-            <p><strong>Product:</strong> ${q.product_name || ""}</p>
-            <p><strong>Email:</strong> ${q.email || ""}</p>
-            <p><strong>Phone:</strong> ${q.phone || ""}</p>
+        <div class="sidebar-bottom">
+            <div id="userBox" class="user-box">Loading...</div>
+            <button id="logoutBtn" class="logout-btn">Logout</button>
         </div>
-    `).join("");
-}
-</script>
+    </aside>
+
+    <main class="main">
+
+        <header class="main-header">
+            <div>
+                <p class="eyebrow">MorganGastro</p>
+                <h1 id="pageTitle">Dashboard</h1>
+            </div>
+
+            <div class="header-actions">
+                <a href="index.html" target="_blank">Open Website</a>
+                <button id="refreshBtn">Refresh</button>
+            </div>
+        </header>
+
+        <!-- Dashboard -->
+        <section id="dashboardPage" class="page active">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span>Total Products</span>
+                    <strong id="statProducts">0</strong>
+                </div>
+                <div class="stat-card">
+                    <span>Total Quotes</span>
+                    <strong id="statQuotes">0</strong>
+                </div>
+                <div class="stat-card">
+                    <span>New Quotes</span>
+                    <strong id="statNewQuotes">0</strong>
+                </div>
+                <div class="stat-card">
+                    <span>Customers</span>
+                    <strong id="statCustomers">0</strong>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-head">
+                    <h2>Latest Quotes</h2>
+                    <button class="small-btn" data-page-shortcut="quotes">View All</button>
+                </div>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Customer</th>
+                                <th>Product</th>
+                                <th>Status</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody id="latestQuotesBody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quotes -->
+        <section id="quotesPage" class="page">
+            <div class="toolbar">
+                <input id="quoteSearch" type="text" placeholder="Search quotes, customers, products...">
+                <select id="quoteStatusFilter">
+                    <option value="">All Status</option>
+                    <option value="New">New</option>
+                    <option value="Contacted">Contacted</option>
+                    <option value="Quoted">Quoted</option>
+                    <option value="Negotiating">Negotiating</option>
+                    <option value="Won">Won</option>
+                    <option value="Lost">Lost</option>
+                    <option value="Closed">Closed</option>
+                </select>
+                <button id="exportQuotesBtn">Export CSV</button>
+            </div>
+
+            <div class="panel">
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Customer</th>
+                                <th>Contact</th>
+                                <th>Product</th>
+                                <th>Qty</th>
+                                <th>Country</th>
+                                <th>Status</th>
+                                <th>Date</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="quotesBody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Customers -->
+        <section id="customersPage" class="page">
+            <div class="panel">
+                <div class="panel-head">
+                    <h2>Customers from Quote Requests</h2>
+                </div>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Customer</th>
+                                <th>Company</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Country</th>
+                                <th>Total Quotes</th>
+                                <th>Latest Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="customersBody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Products -->
+        <section id="productsPage" class="page">
+            <div class="product-layout">
+
+                <div class="panel">
+                    <div class="panel-head">
+                        <h2 id="productFormTitle">Add Product</h2>
+                        <button id="clearProductFormBtn" class="small-btn">Clear</button>
+                    </div>
+
+                    <div class="form-grid">
+                        <label>
+                            Product Name
+                            <input id="productName" type="text">
+                        </label>
+
+                        <label>
+                            Category
+                            <input id="productCategory" type="text">
+                        </label>
+
+                        <label>
+                            Brand
+                            <input id="productBrand" type="text">
+                        </label>
+
+                        <label>
+                            Model
+                            <input id="productModel" type="text">
+                        </label>
+
+                        <label>
+                            Internal Price
+                            <input id="productPrice" type="text">
+                        </label>
+
+                        <label>
+                            Image URL
+                            <input id="productImageUrl" type="text">
+                        </label>
+
+                        <label class="full">
+                            Upload Image
+                            <input id="productImageFile" type="file" accept="image/*">
+                        </label>
+
+                        <label class="full">
+                            Description
+                            <textarea id="productDescription" rows="5"></textarea>
+                        </label>
+
+                        <label class="checkbox-row">
+                            <input id="productFeatured" type="checkbox">
+                            Featured Product
+                        </label>
+                    </div>
+
+                    <button id="saveProductBtn" class="primary-btn">Save Product</button>
+                    <div id="productMessage" class="message"></div>
+                </div>
+
+                <div class="panel">
+                    <div class="toolbar">
+                        <input id="productSearch" type="text" placeholder="Search products...">
+                    </div>
+
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Product</th>
+                                    <th>Category</th>
+                                    <th>Featured</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="productsBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Settings -->
+        <section id="settingsPage" class="page">
+            <div class="panel">
+                <h2>Admin Security</h2>
+                <div class="settings-grid">
+                    <div>
+                        <strong>Login System</strong>
+                        <span>Supabase Auth Email + Password</span>
+                    </div>
+                    <div>
+                        <strong>Database Security</strong>
+                        <span>RLS Policies + Admin Roles</span>
+                    </div>
+                    <div>
+                        <strong>Current Role</strong>
+                        <span id="settingsRole">Loading...</span>
+                    </div>
+                    <div>
+                        <strong>Public Pricing</strong>
+                        <span>Disabled — Request Quote Mode</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+</section>
+
+<!-- Quote Modal -->
+<div id="quoteModal" class="modal hidden">
+    <div class="modal-card">
+        <button id="closeQuoteModal" class="modal-close">×</button>
+        <h2>Quote Details</h2>
+        <div id="quoteDetailContent"></div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="assets/js/admin.js"></script>
 
 </body>
 </html>
