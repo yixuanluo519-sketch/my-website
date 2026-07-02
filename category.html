@@ -4,148 +4,705 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Category | Morgan Food Machinery</title>
+<title>MorganGastro Category | Commercial Food Machinery</title>
 
 <style>
-body{
+*{
     margin:0;
-    font-family:Arial,sans-serif;
-    background:#0b0b0b;
-    color:white;
+    padding:0;
+    box-sizing:border-box;
 }
 
-header{
-    background:#050505;
-    border-bottom:1px solid #d4af37;
-    padding:20px 50px;
+:root{
+    --gold:#d4af37;
+    --gold-dark:#b9952e;
+    --black:#060606;
+    --dark:#111;
+    --white:#fff;
+    --light:#f4f4f4;
+    --line:#ddd;
+    --muted:#666;
+}
+
+body{
+    font-family:Arial, Helvetica, sans-serif;
+    background:#f4f4f4;
+    color:#111;
+    padding-bottom:86px;
+}
+
+a{
+    text-decoration:none;
+}
+
+img{
+    display:block;
+    max-width:100%;
+}
+
+/* Fixed / Sticky Search Header */
+.sticky-header{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    background:#fff;
+    border-bottom:1px solid #ddd;
+    box-shadow:0 8px 25px rgba(0,0,0,.08);
+}
+
+.header-inner{
+    min-height:84px;
+    padding:12px 56px;
     display:flex;
-    justify-content:space-between;
     align-items:center;
+    gap:24px;
 }
 
-.logo{
-    font-size:28px;
-    font-weight:bold;
-    color:#d4af37;
-    text-decoration:none;
+.logo img{
+    width:150px;
+    height:auto;
 }
 
-nav a{
-    color:white;
-    text-decoration:none;
-    margin-left:20px;
-    font-weight:bold;
+.search-wrap{
+    flex:1;
+    max-width:760px;
+    position:relative;
+    display:flex;
 }
 
-nav a:hover{
-    color:#d4af37;
-}
-
-.container{
-    padding:50px;
-}
-
-h1{
-    color:#d4af37;
-    text-align:center;
-    margin-bottom:15px;
-}
-
-.count{
-    text-align:center;
-    color:#aaa;
-    margin-bottom:35px;
-}
-
-.products{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-    gap:25px;
-}
-
-.card{
-    background:#161616;
-    border:1px solid #333;
-    border-radius:15px;
-    overflow:hidden;
-    transition:.2s;
-}
-
-.card:hover{
-    border-color:#d4af37;
-    transform:translateY(-5px);
-}
-
-.card img{
+.search-wrap input{
     width:100%;
-    height:220px;
-    object-fit:cover;
+    padding:15px 18px;
+    border:2px solid var(--gold);
+    border-radius:8px 0 0 8px;
+    font-size:15px;
+    outline:none;
 }
 
-.card-body{
-    padding:20px;
-}
-
-.card-body h3{
-    color:white;
-}
-
-.card-body p{
-    color:#ccc;
-}
-
-.price{
-    color:#d4af37;
-    font-size:22px;
-    font-weight:bold;
-}
-
-.btn{
-    display:inline-block;
-    margin-top:15px;
-    padding:12px 20px;
-    background:#d4af37;
-    color:black;
-    text-decoration:none;
-    border-radius:25px;
-    font-weight:bold;
+.search-wrap button{
     border:none;
+    background:var(--gold);
+    color:#111;
+    padding:0 24px;
+    border-radius:0 8px 8px 0;
+    font-weight:900;
     cursor:pointer;
 }
 
-.btn:disabled{
-    background:#555;
-    color:#aaa;
-    cursor:not-allowed;
+.search-wrap button:hover{
+    background:var(--gold-dark);
+}
+
+.search-results{
+    position:absolute;
+    left:0;
+    right:0;
+    top:56px;
+    background:#fff;
+    border:1px solid #ddd;
+    border-radius:10px;
+    display:none;
+    overflow:hidden;
+    box-shadow:0 16px 40px rgba(0,0,0,.2);
+    z-index:1200;
+}
+
+.search-item{
+    display:flex;
+    gap:12px;
+    padding:12px;
+    color:#111;
+    border-bottom:1px solid #eee;
+}
+
+.search-item:hover{
+    background:#f6f6f6;
+}
+
+.search-item img{
+    width:72px;
+    height:58px;
+    object-fit:cover;
+    background:#eee;
+    border-radius:6px;
+}
+
+.search-item h4{
+    font-size:14px;
+    margin-bottom:4px;
+}
+
+.search-item p{
+    color:#666;
+    font-size:13px;
+}
+
+.header-links{
+    display:flex;
+    gap:18px;
+    white-space:nowrap;
+}
+
+.header-links a{
+    color:#111;
+    font-weight:900;
+}
+
+.header-links a:hover{
+    color:var(--gold-dark);
+}
+
+/* Hero */
+.hero{
+    min-height:280px;
+    padding:70px 56px;
+    color:#fff;
+    background:
+        linear-gradient(90deg,rgba(0,0,0,.82),rgba(0,0,0,.55)),
+        url("https://images.unsplash.com/photo-1556911220-bff31c812dba?auto=format&fit=crop&w=1800&q=80");
+    background-size:cover;
+    background-position:center;
+    display:flex;
+    align-items:center;
+}
+
+.hero-content{
+    max-width:900px;
+}
+
+.kicker{
+    color:var(--gold);
+    text-transform:uppercase;
+    letter-spacing:3px;
+    font-weight:900;
+    margin-bottom:12px;
+    font-size:13px;
+}
+
+.hero h1{
+    font-size:52px;
+    line-height:1.1;
+    margin-bottom:14px;
+}
+
+.hero p{
+    color:#eee;
+    font-size:18px;
+    line-height:1.7;
+}
+
+/* Sticky Category Tabs */
+.tabs-section{
+    position:sticky;
+    top:84px;
+    z-index:900;
+    background:#111;
+    border-bottom:1px solid rgba(212,175,55,.3);
+    overflow-x:auto;
+}
+
+.tabs{
+    display:flex;
+    gap:10px;
+    min-width:max-content;
+    padding:13px 56px;
+}
+
+.tabs a{
+    color:#fff;
+    background:#1b1b1b;
+    border:1px solid #333;
+    border-radius:999px;
+    padding:10px 15px;
+    font-weight:900;
+    white-space:nowrap;
+}
+
+.tabs a.active,
+.tabs a:hover{
+    background:var(--gold);
+    color:#111;
+    border-color:var(--gold);
+}
+
+/* Main */
+.main{
+    display:grid;
+    grid-template-columns:290px 1fr;
+    gap:28px;
+    padding:34px 56px 40px;
+}
+
+.sidebar{
+    position:sticky;
+    top:150px;
+    align-self:start;
+    background:#fff;
+    border:1px solid #e1e1e1;
+    border-radius:16px;
+    padding:22px;
+    box-shadow:0 8px 20px rgba(0,0,0,.06);
+}
+
+.sidebar h2{
+    margin-bottom:18px;
+    font-size:22px;
+}
+
+.sidebar label{
+    display:block;
+    margin:15px 0 7px;
+    font-weight:900;
+}
+
+.sidebar input,
+.sidebar select{
+    width:100%;
+    padding:12px;
+    border:1px solid #ccc;
+    border-radius:9px;
+    outline:none;
+    background:#fff;
+    color:#111;
+}
+
+.sidebar input:focus,
+.sidebar select:focus{
+    border-color:var(--gold);
+}
+
+.sidebar button{
+    width:100%;
+    margin-top:18px;
+    padding:12px;
+    border:none;
+    border-radius:9px;
+    background:#111;
+    color:#fff;
+    font-weight:900;
+    cursor:pointer;
+}
+
+.sidebar button:hover{
+    background:var(--gold);
+    color:#111;
+}
+
+.help-box{
+    margin-top:22px;
+    background:#111;
+    color:#fff;
+    border-radius:14px;
+    padding:18px;
+}
+
+.help-box strong{
+    color:var(--gold);
+    display:block;
+    margin-bottom:8px;
+}
+
+.help-box p{
+    color:#ddd;
+    font-size:14px;
+    line-height:1.6;
+    margin-bottom:12px;
+}
+
+.help-box a{
+    display:inline-block;
+    color:#111;
+    background:var(--gold);
+    padding:10px 13px;
+    border-radius:8px;
+    font-weight:900;
+}
+
+.products-top{
+    background:#fff;
+    border:1px solid #e1e1e1;
+    border-radius:16px;
+    padding:22px;
+    margin-bottom:22px;
+    display:flex;
+    justify-content:space-between;
+    gap:18px;
+    align-items:center;
+    box-shadow:0 8px 20px rgba(0,0,0,.06);
+}
+
+.products-top p{
+    color:#666;
+    margin-bottom:5px;
+}
+
+.products-top h2{
+    font-size:30px;
+}
+
+.quote-top{
+    background:#111;
+    color:#fff;
+    border-radius:9px;
+    padding:13px 18px;
+    font-weight:900;
+    white-space:nowrap;
+}
+
+.quote-top:hover{
+    background:var(--gold);
+    color:#111;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:22px;
+}
+
+.card{
+    background:#fff;
+    border:1px solid #e1e1e1;
+    border-radius:16px;
+    overflow:hidden;
+    box-shadow:0 8px 20px rgba(0,0,0,.06);
+    transition:.25s ease;
+}
+
+.card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 16px 35px rgba(0,0,0,.14);
+}
+
+.card-img{
+    height:225px;
+    overflow:hidden;
+    background:#eee;
+}
+
+.card-img img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:.35s ease;
+}
+
+.card:hover .card-img img{
+    transform:scale(1.06);
+}
+
+.card-body{
+    padding:18px;
+}
+
+.brand{
+    color:var(--gold-dark);
+    text-transform:uppercase;
+    font-size:12px;
+    font-weight:900;
+    letter-spacing:1.4px;
+    margin-bottom:8px;
+}
+
+.card h3{
+    font-size:17px;
+    line-height:1.35;
+    min-height:68px;
+    margin-bottom:12px;
+}
+
+.meta{
+    color:#666;
+    font-size:14px;
+    margin-bottom:10px;
+}
+
+.quote-text{
+    color:#9b731f;
+    font-weight:900;
+    margin-bottom:14px;
+}
+
+.actions{
+    display:flex;
+    gap:10px;
+}
+
+.actions a{
+    flex:1;
+    text-align:center;
+    padding:11px 10px;
+    border-radius:8px;
+    font-weight:900;
+    font-size:14px;
+}
+
+.view-btn{
+    background:#111;
+    color:#fff;
+}
+
+.quote-btn{
+    background:var(--gold);
+    color:#111;
+}
+
+.loading,
+.empty{
+    grid-column:1 / -1;
+    background:#fff;
+    border:1px solid #e1e1e1;
+    border-radius:16px;
+    padding:30px;
+    color:#666;
 }
 
 .pagination{
     display:flex;
     justify-content:center;
+    gap:8px;
+    flex-wrap:wrap;
+    margin-top:28px;
+}
+
+.pagination button{
+    min-width:42px;
+    height:42px;
+    border:1px solid #ddd;
+    background:#fff;
+    border-radius:9px;
+    cursor:pointer;
+    font-weight:900;
+}
+
+.pagination button.active,
+.pagination button:hover{
+    background:var(--gold);
+    border-color:var(--gold);
+    color:#111;
+}
+
+/* Fixed Bottom Contact */
+.fixed-contact{
+    position:fixed;
+    left:0;
+    right:0;
+    bottom:0;
+    z-index:2200;
+    background:#080808;
+    color:#fff;
+    border-top:2px solid var(--gold);
+    padding:13px 56px;
+    display:flex;
     align-items:center;
-    gap:15px;
-    margin-top:45px;
+    justify-content:space-between;
+    gap:18px;
+    box-shadow:0 -10px 25px rgba(0,0,0,.28);
+}
+
+.fixed-contact strong{
+    display:block;
+    color:var(--gold);
+    margin-bottom:3px;
+}
+
+.fixed-contact span{
+    color:#ddd;
+    font-size:14px;
+}
+
+.fixed-actions{
+    display:flex;
+    gap:10px;
     flex-wrap:wrap;
 }
 
-.page-info{
-    color:#d4af37;
-    font-weight:bold;
+.fixed-actions a{
+    color:#fff;
+    border:1px solid #444;
+    border-radius:9px;
+    padding:10px 13px;
+    font-weight:900;
+    white-space:nowrap;
 }
 
-.empty{
-    text-align:center;
-    color:#aaa;
+.fixed-actions a:hover{
+    border-color:var(--gold);
+    color:var(--gold);
 }
 
-@media(max-width:700px){
-    header{
-        flex-direction:column;
-        gap:15px;
+.fixed-actions .gold{
+    background:var(--gold);
+    color:#111;
+    border-color:var(--gold);
+}
+
+.fixed-actions .gold:hover{
+    background:var(--gold-dark);
+    color:#111;
+}
+
+.back{
+    position:fixed;
+    right:22px;
+    bottom:96px;
+    width:48px;
+    height:48px;
+    border:none;
+    border-radius:50%;
+    background:var(--gold);
+    color:#111;
+    font-size:22px;
+    font-weight:900;
+    cursor:pointer;
+    display:none;
+    z-index:2300;
+}
+
+/* Mobile */
+.mobile-btn{
+    display:none;
+    background:#111;
+    color:#fff;
+    border:none;
+    border-radius:8px;
+    width:42px;
+    height:42px;
+    font-size:22px;
+}
+
+.mobile-menu{
+    display:none;
+    background:#111;
+    padding:15px 24px;
+}
+
+.mobile-menu a{
+    display:block;
+    color:#fff;
+    padding:12px 0;
+    border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.mobile-menu.show{
+    display:block;
+}
+
+@media(max-width:1180px){
+    .header-inner,
+    .hero,
+    .tabs,
+    .main,
+    .fixed-contact{
+        padding-left:28px;
+        padding-right:28px;
     }
 
-    .container{
-        padding:30px 20px;
+    .grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+@media(max-width:900px){
+    .header-inner{
+        flex-wrap:wrap;
+    }
+
+    .logo img{
+        width:130px;
+    }
+
+    .search-wrap{
+        order:3;
+        max-width:none;
+        flex-basis:100%;
+    }
+
+    .header-links{
+        display:none;
+    }
+
+    .mobile-btn{
+        display:block;
+        margin-left:auto;
+    }
+
+    .tabs-section{
+        top:136px;
+    }
+
+    .main{
+        grid-template-columns:1fr;
+    }
+
+    .sidebar{
+        position:static;
+    }
+
+    .fixed-contact{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .fixed-actions{
+        width:100%;
+    }
+
+    .fixed-actions a{
+        flex:1;
+        text-align:center;
+    }
+
+    body{
+        padding-bottom:150px;
+    }
+}
+
+@media(max-width:620px){
+    .header-inner,
+    .hero,
+    .tabs,
+    .main,
+    .fixed-contact{
+        padding-left:18px;
+        padding-right:18px;
+    }
+
+    .hero h1{
+        font-size:34px;
+    }
+
+    .search-wrap{
+        flex-direction:column;
+        gap:8px;
+    }
+
+    .search-wrap input,
+    .search-wrap button{
+        border-radius:8px;
+        min-height:46px;
+    }
+
+    .search-results{
+        top:102px;
+    }
+
+    .products-top{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .grid{
+        grid-template-columns:1fr;
+    }
+
+    .fixed-actions{
+        display:grid;
+        grid-template-columns:1fr;
+    }
+
+    body{
+        padding-bottom:230px;
     }
 }
 </style>
@@ -153,163 +710,365 @@ h1{
 
 <body>
 
-<header>
-<a class="logo" href="index.html">
-Morgan Food Machinery
-</a>
+<header class="sticky-header">
+    <div class="header-inner">
+        <a class="logo" href="index.html">
+            <img src="logo.png" alt="MorganGastro">
+        </a>
 
-<nav>
-<a href="index.html">Home</a>
-<a href="search.html">Search</a>
-<a href="index.html#contact">Contact</a>
-</nav>
+        <div class="search-wrap">
+            <input id="topSearch" type="text" placeholder="Search products in this category...">
+            <button id="topSearchBtn">Search</button>
+            <div id="searchResults" class="search-results"></div>
+        </div>
+
+        <nav class="header-links">
+            <a href="index.html">Home</a>
+            <a href="search.html">All Products</a>
+            <a href="#contact">Contact</a>
+        </nav>
+
+        <button class="mobile-btn" id="mobileBtn">☰</button>
+    </div>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="index.html">Home</a>
+        <a href="search.html">All Products</a>
+        <a href="#products">Products</a>
+        <a href="#contact">Contact</a>
+    </div>
 </header>
 
-<div class="container">
+<section class="hero">
+    <div class="hero-content">
+        <p class="kicker">MorganGastro Departments</p>
+        <h1 id="categoryTitle">Category Products</h1>
+        <p id="categorySubtitle">Browse commercial equipment and request pricing from MorganGastro.</p>
+    </div>
+</section>
 
-<h1 id="title">Loading Category...</h1>
-<p class="count" id="countText"></p>
+<section class="tabs-section">
+    <div class="tabs" id="tabs">
+        <a href="category.html?category=Food%20Prep%20%26%20Processing">Food Prep</a>
+        <a href="category.html?category=Cooking%20Equipment">Cooking</a>
+        <a href="category.html?category=Refrigeration%20%26%20Ice">Refrigeration</a>
+        <a href="category.html?category=Holding%20%26%20Warming">Warming</a>
+        <a href="category.html?category=Beverage%20Equipment">Beverage</a>
+        <a href="category.html?category=Storage%20%26%20Transport">Storage</a>
+        <a href="category.html?category=Smallwares%20%26%20Accessories">Smallwares</a>
+        <a href="category.html?category=Cleaning%20%26%20Dishwashing">Cleaning</a>
+    </div>
+</section>
 
-<div class="products" id="productList">
-Loading...
+<main class="main" id="products">
+    <aside class="sidebar">
+        <h2>Filter Products</h2>
+
+        <label>Search</label>
+        <input id="sideSearch" type="text" placeholder="Keyword, brand, model...">
+
+        <label>Brand</label>
+        <select id="brandFilter">
+            <option value="">All Brands</option>
+        </select>
+
+        <label>Sort</label>
+        <select id="sortFilter">
+            <option value="newest">Newest First</option>
+            <option value="name">Name A-Z</option>
+            <option value="brand">Brand A-Z</option>
+            <option value="featured">Featured First</option>
+        </select>
+
+        <button id="clearBtn">Clear Filters</button>
+
+        <div class="help-box">
+            <strong>Need help?</strong>
+            <p>Tell us what equipment you need. We will help with details and pricing.</p>
+            <a href="mailto:sales@morgangastros.com">Email Sales</a>
+        </div>
+    </aside>
+
+    <section>
+        <div class="products-top">
+            <div>
+                <p id="resultInfo">Loading products...</p>
+                <h2 id="sectionTitle">Products</h2>
+            </div>
+            <a class="quote-top" href="mailto:sales@morgangastros.com">Request Quote</a>
+        </div>
+
+        <div id="grid" class="grid">
+            <div class="loading">Loading products...</div>
+        </div>
+
+        <div id="pagination" class="pagination"></div>
+    </section>
+</main>
+
+<div class="fixed-contact" id="contact">
+    <div>
+        <strong>Need commercial equipment?</strong>
+        <span>Request pricing, availability, or product help.</span>
+    </div>
+
+    <div class="fixed-actions">
+        <a href="tel:3138999696">Call: 313-899-9696</a>
+        <a href="mailto:sales@morgangastros.com">Email Sales</a>
+        <a class="gold" href="mailto:sales@morgangastros.com?subject=MorganGastro%20Quote%20Request">Request Quote</a>
+    </div>
 </div>
 
-<div class="pagination">
-<button class="btn" id="prevBtn" onclick="previousPage()">← Previous</button>
-<span class="page-info" id="pageInfo">Page 1</span>
-<button class="btn" id="nextBtn" onclick="nextPage()">Next →</button>
-</div>
-
-</div>
+<button class="back" id="backBtn">↑</button>
 
 <script>
-const SUPABASE_URL =
-"https://omcytrhftuivfzbwcalp.supabase.co";
+const SUPABASE_URL = "https://omcytrhftuivfzbwcalp.supabase.co";
+const SUPABASE_KEY = "sb_publishable_XpUZl3GZyhSQ9-NR4xFzbw_Kf5pU_cQ";
 
-const SUPABASE_KEY =
-"sb_publishable_XpUZl3GZyhSQ9-NR4xFzbw_Kf5pU_cQ";
-
-const params =
-new URLSearchParams(window.location.search);
-
-const category =
-params.get("category");
-
-const PRODUCTS_PER_PAGE = 12;
-
-let currentPage = 1;
 let allProducts = [];
+let filteredProducts = [];
+let currentPage = 1;
+const pageSize = 12;
 
-document.getElementById("title").innerText =
-category || "Products";
+function $(id){ return document.getElementById(id); }
+function clean(v){ return v === null || v === undefined ? "" : String(v); }
+function safeImage(url){ return url || "https://images.unsplash.com/photo-1556911220-bff31c812dba?auto=format&fit=crop&w=900&q=80"; }
+
+function getCategory(){
+    return new URLSearchParams(window.location.search).get("category") || "";
+}
+
+function setTitle(){
+    const category = getCategory();
+    const title = category || "All Products";
+
+    document.title = `${title} | MorganGastro`;
+    $("categoryTitle").textContent = title;
+    $("categorySubtitle").textContent = `Browse ${title} and request B2B pricing from MorganGastro.`;
+    $("sectionTitle").textContent = title;
+
+    document.querySelectorAll("#tabs a").forEach(a=>{
+        const c = new URL(a.href).searchParams.get("category");
+        if(c === category) a.classList.add("active");
+    });
+}
 
 async function loadProducts(){
-    const response = await fetch(
-        `${SUPABASE_URL}/rest/v1/products?category=eq.${encodeURIComponent(category)}&select=*&order=id.asc`,
-        {
+    setTitle();
+
+    try{
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/products?select=*&order=id.desc&limit=1000`,{
             headers:{
                 apikey:SUPABASE_KEY,
                 Authorization:`Bearer ${SUPABASE_KEY}`
             }
+        });
+
+        const data = await res.json();
+        const category = getCategory();
+
+        allProducts = Array.isArray(data) ? data : [];
+
+        if(category){
+            allProducts = allProducts.filter(p =>
+                clean(p.category).toLowerCase() === category.toLowerCase()
+            );
         }
-    );
 
-    allProducts = await response.json();
+        buildBrands();
+        applyFilters();
 
-    renderPage();
+    }catch(error){
+        console.error(error);
+        $("grid").innerHTML = `<div class="empty">Unable to load products.</div>`;
+    }
 }
 
-function renderPage(){
-    const list = document.getElementById("productList");
-    const countText = document.getElementById("countText");
-    const pageInfo = document.getElementById("pageInfo");
-    const prevBtn = document.getElementById("prevBtn");
-    const nextBtn = document.getElementById("nextBtn");
+function buildBrands(){
+    const brands = [...new Set(allProducts.map(p => clean(p.brand)).filter(Boolean))].sort();
+    $("brandFilter").innerHTML = `<option value="">All Brands</option>` + brands.map(b => `<option value="${b}">${b}</option>`).join("");
+}
 
-    if(!allProducts || allProducts.length === 0){
-        list.innerHTML = "<p class='empty'>No products found.</p>";
-        countText.innerText = "0 products";
-        pageInfo.innerText = "Page 0 of 0";
-        prevBtn.disabled = true;
-        nextBtn.disabled = true;
+function applyFilters(){
+    const term = ($("sideSearch").value || $("topSearch").value).toLowerCase().trim();
+    const brand = $("brandFilter").value;
+    const sort = $("sortFilter").value;
+
+    filteredProducts = allProducts.filter(p=>{
+        const blob = [
+            p.name,p.brand,p.model,p.category,p.description,p.voltage,p.power,p.material
+        ].map(clean).join(" ").toLowerCase();
+
+        return (!term || blob.includes(term)) && (!brand || clean(p.brand) === brand);
+    });
+
+    if(sort === "name") filteredProducts.sort((a,b)=>clean(a.name).localeCompare(clean(b.name)));
+    if(sort === "brand") filteredProducts.sort((a,b)=>clean(a.brand).localeCompare(clean(b.brand)));
+    if(sort === "featured") filteredProducts.sort((a,b)=>(b.featured === true) - (a.featured === true));
+    if(sort === "newest") filteredProducts.sort((a,b)=>(b.id || 0) - (a.id || 0));
+
+    currentPage = 1;
+    renderProducts();
+}
+
+function renderProducts(){
+    $("resultInfo").textContent = `${filteredProducts.length} products found`;
+
+    if(!filteredProducts.length){
+        $("grid").innerHTML = `<div class="empty">No products found.</div>`;
+        $("pagination").innerHTML = "";
         return;
     }
 
-    const totalPages =
-    Math.ceil(allProducts.length / PRODUCTS_PER_PAGE);
+    const start = (currentPage - 1) * pageSize;
+    const products = filteredProducts.slice(start, start + pageSize);
 
-    if(currentPage < 1) currentPage = 1;
-    if(currentPage > totalPages) currentPage = totalPages;
+    $("grid").innerHTML = products.map(card).join("");
+    renderPagination();
+}
 
-    const start =
-    (currentPage - 1) * PRODUCTS_PER_PAGE;
+function card(p){
+    const name = clean(p.name);
+    const brand = clean(p.brand) || "MorganGastro";
+    const category = clean(p.category);
+    const model = clean(p.model);
 
-    const end =
-    start + PRODUCTS_PER_PAGE;
-
-    const pageProducts =
-    allProducts.slice(start,end);
-
-    countText.innerText =
-    `${allProducts.length} products found`;
-
-    pageInfo.innerText =
-    `Page ${currentPage} of ${totalPages}`;
-
-    prevBtn.disabled =
-    currentPage === 1;
-
-    nextBtn.disabled =
-    currentPage === totalPages;
-
-    list.innerHTML =
-    pageProducts.map(product=>`
-
-        <div class="card">
-
-            <img src="${product.image_url}" alt="${product.name}">
-
-            <div class="card-body">
-
-                <h3>${product.name}</h3>
-
-                <p>${product.description || ""}</p>
-
-                <p class="price">
-                $${product.price}
-                </p>
-
-                <a class="btn"
-                href="product.html?id=${product.id}">
-                View Details
-                </a>
-
+    return `
+    <article class="card">
+        <a class="card-img" href="product.html?id=${p.id}">
+            <img src="${safeImage(p.image_url)}" alt="${name}">
+        </a>
+        <div class="card-body">
+            <div class="brand">${brand}</div>
+            <h3>${name}</h3>
+            <div class="meta">${category}${model ? " • " + model : ""}</div>
+            <div class="quote-text">Request a Quote for Pricing</div>
+            <div class="actions">
+                <a class="view-btn" href="product.html?id=${p.id}">View Details</a>
+                <a class="quote-btn" href="product.html?id=${p.id}#quote">Quote</a>
             </div>
-
         </div>
-
-    `).join("");
+    </article>`;
 }
 
-function nextPage(){
-    currentPage++;
-    renderPage();
-    window.scrollTo({
-        top:0,
-        behavior:"smooth"
+function renderPagination(){
+    const totalPages = Math.ceil(filteredProducts.length / pageSize);
+    if(totalPages <= 1){
+        $("pagination").innerHTML = "";
+        return;
+    }
+
+    let html = "";
+
+    if(currentPage > 1) html += `<button onclick="goPage(${currentPage - 1})">‹</button>`;
+
+    const start = Math.max(1, currentPage - 2);
+    const end = Math.min(totalPages, currentPage + 2);
+
+    for(let i=start; i<=end; i++){
+        html += `<button class="${i === currentPage ? "active" : ""}" onclick="goPage(${i})">${i}</button>`;
+    }
+
+    if(currentPage < totalPages) html += `<button onclick="goPage(${currentPage + 1})">›</button>`;
+
+    $("pagination").innerHTML = html;
+}
+
+function goPage(page){
+    currentPage = page;
+    renderProducts();
+    window.scrollTo({top:document.querySelector(".main").offsetTop - 145, behavior:"smooth"});
+}
+
+function initSearch(){
+    const results = $("searchResults");
+
+    $("topSearchBtn").addEventListener("click",()=>{
+        $("sideSearch").value = $("topSearch").value;
+        applyFilters();
+        window.scrollTo({top:document.querySelector(".main").offsetTop - 145, behavior:"smooth"});
+    });
+
+    $("topSearch").addEventListener("keydown",e=>{
+        if(e.key === "Enter"){
+            $("topSearchBtn").click();
+        }
+    });
+
+    $("topSearch").addEventListener("input",()=>{
+        const term = $("topSearch").value.toLowerCase().trim();
+
+        if(term.length < 2){
+            results.style.display = "none";
+            results.innerHTML = "";
+            applyFilters();
+            return;
+        }
+
+        const matches = allProducts.filter(p=>{
+            const blob = [p.name,p.brand,p.model,p.category,p.description].map(clean).join(" ").toLowerCase();
+            return blob.includes(term);
+        }).slice(0,8);
+
+        results.style.display = "block";
+
+        if(!matches.length){
+            results.innerHTML = `<div class="search-item"><div><h4>No products found</h4><p>Try another keyword.</p></div></div>`;
+            return;
+        }
+
+        results.innerHTML = matches.map(p=>`
+            <a class="search-item" href="product.html?id=${p.id}">
+                <img src="${safeImage(p.image_url)}" alt="${clean(p.name)}">
+                <div>
+                    <h4>${clean(p.name)}</h4>
+                    <p>${clean(p.category)}</p>
+                    <p>Request a Quote for Pricing</p>
+                </div>
+            </a>
+        `).join("");
+
+        applyFilters();
+    });
+
+    $("sideSearch").addEventListener("input",applyFilters);
+    $("brandFilter").addEventListener("change",applyFilters);
+    $("sortFilter").addEventListener("change",applyFilters);
+
+    $("clearBtn").addEventListener("click",()=>{
+        $("topSearch").value = "";
+        $("sideSearch").value = "";
+        $("brandFilter").value = "";
+        $("sortFilter").value = "newest";
+        applyFilters();
+    });
+
+    document.addEventListener("click",e=>{
+        if(!e.target.closest(".search-wrap")){
+            results.style.display = "none";
+        }
     });
 }
 
-function previousPage(){
-    currentPage--;
-    renderPage();
-    window.scrollTo({
-        top:0,
-        behavior:"smooth"
+function initUI(){
+    $("mobileBtn").addEventListener("click",()=>{
+        $("mobileMenu").classList.toggle("show");
+    });
+
+    $("backBtn").addEventListener("click",()=>{
+        window.scrollTo({top:0,behavior:"smooth"});
+    });
+
+    window.addEventListener("scroll",()=>{
+        $("backBtn").style.display = window.scrollY > 500 ? "block" : "none";
     });
 }
 
-loadProducts();
+document.addEventListener("DOMContentLoaded",()=>{
+    initUI();
+    initSearch();
+    loadProducts();
+});
 </script>
 
 </body>
