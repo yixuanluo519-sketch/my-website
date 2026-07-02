@@ -2,598 +2,246 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Product Details | Morgan Food Machinery</title>
-
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>MorganGastro Product</title>
 <style>
-*{
-    box-sizing:border-box;
-}
-
-body{
-    margin:0;
-    font-family:Arial,sans-serif;
-    background:#0b0b0b;
-    color:white;
-}
-
-header{
-    background:#050505;
-    border-bottom:1px solid #d4af37;
-    padding:20px 50px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-}
-
-.logo{
-    font-size:28px;
-    font-weight:bold;
-    color:#d4af37;
-    text-decoration:none;
-}
-
-nav a{
-    color:white;
-    text-decoration:none;
-    margin-left:22px;
-    font-weight:bold;
-}
-
-nav a:hover{
-    color:#d4af37;
-}
-
-.container{
-    max-width:1250px;
-    margin:auto;
-    padding:55px 30px;
-}
-
-.back{
-    display:inline-block;
-    margin-bottom:30px;
-    color:#d4af37;
-    text-decoration:none;
-    font-weight:bold;
-}
-
-.product{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:50px;
-    align-items:start;
-}
-
-.product-image{
-    background:#111;
-    border:1px solid #333;
-    border-radius:18px;
-    padding:15px;
-}
-
-.product-image img{
-    width:100%;
-    border-radius:12px;
-    display:block;
-}
-
-.product-info{
-    background:#151515;
-    border:1px solid #333;
-    border-radius:18px;
-    padding:35px;
-}
-
-h1{
-    color:#d4af37;
-    margin-top:0;
-    font-size:38px;
-}
-
-.category{
-    color:#aaa;
-    margin-bottom:15px;
-}
-
-.price{
-    font-size:34px;
-    font-weight:bold;
-    color:#d4af37;
-    margin:20px 0;
-}
-
-.description{
-    line-height:1.8;
-    font-size:18px;
-    color:#ddd;
-}
-
-.btn{
-    display:inline-block;
-    padding:14px 28px;
-    background:#d4af37;
-    color:black;
-    text-decoration:none;
-    border-radius:30px;
-    font-weight:bold;
-    margin-top:22px;
-    border:none;
-    cursor:pointer;
-}
-
-.btn:hover{
-    background:#b9962f;
-}
-
-.info-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-    gap:25px;
-    margin-top:50px;
-}
-
-.info-box{
-    background:#151515;
-    border:1px solid #333;
-    border-radius:18px;
-    padding:28px;
-}
-
-.info-box h2{
-    color:#d4af37;
-    margin-top:0;
-}
-
-.info-box ul{
-    padding-left:20px;
-    line-height:1.8;
-    color:#ddd;
-}
-
-.quote-section{
-    margin-top:55px;
-    background:#151515;
-    border:1px solid #333;
-    border-radius:18px;
-    padding:35px;
-}
-
-.quote-section h2{
-    color:#d4af37;
-    margin-top:0;
-}
-
-.form-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:15px;
-}
-
-input, textarea{
-    width:100%;
-    padding:14px;
-    margin-top:12px;
-    border-radius:8px;
-    border:1px solid #333;
-    background:#0f0f0f;
-    color:white;
-    font-size:16px;
-}
-
-textarea{
-    height:130px;
-    resize:vertical;
-}
-
-.full{
-    grid-column:1 / -1;
-}
-
-#quoteResult{
-    margin-top:18px;
-    font-weight:bold;
-}
-
-.related-section{
-    margin-top:60px;
-}
-
-.related-section h2{
-    color:#d4af37;
-    text-align:center;
-    margin-bottom:30px;
-}
-
-.related-products{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-    gap:25px;
-}
-
-.card{
-    background:#151515;
-    border:1px solid #333;
-    border-radius:15px;
-    overflow:hidden;
-}
-
-.card img{
-    width:100%;
-    height:190px;
-    object-fit:cover;
-}
-
-.card-body{
-    padding:18px;
-}
-
-.card h3{
-    color:white;
-    font-size:18px;
-}
-
-.card .price{
-    font-size:22px;
-}
-
-footer{
-    background:#050505;
-    border-top:1px solid #d4af37;
-    color:#aaa;
-    text-align:center;
-    padding:30px;
-    margin-top:50px;
-}
-
-@media(max-width:900px){
-    header{
-        flex-direction:column;
-        gap:15px;
-    }
-
-    .product{
-        grid-template-columns:1fr;
-    }
-
-    .form-grid{
-        grid-template-columns:1fr;
-    }
-
-    h1{
-        font-size:30px;
-    }
-}
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--gold:#d4af37;--gold2:#b9952e;--black:#070707;--line:#ddd}
+html{scroll-behavior:smooth}
+body{font-family:Arial,Helvetica,sans-serif;background:#f4f4f4;color:#111;padding-bottom:86px}
+a{text-decoration:none}img{max-width:100%;display:block}
+.header{position:sticky;top:0;z-index:2000;background:#fff;border-bottom:1px solid #ddd;box-shadow:0 8px 25px #0002}
+.header-inner{min-height:84px;padding:12px 56px;display:flex;gap:24px;align-items:center}
+.logo img{width:150px}
+.search{flex:1;max-width:760px;display:flex;position:relative}
+.search input{width:100%;padding:15px 18px;border:2px solid var(--gold);border-radius:8px 0 0 8px;font-size:15px;outline:none}
+.search button{border:0;background:var(--gold);font-weight:900;padding:0 24px;border-radius:0 8px 8px 0;cursor:pointer}
+.results{display:none;position:absolute;top:56px;left:0;right:0;background:#fff;border:1px solid #ddd;border-radius:10px;box-shadow:0 16px 40px #0003;overflow:hidden;z-index:2200}
+.result{display:flex;gap:12px;padding:12px;border-bottom:1px solid #eee;color:#111}
+.result:hover{background:#f6f6f6}.result img{width:72px;height:58px;object-fit:cover;border-radius:6px;background:#eee}.result h4{font-size:14px}.result p{font-size:13px;color:#666;margin-top:4px}
+.links{display:flex;gap:18px;white-space:nowrap}.links a{color:#111;font-weight:900}.links a:hover{color:var(--gold2)}
+.mobile-btn{display:none;background:#111;color:#fff;border:0;border-radius:8px;width:42px;height:42px;font-size:22px}
+.mobile-menu{display:none;background:#111;padding:15px 24px}.mobile-menu a{display:block;color:#fff;padding:12px 0;border-bottom:1px solid #ffffff18}.mobile-menu.show{display:block}
+.breadcrumb{background:#111;color:#ccc;padding:13px 56px;border-bottom:1px solid #d4af374d}.breadcrumb a{color:var(--gold);font-weight:900}
+.main{padding:36px 56px 120px}.layout{max-width:1450px;margin:auto;display:grid;grid-template-columns:minmax(330px,520px) 1fr;gap:32px}
+.gallery{background:#fff;border:1px solid #e1e1e1;border-radius:18px;overflow:hidden;box-shadow:0 8px 20px #0001;position:sticky;top:150px;align-self:start}
+.gallery img{width:100%;height:500px;object-fit:contain;padding:18px;background:#fff}.note{padding:15px 18px;border-top:1px solid #eee;color:#666;font-size:14px}
+.panel{background:#fff;border:1px solid #e1e1e1;border-radius:18px;padding:28px;box-shadow:0 8px 20px #0001;margin-bottom:24px}
+.kicker{color:var(--gold2);text-transform:uppercase;letter-spacing:2px;font-size:13px;font-weight:900;margin-bottom:10px}
+h1{font-size:38px;line-height:1.18;margin-bottom:18px}.quote-pill{display:inline-block;background:#fff8df;color:#8a6416;border:1px solid #f0d36d;border-radius:999px;padding:10px 14px;font-weight:900;margin-bottom:18px}
+.summary,.desc{color:#555;line-height:1.75;font-size:16px}.desc{white-space:pre-wrap}
+.meta,.specs{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:22px 0}.box{background:#f7f7f7;border:1px solid #e6e6e6;border-radius:12px;padding:14px}.box strong{display:block;margin-bottom:5px}.box span{color:#666}
+.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:13px 20px;border-radius:9px;font-weight:900;border:0;cursor:pointer}.gold{background:var(--gold);color:#111}.dark{background:#111;color:#fff}.outline{border:1px solid #111;color:#111;background:#fff}
+.section-title{font-size:26px;margin-bottom:16px}
+.form{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.form label{font-weight:900}.form input,.form textarea{width:100%;margin-top:7px;padding:12px;border:1px solid #ccc;border-radius:9px;outline:none}.form input:focus,.form textarea:focus{border-color:var(--gold)}.full{grid-column:1/-1}.msg{margin-top:12px;font-weight:900}.success{color:#248a3d}.error{color:#c0392b}
+.related-wrap{max-width:1450px;margin:10px auto 0}.related{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}.rel-card{background:#fff;border:1px solid #e1e1e1;border-radius:16px;overflow:hidden;box-shadow:0 8px 20px #0001}.rel-img{height:210px;background:#eee}.rel-img img{width:100%;height:100%;object-fit:cover}.rel-body{padding:16px}.rel-body h3{font-size:16px;line-height:1.35;min-height:66px}.rel-body a{display:block;background:#111;color:#fff;text-align:center;padding:11px;border-radius:8px;font-weight:900;margin-top:12px}
+.loading{background:#fff;border:1px solid #e1e1e1;border-radius:16px;padding:30px;color:#666}
+.fixed{position:fixed;left:0;right:0;bottom:0;z-index:2500;background:#080808;color:#fff;border-top:2px solid var(--gold);padding:13px 56px;display:flex;justify-content:space-between;gap:18px;align-items:center;box-shadow:0 -10px 25px #0005}.fixed strong{display:block;color:var(--gold)}.fixed span{color:#ddd;font-size:14px}.fixed-actions{display:flex;gap:10px;flex-wrap:wrap}.fixed-actions a{color:#fff;border:1px solid #444;border-radius:9px;padding:10px 13px;font-weight:900}.fixed-actions .goldlink{background:var(--gold);color:#111;border-color:var(--gold)}
+.back{display:none;position:fixed;right:22px;bottom:96px;width:48px;height:48px;border:0;border-radius:50%;background:var(--gold);font-size:22px;font-weight:900;z-index:2600}
+@media(max-width:1050px){.header-inner,.breadcrumb,.main,.fixed{padding-left:28px;padding-right:28px}.layout{grid-template-columns:1fr}.gallery{position:static}.related{grid-template-columns:repeat(2,1fr)}.links{display:none}.mobile-btn{display:block;margin-left:auto}.search{order:3;max-width:none;flex-basis:100%}.header-inner{flex-wrap:wrap}.fixed{flex-direction:column;align-items:flex-start}.fixed-actions{width:100%}.fixed-actions a{flex:1;text-align:center}body{padding-bottom:150px}}
+@media(max-width:620px){.header-inner,.breadcrumb,.main,.fixed{padding-left:18px;padding-right:18px}.logo img{width:130px}.search{flex-direction:column;gap:8px}.search input,.search button{border-radius:8px;min-height:46px}.results{top:102px}h1{font-size:28px}.gallery img{height:320px}.meta,.specs,.form,.related{grid-template-columns:1fr}.full{grid-column:auto}.actions{flex-direction:column}.btn{width:100%}.fixed-actions{display:grid;grid-template-columns:1fr}body{padding-bottom:230px}}
 </style>
 </head>
-
 <body>
-
-<header>
-<a class="logo" href="index.html">
-Morgan Food Machinery
-</a>
-
-<nav>
-<a href="index.html">Home</a>
-<a href="search.html">Search</a>
-<a href="index.html#contact">Contact</a>
-</nav>
+<header class="header">
+  <div class="header-inner">
+    <a class="logo" href="index.html"><img src="logo.png" alt="MorganGastro"></a>
+    <div class="search">
+      <input id="topSearch" placeholder="Search products, machines, equipment...">
+      <button id="topSearchBtn" type="button">Search</button>
+      <div id="searchResults" class="results"></div>
+    </div>
+    <nav class="links">
+      <a href="index.html">Home</a>
+      <a href="search.html">All Products</a>
+      <a id="categoryNav" href="search.html">Category</a>
+      <a href="#quote">Request Quote</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <button class="mobile-btn" id="mobileBtn">☰</button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html">Home</a>
+    <a href="search.html">All Products</a>
+    <a id="mobileCategoryNav" href="search.html">Category</a>
+    <a href="#quote">Request Quote</a>
+    <a href="#contact">Contact</a>
+  </div>
 </header>
 
-<div class="container">
-
-<a class="back" href="javascript:history.back()">
-← Back
-</a>
-
-<div id="productContainer">
-Loading...
+<div class="breadcrumb">
+  <a href="index.html">Home</a> / <a href="search.html">All Products</a><span id="bcCat"></span> / <span id="bcProduct">Product</span>
 </div>
 
-<div class="info-grid">
+<main class="main">
+  <div id="loading" class="loading">Loading product...</div>
 
-<div class="info-box">
-<h2>Product Features</h2>
-<ul>
-<li>Commercial-grade construction for professional use</li>
-<li>Designed for restaurants, food shops, and production environments</li>
-<li>Reliable performance for daily operation</li>
-<li>Easy to clean and maintain</li>
-</ul>
+  <section id="content" class="layout" style="display:none">
+    <div class="gallery">
+      <img id="pImage" src="" alt="">
+      <div class="note">Product images are for reference. Request a quote for details and availability.</div>
+    </div>
+
+    <div>
+      <section class="panel">
+        <div id="pBrandTop" class="kicker">MorganGastro</div>
+        <h1 id="pName">Product</h1>
+        <div class="quote-pill">Request a Quote for Pricing</div>
+        <p id="pSummary" class="summary"></p>
+
+        <div class="meta">
+          <div class="box"><strong>Category</strong><span id="pCategory"></span></div>
+          <div class="box"><strong>Brand</strong><span id="pBrand"></span></div>
+          <div class="box"><strong>Model</strong><span id="pModel"></span></div>
+          <div class="box"><strong>Availability</strong><span>Request confirmation</span></div>
+        </div>
+
+        <div class="actions">
+          <a class="btn gold" href="#quote">Request Quote</a>
+          <a class="btn dark" href="mailto:sales@morgangastros.com">Email Sales</a>
+          <a class="btn outline" id="backCat" href="search.html">Back to Category</a>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2 class="section-title">Product Description</h2>
+        <div id="pDesc" class="desc"></div>
+      </section>
+
+      <section class="panel">
+        <h2 class="section-title">Specifications</h2>
+        <div class="specs">
+          <div class="box"><strong>Voltage</strong><span id="pVoltage">Request details</span></div>
+          <div class="box"><strong>Power</strong><span id="pPower">Request details</span></div>
+          <div class="box"><strong>Material</strong><span id="pMaterial">Request details</span></div>
+          <div class="box"><strong>Quote Mode</strong><span>B2B pricing by request</span></div>
+        </div>
+      </section>
+
+      <section class="panel" id="quote">
+        <h2 class="section-title">Request a Quote</h2>
+        <form id="quoteForm" class="form">
+          <label>Name *<input id="qName" required autocomplete="name"></label>
+          <label>Email *<input id="qEmail" type="email" required autocomplete="email"></label>
+          <label>Phone<input id="qPhone" autocomplete="tel"></label>
+          <label>Company<input id="qCompany" autocomplete="organization"></label>
+          <label>Country<input id="qCountry" autocomplete="country-name"></label>
+          <label>Quantity<input id="qQuantity" placeholder="Example: 1 unit / 5 units"></label>
+          <label class="full">Message<textarea id="qMessage" rows="5" placeholder="Tell us your quantity, voltage, delivery location, or questions."></textarea></label>
+          <div class="full">
+            <button id="submitBtn" class="btn gold" type="submit">Submit Quote Request</button>
+            <div id="formMsg" class="msg"></div>
+          </div>
+        </form>
+      </section>
+    </div>
+  </section>
+
+  <section id="relatedSection" class="related-wrap" style="display:none">
+    <section class="panel">
+      <h2 class="section-title">Related Products</h2>
+      <div id="related" class="related"></div>
+    </section>
+  </section>
+</main>
+
+<div class="fixed" id="contact">
+  <div><strong>Need pricing or product help?</strong><span>Request a quote, call us, or email sales anytime.</span></div>
+  <div class="fixed-actions">
+    <a href="tel:3138999696">Call: 313-899-9696</a>
+    <a href="mailto:sales@morgangastros.com">Email Sales</a>
+    <a class="goldlink" href="#quote">Request Quote</a>
+  </div>
 </div>
-
-<div class="info-box">
-<h2>Specifications</h2>
-<ul id="specList">
-<li>Category: Loading...</li>
-<li>Price: Loading...</li>
-<li>Availability: Contact sales for details</li>
-<li>Support: Morgan Food Machinery</li>
-</ul>
-</div>
-
-<div class="info-box">
-<h2>Need Help?</h2>
-<p class="description">
-Not sure which model fits your business? Send us a request and our team will help you choose the right equipment.
-</p>
-<a class="btn" href="#quote">
-Request A Quote
-</a>
-</div>
-
-</div>
-
-<div class="quote-section" id="quote">
-<h2>Request A Quote</h2>
-
-<form id="quoteForm">
-
-<div class="form-grid">
-
-<input
-type="text"
-id="name"
-placeholder="Your Name"
-required
->
-
-<input
-type="email"
-id="email"
-placeholder="Email"
-required
->
-
-<input
-type="text"
-id="phone"
-placeholder="Phone Number"
->
-
-<input
-type="text"
-id="company"
-placeholder="Company Name"
->
-
-<textarea
-class="full"
-id="message"
-placeholder="Tell us what you need..."
-></textarea>
-
-</div>
-
-<button type="submit" class="btn">
-Submit Quote Request
-</button>
-
-</form>
-
-<div id="quoteResult"></div>
-</div>
-
-<div class="related-section">
-<h2>Related Products</h2>
-<div class="related-products" id="relatedProducts">
-Loading related products...
-</div>
-</div>
-
-</div>
-
-<footer>
-<p>© 2026 Morgan Food Machinery. All Rights Reserved.</p>
-</footer>
+<button class="back" id="backBtn">↑</button>
 
 <script>
-const SUPABASE_URL =
-"https://omcytrhftuivfzbwcalp.supabase.co";
+const SUPABASE_URL="https://omcytrhftuivfzbwcalp.supabase.co";
+const SUPABASE_KEY="sb_publishable_XpUZl3GZyhSQ9-NR4xFzbw_Kf5pU_cQ";
+let product=null, allProducts=[];
+const $=id=>document.getElementById(id);
+const clean=v=>v==null?"":String(v);
+const esc=v=>clean(v).replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;");
+const img=url=>clean(url).trim()||"https://images.unsplash.com/photo-1556911220-bff31c812dba?auto=format&fit=crop&w=900&q=80";
 
-const SUPABASE_KEY =
-"sb_publishable_XpUZl3GZyhSQ9-NR4xFzbw_Kf5pU_cQ";
-
-const params =
-new URLSearchParams(window.location.search);
-
-const id =
-params.get("id");
-
-let currentProduct = null;
+async function api(path,opt={}){
+  const r=await fetch(SUPABASE_URL+path,{...opt,headers:{apikey:SUPABASE_KEY,Authorization:`Bearer ${SUPABASE_KEY}`,"Content-Type":"application/json",...(opt.headers||{})}});
+  if(!r.ok)throw new Error(await r.text());
+  if(r.status===204)return null;
+  return await r.json();
+}
+function id(){const n=Number(new URLSearchParams(location.search).get("id"));return Number.isFinite(n)&&n>0?n:null}
 
 async function loadProduct(){
-
-const response = await fetch(
-`${SUPABASE_URL}/rest/v1/products?id=eq.${id}&select=*`,
-{
-headers:{
-apikey:SUPABASE_KEY,
-Authorization:`Bearer ${SUPABASE_KEY}`
+  const pid=id(); if(!pid){noProduct("Missing product ID.");return}
+  try{
+    const rows=await api(`/rest/v1/products?select=*&id=eq.${pid}&limit=1`);
+    product=rows&&rows[0]; if(!product){noProduct("Product not found.");return}
+    renderProduct(product); loadRelated(product); loadSearchProducts();
+  }catch(e){console.error(e);noProduct("Unable to load product. Please check Supabase policies.")}
 }
+function noProduct(t){
+  $("loading").innerHTML=`<h2>Product unavailable</h2><p style="margin:12px 0">${esc(t)}</p><a class="btn gold" href="search.html">Browse Products</a>`;
 }
-);
-
-const data =
-await response.json();
-
-const product =
-data[0];
-
-currentProduct = product;
-
-const box =
-document.getElementById("productContainer");
-
-if(!product){
-box.innerHTML =
-"<h2>Product not found</h2>";
-return;
+function renderProduct(p){
+  const name=clean(p.name)||"Product", brand=clean(p.brand)||"MorganGastro", cat=clean(p.category)||"Commercial Equipment";
+  const desc=clean(p.description)||"Product details are available by request. Please contact MorganGastro for specifications, pricing, and availability.";
+  document.title=`${name} | MorganGastro`;
+  $("pImage").src=img(p.image_url); $("pImage").alt=name;
+  $("pBrandTop").textContent=brand; $("pName").textContent=name; $("pSummary").textContent=desc.slice(0,260)+(desc.length>260?"...":"");
+  $("pCategory").textContent=cat; $("pBrand").textContent=brand; $("pModel").textContent=clean(p.model)||"Request details";
+  $("pDesc").textContent=desc; $("pVoltage").textContent=clean(p.voltage)||"Request details"; $("pPower").textContent=clean(p.power)||"Request details"; $("pMaterial").textContent=clean(p.material)||"Request details";
+  $("bcProduct").textContent=name; $("bcCat").innerHTML=` / <a href="category.html?category=${encodeURIComponent(cat)}">${esc(cat)}</a>`;
+  $("categoryNav").href=`category.html?category=${encodeURIComponent(cat)}`; $("mobileCategoryNav").href=$("categoryNav").href; $("backCat").href=$("categoryNav").href;
+  $("loading").style.display="none"; $("content").style.display="grid";
 }
-
-document.title =
-product.name + " | Morgan Food Machinery";
-
-box.innerHTML = `
-
-<div class="product">
-
-<div class="product-image">
-<img src="${product.image_url}" alt="${product.name}">
-</div>
-
-<div class="product-info">
-
-<div class="category">
-${product.category || "Commercial Equipment"}
-</div>
-
-<h1>${product.name}</h1>
-
-<div class="price">
-$${product.price}
-</div>
-
-<div class="description">
-${product.description || "No description available."}
-</div>
-
-<a class="btn" href="#quote">
-Request Quote
-</a>
-
-<a class="btn"
-href="category.html?category=${encodeURIComponent(product.category || "")}">
-View Category
-</a>
-
-</div>
-
-</div>
-
-`;
-
-document.getElementById("specList").innerHTML = `
-<li>Category: ${product.category || "Commercial Equipment"}</li>
-<li>Price: $${product.price}</li>
-<li>Availability: Contact sales for details</li>
-<li>Support: Morgan Food Machinery</li>
-`;
-
-loadRelatedProducts(product.category, product.id);
-
+async function loadRelated(p){
+  const cat=clean(p.category); if(!cat)return;
+  try{
+    const rows=await api(`/rest/v1/products?select=*&category=eq.${encodeURIComponent(cat)}&id=neq.${p.id}&limit=8`);
+    if(rows&&rows.length){$("related").innerHTML=rows.slice(0,4).map(relCard).join("");$("relatedSection").style.display="block"}
+  }catch(e){console.error(e)}
 }
+function relCard(p){return `<article class="rel-card"><a class="rel-img" href="product.html?id=${p.id}"><img src="${esc(img(p.image_url))}" alt="${esc(p.name)}"></a><div class="rel-body"><div class="kicker">${esc(p.brand||"MorganGastro")}</div><h3>${esc(p.name)}</h3><a href="product.html?id=${p.id}">View Details</a></div></article>`}
 
-async function loadRelatedProducts(category, productId){
-
-if(!category){
-document.getElementById("relatedProducts").innerHTML =
-"<p>No related products available.</p>";
-return;
+async function loadSearchProducts(){
+  try{allProducts=await api("/rest/v1/products?select=id,name,category,brand,model,image_url,description&order=id.desc&limit=1000")}
+  catch(e){console.error(e);allProducts=[]}
 }
-
-const response = await fetch(
-`${SUPABASE_URL}/rest/v1/products?category=eq.${encodeURIComponent(category)}&id=neq.${productId}&select=*&limit=4`,
-{
-headers:{
-apikey:SUPABASE_KEY,
-Authorization:`Bearer ${SUPABASE_KEY}`
+function initSearch(){
+  const input=$("topSearch"), res=$("searchResults");
+  $("topSearchBtn").onclick=()=>{const q=input.value.trim();location.href=q?`search.html?query=${encodeURIComponent(q)}`:"search.html"};
+  input.onkeydown=e=>{if(e.key==="Enter")$("topSearchBtn").click()};
+  input.oninput=()=>{
+    const term=input.value.toLowerCase().trim();
+    if(term.length<2){res.style.display="none";res.innerHTML="";return}
+    const rows=allProducts.filter(p=>[p.name,p.brand,p.model,p.category,p.description].map(clean).join(" ").toLowerCase().includes(term)).slice(0,8);
+    res.style.display="block";
+    res.innerHTML=rows.length?rows.map(p=>`<a class="result" href="product.html?id=${p.id}"><img src="${esc(img(p.image_url))}" alt="${esc(p.name)}"><div><h4>${esc(p.name)}</h4><p>${esc(p.category)}</p><p>Request a Quote for Pricing</p></div></a>`).join(""):`<div class="result"><div><h4>No products found</h4><p>Try another keyword.</p></div></div>`;
+  };
+  document.addEventListener("click",e=>{if(!e.target.closest(".search"))res.style.display="none"});
 }
+function initQuote(){
+  $("quoteForm").onsubmit=async e=>{
+    e.preventDefault();
+    if(!product)return msg("Product is not loaded yet.","error");
+    const name=$("qName").value.trim(), email=$("qEmail").value.trim();
+    if(!name||!email)return msg("Please enter your name and email.","error");
+    const payload={name,email,phone:$("qPhone").value.trim(),company:$("qCompany").value.trim(),country:$("qCountry").value.trim(),quantity:$("qQuantity").value.trim(),message:$("qMessage").value.trim(),product_id:product.id,product_name:clean(product.name),status:"New"};
+    $("submitBtn").disabled=true;$("submitBtn").textContent="Submitting...";
+    try{await api("/rest/v1/quotes",{method:"POST",headers:{Prefer:"return=minimal"},body:JSON.stringify(payload)});$("quoteForm").reset();msg("Your quote request has been submitted successfully.","success")}
+    catch(err){console.error(err);msg("Unable to submit quote. Please email sales@morgangastros.com.","error")}
+    $("submitBtn").disabled=false;$("submitBtn").textContent="Submit Quote Request";
+  }
 }
-);
-
-const products =
-await response.json();
-
-const box =
-document.getElementById("relatedProducts");
-
-if(!products || products.length===0){
-box.innerHTML =
-"<p>No related products available.</p>";
-return;
+function msg(t,c){$("formMsg").textContent=t;$("formMsg").className=`msg ${c}`}
+function initUI(){
+  $("mobileBtn").onclick=()=>$("mobileMenu").classList.toggle("show");
+  $("mobileMenu").querySelectorAll("a").forEach(a=>a.onclick=()=>$("mobileMenu").classList.remove("show"));
+  $("backBtn").onclick=()=>scrollTo({top:0,behavior:"smooth"});
+  addEventListener("scroll",()=>$("backBtn").style.display=scrollY>500?"block":"none");
 }
-
-box.innerHTML =
-products.map(product=>`
-
-<div class="card">
-
-<img src="${product.image_url}" alt="${product.name}">
-
-<div class="card-body">
-
-<h3>${product.name}</h3>
-
-<div class="price">
-$${product.price}
-</div>
-
-<a class="btn"
-href="product.html?id=${product.id}">
-View Details
-</a>
-
-</div>
-
-</div>
-
-`).join("");
-
-}
-
-document.addEventListener("submit", async function(e){
-
-if(e.target.id !== "quoteForm") return;
-
-e.preventDefault();
-
-if(!currentProduct){
-document.getElementById("quoteResult").innerHTML =
-"<p style='color:red;'>Product information is still loading.</p>";
-return;
-}
-
-const response = await fetch(
-`${SUPABASE_URL}/rest/v1/quotes`,
-{
-method:"POST",
-headers:{
-apikey:SUPABASE_KEY,
-Authorization:`Bearer ${SUPABASE_KEY}`,
-"Content-Type":"application/json"
-},
-body:JSON.stringify({
-name:document.getElementById("name").value,
-email:document.getElementById("email").value,
-phone:document.getElementById("phone").value,
-company:document.getElementById("company").value,
-product_name:currentProduct.name,
-message:document.getElementById("message").value
-})
-}
-);
-
-if(response.ok){
-
-document.getElementById("quoteResult").innerHTML =
-"<p style='color:#d4af37;'>Thank you! We received your inquiry.</p>";
-
-document.getElementById("quoteForm").reset();
-
-}else{
-
-document.getElementById("quoteResult").innerHTML =
-"<p style='color:red;'>Submission failed. Please try again.</p>";
-
-}
-
-});
-
-loadProduct();
+document.addEventListener("DOMContentLoaded",()=>{initUI();initSearch();initQuote();loadProduct()});
 </script>
-
 </body>
 </html>
